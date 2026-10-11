@@ -28,6 +28,7 @@ In sections B, C and D you answer any one of two options. Both options are solve
 - Filter by marks to revise only the 1, 2, 3 or 5 mark questions.
 - **Hide answers** turns the page into a self-test; reveal answers one by one.
 - Tick questions as revised; ticks are saved in your browser.
+- Switch between light and dark mode with the sun/moon button; the page remembers your choice.
 
 ## Editing the answers
 

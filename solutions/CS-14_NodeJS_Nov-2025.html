@@ -24,6 +24,7 @@
   --s-cap: 0.8125rem; --s-small: 0.9375rem; --s-body: 1.0625rem; --s-ask: 1.25rem;
   --s-h2: 1.5rem; --s-title: clamp(1.85rem, 1.25rem + 2.6vw, 2.75rem);
   --radius: 10px;
+  color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) { --paper: #101410; --sheet: #171c17; --well: #1f261f; --rule: #2b352b; --rule-strong: #3e4b3e; --code-bg: #131913; --accent: #7bc96f; --accent-strong: #9edb92; --accent-soft: #1c331f; --on-accent: #0a160a; --ink: #eceef2; --ink-2: #b9bfca; --ink-3: #959ca9; --ok: #71d49c; --ok-soft: #173526; --bad: #ff8f86; --bad-soft: #3d1a18; --syn-key: #d9a3f6; --syn-str: #a3d891; --syn-num: #f4b971; --syn-com: #8a92a0; --syn-fn: #86c1ff; --syn-type: #f2cd7d; --syn-tag: #ff978c; --syn-attr: #eeb882; --syn-built: #70dbcb; color-scheme: dark; }
@@ -96,9 +97,8 @@ button { font: inherit; }
   position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
   background: var(--paper); border-block: 1px solid var(--rule);
 }
-.toolbar .wrap {
-  display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem 0.9rem; padding-block: 0.55rem;
-}
+.toolbar .wrap { display: flex; align-items: center; gap: 0.75rem; padding-block: 0.55rem; }
+.tools { display: flex; flex: 1; flex-wrap: wrap; align-items: center; gap: 0.45rem 0.9rem; min-width: 0; }
 .qnav { display: flex; gap: 0.2rem; }
 .qnav a {
   padding: 0.38rem 0.62rem; border-radius: 999px; font-family: var(--f-mono); font-size: 0.875rem;
@@ -139,6 +139,17 @@ button { font: inherit; }
 .progress b { color: var(--ink); }
 .progress .bar { width: 4.5rem; height: 6px; border-radius: 999px; background: var(--well); overflow: hidden; }
 .progress .bar i { display: block; width: 0; height: 100%; background: var(--accent); transition: width 0.3s; }
+.theme-btn {
+  display: inline-grid; flex: none; place-items: center; width: 2.25rem; height: 2.25rem; padding: 0;
+  border: 1px solid var(--rule-strong); border-radius: 50%; background: var(--sheet);
+  color: var(--ink-2); cursor: pointer;
+}
+.theme-btn:hover { color: var(--ink); border-color: var(--ink-3); }
+.theme-btn svg {
+  width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.theme-btn[data-mode="light"] .ico-sun, .theme-btn[data-mode="dark"] .ico-moon { display: none; }
 
 /* ---------- questions & sections ---------- */
 .q { padding-block: 2.75rem 0.5rem; }
@@ -322,8 +333,12 @@ button { font: inherit; }
 @media (max-width: 640px) {
   .wrap { padding-inline: 16px; }
   body { font-size: 1rem; }
-  .toolbar .wrap { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 0.6rem; }
-  .toolbar .wrap::-webkit-scrollbar { display: none; }
+  .tools {
+    flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 0.6rem; padding-right: 1.5rem;
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 1.5rem), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 1.5rem), transparent);
+  }
+  .tools::-webkit-scrollbar { display: none; }
   .qnav a { padding-inline: 0.5rem; }
   .seg-label { display: none; }
   .switch, .progress { flex: none; }
@@ -339,6 +354,12 @@ button { font: inherit; }
   *, *::before, *::after { transition: none !important; }
 }
 </style>
+<script>
+  try {
+    var savedTheme = localStorage.getItem("msc-sem3-theme");
+    if (savedTheme === "dark" || savedTheme === "light") document.documentElement.setAttribute("data-theme", savedTheme);
+  } catch (e) {}
+</script>
 
 </head>
 <body>
@@ -368,6 +389,7 @@ button { font: inherit; }
 
   <nav class="toolbar" aria-label="Paper controls">
     <div class="wrap">
+      <div class="tools">
       <div class="qnav"><a href="#q1" title="Introduction, REPL and process model">Q1</a><a href="#q2" title="Modules, Buffer and package.json">Q2</a><a href="#q3" title="File system and serving files">Q3</a><a href="#q4" title="Events and databases">Q4</a><a href="#q5" title="Express.js">Q5</a></div>
       <div class="seg" role="group" aria-label="Show questions by marks">
         <span class="seg-label">Marks</span>
@@ -379,6 +401,11 @@ button { font: inherit; }
       </div>
       <button type="button" class="switch" id="selftest" aria-pressed="false"><span class="knob" aria-hidden="true"></span>Hide answers</button>
       <p class="progress"><span><b id="done-count">0</b>/50 revised</span><span class="bar" aria-hidden="true"><i id="done-bar"></i></span></p>
+      </div>
+      <button type="button" class="theme-btn" id="theme" data-mode="light" aria-label="Switch to dark mode" title="Switch to dark mode">
+        <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>
+        <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M2 12h2.5M19.5 12H22M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+      </button>
     </div>
   </nav>
 
@@ -1540,6 +1567,26 @@ app.get('/profile', checkLogin, (req, res) =&gt; {
   }
   paint();
 
+  var root = document.documentElement;
+  var themeBtn = document.getElementById("theme");
+  var systemDark = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+  function isDark() {
+    var chosen = root.getAttribute("data-theme");
+    return chosen ? chosen === "dark" : !!(systemDark && systemDark.matches);
+  }
+  function syncTheme() {
+    var dark = isDark();
+    var label = dark ? "Switch to light mode" : "Switch to dark mode";
+    themeBtn.dataset.mode = dark ? "dark" : "light";
+    themeBtn.setAttribute("aria-label", label);
+    themeBtn.title = label;
+  }
+  syncTheme();
+  if (systemDark && systemDark.addEventListener) systemDark.addEventListener("change", syncTheme);
+  if ("MutationObserver" in window) {
+    new MutationObserver(syncTheme).observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+  }
+
   document.addEventListener("click", function (ev) {
     var t = ev.target.closest("button, .blank");
     if (!t) return;
@@ -1555,6 +1602,11 @@ app.get('/profile', checkLogin, (req, res) =&gt; {
       document.querySelectorAll("[data-filter]").forEach(function (b) {
         if (b.tagName === "BUTTON") b.setAttribute("aria-pressed", b === t ? "true" : "false");
       });
+    } else if (t.id === "theme") {
+      var next = isDark() ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("msc-sem3-theme", next); } catch (e) {}
+      syncTheme();
     } else if (t.id === "selftest") {
       var on = !app.classList.contains("selftest");
       app.classList.toggle("selftest", on);
