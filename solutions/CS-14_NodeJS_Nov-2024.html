@@ -1,0 +1,1473 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Solved CS-14 Node JS question paper (M.Sc. IT &amp; CA Sem 3, Oct–Nov 2024) with simple answers sized to the marks of each question.">
+<title>Node JS Nov 2024 Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&display=swap">
+<style>
+/* Layout: an exam answer sheet. Question number in a left gutter, the answer in one
+   readable column, the marks in the right margin where the printed paper puts them. */
+:root {
+  --paper: #fafcfa; --sheet: #ffffff; --well: #ecf2ec; --rule: #e0e8e0; --rule-strong: #c6d3c6; --code-bg: #f6faf6; --accent: #2e7d32; --accent-strong: #1f6424; --accent-soft: #e8f3e7;
+  --on-accent: #ffffff;
+  --ink: #16181d; --ink-2: #474d59; --ink-3: #676e7b;
+  --ok: #1d7444; --ok-soft: #e4f3ea; --bad: #b42318; --bad-soft: #fbe9e7;
+  --syn-key: #8f2bb0; --syn-str: #18794e; --syn-num: #a8530a; --syn-com: #757b86;
+  --syn-fn: #1c5fc4; --syn-type: #8f5400; --syn-tag: #b42318; --syn-attr: #8a4b14; --syn-built: #0f766e;
+  --f-display: "Source Serif 4", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --s-cap: 0.8125rem; --s-small: 0.9375rem; --s-body: 1.0625rem; --s-ask: 1.25rem;
+  --s-h2: 1.5rem; --s-title: clamp(1.85rem, 1.25rem + 2.6vw, 2.75rem);
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --paper: #101410; --sheet: #171c17; --well: #1f261f; --rule: #2b352b; --rule-strong: #3e4b3e; --code-bg: #131913; --accent: #7bc96f; --accent-strong: #9edb92; --accent-soft: #1c331f; --on-accent: #0a160a; --ink: #eceef2; --ink-2: #b9bfca; --ink-3: #959ca9; --ok: #71d49c; --ok-soft: #173526; --bad: #ff8f86; --bad-soft: #3d1a18; --syn-key: #d9a3f6; --syn-str: #a3d891; --syn-num: #f4b971; --syn-com: #8a92a0; --syn-fn: #86c1ff; --syn-type: #f2cd7d; --syn-tag: #ff978c; --syn-attr: #eeb882; --syn-built: #70dbcb; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --paper: #101410; --sheet: #171c17; --well: #1f261f; --rule: #2b352b; --rule-strong: #3e4b3e; --code-bg: #131913; --accent: #7bc96f; --accent-strong: #9edb92; --accent-soft: #1c331f; --on-accent: #0a160a; --ink: #eceef2; --ink-2: #b9bfca; --ink-3: #959ca9; --ok: #71d49c; --ok-soft: #173526; --bad: #ff8f86; --bad-soft: #3d1a18; --syn-key: #d9a3f6; --syn-str: #a3d891; --syn-num: #f4b971; --syn-com: #8a92a0; --syn-fn: #86c1ff; --syn-type: #f2cd7d; --syn-tag: #ff978c; --syn-attr: #eeb882; --syn-built: #70dbcb; color-scheme: dark; }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 7.5rem; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--f-body); font-size: var(--s-body); line-height: 1.6;
+}
+img, svg { max-width: 100%; }
+[hidden] { display: none !important; }
+a { color: var(--accent-strong); text-underline-offset: 0.15em; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+button { font: inherit; }
+.wrap { max-width: 57rem; margin-inline: auto; padding-inline: 20px; }
+
+/* ---------- cover ---------- */
+.cover { padding-block: 2.75rem 0.5rem; }
+.eyebrow {
+  margin: 0 0 0.9rem; font-size: var(--s-cap); font-weight: 700;
+  letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-3);
+}
+.cover h1 {
+  margin: 0; font-family: var(--f-display); font-size: var(--s-title); font-weight: 650;
+  line-height: 1.1; letter-spacing: -0.012em; text-wrap: balance;
+}
+.cover h1 .kicker {
+  display: block; margin-bottom: 0.6rem; font-family: var(--f-mono); font-size: 1rem;
+  font-weight: 600; letter-spacing: 0.02em; color: var(--accent-strong);
+}
+.printed { margin: 1rem 0 0; font-family: var(--f-mono); font-size: var(--s-cap); color: var(--ink-2); }
+.facts {
+  display: flex; flex-wrap: wrap; gap: 0.75rem 2.25rem; margin: 1.6rem 0 0;
+  padding-top: 1.1rem; border-top: 1px solid var(--rule);
+}
+.facts div { display: grid; gap: 0.15rem; }
+.facts dt {
+  font-size: var(--s-cap); font-weight: 700; letter-spacing: 0.07em;
+  text-transform: uppercase; color: var(--ink-3);
+}
+.facts dd {
+  margin: 0; font-family: var(--f-display); font-size: var(--s-ask); font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- how much to write ---------- */
+.guide { padding-block: 1.75rem 1.5rem; }
+.guide h2 {
+  margin: 0 0 0.8rem; font-size: var(--s-cap); font-weight: 700; letter-spacing: 0.09em;
+  text-transform: uppercase; color: var(--ink-3);
+}
+.guide-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.75rem; }
+.guide-cell {
+  display: grid; gap: 0.4rem; align-content: start; padding: 0.95rem 1rem;
+  background: var(--sheet); border: 1px solid var(--rule); border-radius: var(--radius);
+}
+.guide-cell .m { display: flex; align-items: baseline; gap: 0.4rem; font-weight: 700; }
+.guide-cell .m b {
+  font-family: var(--f-display); font-size: 2rem; line-height: 1; color: var(--accent-strong);
+}
+.guide-cell p { margin: 0; font-size: var(--s-small); line-height: 1.45; color: var(--ink-2); }
+.guide-note { margin: 0.9rem 0 0; font-size: var(--s-small); color: var(--ink-2); max-width: 46rem; }
+
+/* ---------- toolbar ---------- */
+.toolbar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: var(--paper); border-block: 1px solid var(--rule);
+}
+.toolbar .wrap {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem 0.9rem; padding-block: 0.55rem;
+}
+.qnav { display: flex; gap: 0.2rem; }
+.qnav a {
+  padding: 0.38rem 0.62rem; border-radius: 999px; font-family: var(--f-mono); font-size: 0.875rem;
+  font-weight: 600; color: var(--ink-2); text-decoration: none;
+}
+.qnav a:hover { background: var(--well); color: var(--ink); }
+.qnav a[aria-current="true"] { background: var(--accent); color: var(--on-accent); }
+.seg { display: inline-flex; align-items: center; gap: 2px; padding: 3px; border-radius: 999px; background: var(--well); }
+.seg-label {
+  padding-inline: 0.55rem 0.3rem; font-size: 0.6875rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3);
+}
+.seg button {
+  min-width: 2rem; padding: 0.36rem 0.55rem; border: 0; border-radius: 999px; background: transparent;
+  font-family: var(--f-mono); font-size: 0.8125rem; font-weight: 600; color: var(--ink-2); cursor: pointer;
+}
+.seg button:hover { color: var(--ink); }
+.seg button[aria-pressed="true"] { background: var(--sheet); color: var(--ink); box-shadow: 0 0 0 1px var(--rule-strong); }
+.switch {
+  display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.3rem 0.2rem; border: 0;
+  background: transparent; color: var(--ink-2); font-size: 0.875rem; font-weight: 700; cursor: pointer;
+}
+.switch .knob {
+  position: relative; width: 2.1rem; height: 1.2rem; border-radius: 999px;
+  background: var(--rule-strong); transition: background 0.2s;
+}
+.switch .knob::after {
+  content: ""; position: absolute; top: 0.15rem; left: 0.15rem; width: 0.9rem; height: 0.9rem;
+  border-radius: 50%; background: var(--sheet); transition: transform 0.2s;
+}
+.switch[aria-pressed="true"] { color: var(--ink); }
+.switch[aria-pressed="true"] .knob { background: var(--accent); }
+.switch[aria-pressed="true"] .knob::after { transform: translateX(0.9rem); }
+.progress {
+  display: flex; align-items: center; gap: 0.55rem; margin: 0 0 0 auto;
+  font-family: var(--f-mono); font-size: 0.75rem; color: var(--ink-2); font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.progress b { color: var(--ink); }
+.progress .bar { width: 4.5rem; height: 6px; border-radius: 999px; background: var(--well); overflow: hidden; }
+.progress .bar i { display: block; width: 0; height: 100%; background: var(--accent); transition: width 0.3s; }
+
+/* ---------- questions & sections ---------- */
+.q { padding-block: 2.75rem 0.5rem; }
+.q-head {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: baseline;
+  gap: 0.2rem 0.9rem; padding-bottom: 0.8rem; border-bottom: 2px solid var(--ink);
+}
+.q-no { margin: 0; font-family: var(--f-mono); font-size: var(--s-ask); font-weight: 600; color: var(--accent-strong); }
+.q-head h2 {
+  margin: 0; font-family: var(--f-display); font-size: var(--s-h2); font-weight: 650;
+  line-height: 1.2; text-wrap: balance;
+}
+.q-total { margin: 0; font-family: var(--f-mono); font-size: var(--s-cap); color: var(--ink-3); white-space: nowrap; }
+.sec { padding-top: 1.5rem; }
+.sec-head {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.65rem;
+  padding-bottom: 0.6rem; border-bottom: 1px solid var(--rule);
+}
+.sec-letter { font-family: var(--f-display); font-size: var(--s-ask); font-weight: 700; color: var(--ink-3); }
+.sec-title { margin: 0; font-family: var(--f-display); font-size: var(--s-ask); font-weight: 600; }
+.sec-rule {
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3);
+}
+.sec-marks {
+  display: inline-grid; place-items: center; width: 2.3rem; height: 2.3rem; margin-left: auto;
+  border: 1.5px solid var(--ink); border-radius: 50%;
+  font-family: var(--f-mono); font-size: 0.9375rem; font-weight: 600; font-variant-numeric: tabular-nums;
+}
+#paper[data-filter="1"] .sec:not([data-marks="1"]),
+#paper[data-filter="2"] .sec:not([data-marks="2"]),
+#paper[data-filter="3"] .sec:not([data-marks="3"]),
+#paper[data-filter="5"] .sec:not([data-marks="5"]) { display: none; }
+
+/* ---------- one question item ---------- */
+.item {
+  display: grid; grid-template-columns: 2rem minmax(0, 1fr) 3rem;
+  grid-template-areas: "no main side"; gap: 0 0.8rem; padding-block: 1.15rem;
+  border-bottom: 1px solid var(--rule);
+}
+.items > .item:last-child, .item:has(+ .or) { border-bottom: 0; }
+.item-no { grid-area: no; padding-top: 0.12rem; font-family: var(--f-display); font-size: var(--s-body); font-weight: 700; color: var(--ink-3); }
+.item-main { grid-area: main; min-width: 0; }
+.item-side { grid-area: side; display: flex; flex-direction: column; align-items: flex-end; gap: 0.7rem; }
+.ask {
+  margin: 0; font-family: var(--f-display); font-size: var(--s-ask); font-weight: 600;
+  line-height: 1.4; text-wrap: pretty;
+}
+.item.is-done .ask { color: var(--ink-2); }
+.or {
+  display: flex; align-items: center; gap: 0.8rem; margin-left: 2.8rem; color: var(--ink-3);
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+}
+.or::before, .or::after { content: ""; flex: 1; border-top: 1px dashed var(--rule-strong); }
+
+.wt { display: inline-flex; flex-direction: column; align-items: center; gap: 0.3rem; }
+.wt b { font-family: var(--f-mono); font-size: 1rem; font-weight: 600; line-height: 1; }
+.wt small { font-size: 0.625rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+.wt .bars { display: flex; gap: 2px; }
+.wt .bars i { width: 4px; height: 10px; border-radius: 1px; background: var(--rule-strong); }
+.wt[data-m="1"] i:nth-child(-n+1), .wt[data-m="2"] i:nth-child(-n+2),
+.wt[data-m="3"] i:nth-child(-n+3), .wt[data-m="5"] i { background: var(--accent); }
+.done {
+  display: grid; place-items: center; width: 2rem; height: 2rem; padding: 0; border-radius: 50%;
+  border: 1.5px solid var(--rule-strong); background: transparent; color: transparent; cursor: pointer;
+}
+.done svg { width: 14px; height: 14px; }
+.done:hover { border-color: var(--accent); color: var(--ink-3); }
+.done[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: var(--on-accent); }
+
+/* fill-in blanks and true/false */
+.blank {
+  display: inline-block; min-width: 6ch; padding: 0 0.15em; line-height: 1.3;
+  border-bottom: 2px solid var(--accent);
+}
+.blank .fill { font-family: var(--f-body); font-weight: 700; color: var(--accent-strong); }
+.verdict { margin: 0 0 0.45rem; }
+.pill {
+  display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.32rem 0.65rem; border-radius: 999px;
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+}
+.pill-true { background: var(--ok-soft); color: var(--ok); }
+.pill-false { background: var(--bad-soft); color: var(--bad); }
+.pill-true::before { content: "\2713"; }
+.pill-false::before { content: "\2715"; }
+
+/* self-test mode */
+.reveal {
+  display: none; align-items: center; margin-top: 0.75rem; padding: 0.5rem 0.9rem; border: 0;
+  border-radius: 999px; background: var(--accent-soft); color: var(--accent-strong);
+  font-size: 0.875rem; font-weight: 700; cursor: pointer;
+}
+.selftest .item:not(.shown) .reveal { display: inline-flex; }
+.selftest .item:not(.shown) .ans { display: none; }
+.selftest .item:not(.shown) .blank .fill { color: transparent; user-select: none; }
+.selftest .item:not(.shown) .blank { cursor: pointer; }
+
+/* ---------- answer body ---------- */
+.ans { margin-top: 0.65rem; color: var(--ink); }
+.ans > :first-child { margin-top: 0; }
+.ans > :last-child { margin-bottom: 0; }
+.ans p, .ans ul, .ans ol { margin: 0.6rem 0; }
+.ans ul, .ans ol { padding-left: 1.3rem; }
+.ans li { margin: 0.3rem 0; padding-left: 0.15rem; }
+.ans li::marker { color: var(--accent-strong); font-weight: 700; }
+.ans strong { font-weight: 700; }
+.ans h4 {
+  margin: 1.2rem 0 0.35rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--accent-strong);
+}
+:not(pre) > code {
+  padding: 0.08em 0.34em; border-radius: 5px; background: var(--well);
+  font-family: var(--f-mono); font-size: 0.86em; overflow-wrap: anywhere;
+}
+.ans blockquote {
+  margin: 0.9rem 0; padding: 0.65rem 0.9rem; border-radius: var(--radius);
+  background: var(--accent-soft); color: var(--ink);
+}
+.ans blockquote p { margin: 0.2rem 0; }
+.code { margin: 0.85rem 0; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--code-bg); overflow: hidden; }
+.code-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 0.3rem 0.45rem 0.3rem 0.85rem; border-bottom: 1px solid var(--rule);
+  font-family: var(--f-mono); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--ink-3);
+}
+.copy {
+  padding: 0.28rem 0.55rem; border: 1px solid var(--rule-strong); border-radius: 6px; background: var(--sheet);
+  font-family: var(--f-mono); font-size: 0.6875rem; font-weight: 600; color: var(--ink-2); cursor: pointer;
+}
+.copy:hover { color: var(--ink); border-color: var(--ink-3); }
+.code pre { margin: 0; padding: 0.85rem 1rem; overflow-x: auto; font-family: var(--f-mono); font-size: 0.84rem; line-height: 1.6; tab-size: 2; }
+.code[data-kind="output"] { background: var(--sheet); border-style: dashed; }
+.code[data-kind="output"] .code-bar { border-bottom-style: dashed; }
+.hljs-keyword, .hljs-selector-tag, .hljs-doctag, .hljs-meta .hljs-keyword { color: var(--syn-key); }
+.hljs-string, .hljs-regexp, .hljs-selector-attr { color: var(--syn-str); }
+.hljs-number, .hljs-literal { color: var(--syn-num); }
+.hljs-comment, .hljs-quote { color: var(--syn-com); font-style: italic; }
+.hljs-title, .hljs-section, .hljs-title.function_ { color: var(--syn-fn); }
+.hljs-title.class_, .hljs-type { color: var(--syn-type); }
+.hljs-tag, .hljs-name, .hljs-selector-id, .hljs-selector-class { color: var(--syn-tag); }
+.hljs-attr, .hljs-attribute, .hljs-property { color: var(--syn-attr); }
+.hljs-built_in, .hljs-meta, .hljs-symbol, .hljs-variable.language_, .hljs-template-variable { color: var(--syn-built); }
+.hljs-subst, .hljs-params, .hljs-tag .hljs-string ~ .hljs-string { color: inherit; }
+.hljs-tag .hljs-string { color: var(--syn-str); }
+.table-wrap { margin: 0.85rem 0; overflow-x: auto; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--sheet); }
+.table-wrap table { width: 100%; border-collapse: collapse; font-size: var(--s-small); line-height: 1.45; }
+.table-wrap th, .table-wrap td { padding: 0.55rem 0.8rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--rule); }
+.table-wrap th { background: var(--well); font-size: 0.875rem; font-weight: 700; }
+.table-wrap td:first-child { font-weight: 700; }
+.table-wrap tr:last-child td { border-bottom: 0; }
+.table-wrap.cols-3 table { min-width: 21rem; }
+.table-wrap.cols-4 table, .table-wrap.cols-5 table { min-width: 34rem; }
+
+/* ---------- diagrams ---------- */
+.diagram { margin: 1rem 0; padding: 0.9rem; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--sheet); }
+.diagram .scroll { overflow-x: auto; }
+.diagram svg { display: block; width: 100%; height: auto; margin-inline: auto; max-width: var(--dw, 100%); min-width: var(--dmin, 0px); }
+.diagram figcaption { margin-top: 0.6rem; font-size: var(--s-cap); line-height: 1.45; color: var(--ink-2); }
+.dg { font-family: var(--f-body); font-size: 13px; }
+.dg text { fill: var(--ink); }
+.dg .t-b { font-weight: 700; }
+.dg .t-sub { fill: var(--ink-2); font-size: 11.5px; }
+.dg .t-acc { fill: var(--accent-strong); font-weight: 700; }
+.dg .t-mono { font-family: var(--f-mono); font-size: 12px; }
+.dg .b { fill: var(--paper); stroke: var(--rule-strong); stroke-width: 1.5; }
+.dg .b-acc { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.5; }
+.dg .b-well { fill: var(--well); stroke: none; }
+.dg .e { fill: none; stroke: var(--ink-3); stroke-width: 1.5; }
+.dg .e-acc { fill: none; stroke: var(--accent); stroke-width: 1.75; }
+.dg .dash { stroke-dasharray: 5 4; }
+.dg .ah { fill: var(--ink-3); }
+.dg .ah-acc { fill: var(--accent); }
+.dg .halo { paint-order: stroke; stroke: var(--sheet); stroke-width: 5px; stroke-linejoin: round; }
+
+.foot { margin-top: 3rem; padding-block: 1.5rem 3rem; border-top: 1px solid var(--rule); font-size: var(--s-cap); color: var(--ink-3); }
+.foot p { margin: 0.3rem 0; max-width: 46rem; }
+
+@media (max-width: 760px) {
+  .guide-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .wrap { padding-inline: 16px; }
+  body { font-size: 1rem; }
+  .toolbar .wrap { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 0.6rem; }
+  .toolbar .wrap::-webkit-scrollbar { display: none; }
+  .qnav a { padding-inline: 0.5rem; }
+  .seg-label { display: none; }
+  .switch, .progress { flex: none; }
+  .diagram { padding: 0.5rem 0.25rem; }
+  .item { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "no side" "main main"; gap: 0.35rem 0.8rem; }
+  .item-side { flex-direction: row; align-items: center; }
+  .wt { flex-direction: row-reverse; gap: 0.45rem; }
+  .or { margin-left: 0; }
+  .q-head { grid-template-columns: auto minmax(0, 1fr); }
+  .q-total { grid-column: 2; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+}
+</style>
+
+</head>
+<body>
+<div class="app" data-slug="nodejs-2024">
+  <header class="cover wrap">
+    <p class="eyebrow">M.Sc. (IT &amp; CA) · Semester 3 · Solved question paper</p>
+    <h1><span class="kicker">CS-14 · Oct–Nov 2024</span>Node JS</h1>
+    <p class="printed">M.SC. (IT&amp;CA) (2022) SEMESTER-3 OCT-2024 · Paper 003-3083002</p>
+    <dl class="facts">
+      <div><dt>Time</dt><dd>2.5 hours</dd></div>
+      <div><dt>Total</dt><dd>70 marks</dd></div>
+      <div><dt>Questions</dt><dd>5 × 14 marks</dd></div>
+      <div><dt>Answers solved</dt><dd>50</dd></div>
+    </dl>
+  </header>
+
+  <section class="guide wrap" aria-labelledby="guide-title">
+    <h2 id="guide-title">How much to write for each mark</h2>
+    <div class="guide-grid">
+      <div class="guide-cell"><span class="m"><b>1</b> mark</span><p>One word or one line. Fill the blank, say True or False, or give a one-line meaning.</p></div>
+      <div class="guide-cell"><span class="m"><b>2</b> marks</span><p>Three or four lines. A definition plus two key points or a tiny example.</p></div>
+      <div class="guide-cell"><span class="m"><b>3</b> marks</span><p>A definition, three or four points, and a small table or code example.</p></div>
+      <div class="guide-cell"><span class="m"><b>5</b> marks</span><p>A full note: meaning, diagram or code, five or six points, and a closing line.</p></div>
+    </div>
+    <p class="guide-note">In (B), (C) and (D) you answer any one of the two options. Both options are solved here, so pick the one you know better.</p>
+  </section>
+
+  <nav class="toolbar" aria-label="Paper controls">
+    <div class="wrap">
+      <div class="qnav"><a href="#q1" title="Introduction, REPL and process model">Q1</a><a href="#q2" title="Modules, NPM, query string and URL">Q2</a><a href="#q3" title="File system and HTTP">Q3</a><a href="#q4" title="Events and MySQL database">Q4</a><a href="#q5" title="Express.js">Q5</a></div>
+      <div class="seg" role="group" aria-label="Show questions by marks">
+        <span class="seg-label">Marks</span>
+        <button type="button" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" data-filter="1" aria-pressed="false">1</button>
+        <button type="button" data-filter="2" aria-pressed="false">2</button>
+        <button type="button" data-filter="3" aria-pressed="false">3</button>
+        <button type="button" data-filter="5" aria-pressed="false">5</button>
+      </div>
+      <button type="button" class="switch" id="selftest" aria-pressed="false"><span class="knob" aria-hidden="true"></span>Hide answers</button>
+      <p class="progress"><span><b id="done-count">0</b>/50 revised</span><span class="bar" aria-hidden="true"><i id="done-bar"></i></span></p>
+    </div>
+  </nav>
+
+  <main id="paper" class="wrap" data-filter="all">
+<section class="q" id="q1" aria-labelledby="q1-title"><header class="q-head"><p class="q-no">Q.1</p><h2 id="q1-title">Introduction, REPL and process model</h2><p class="q-total">14 marks</p></header><section class="sec" id="q1a" data-marks="1"><header class="sec-head"><span class="sec-letter">(A)</span><h3 class="sec-title">Answer the following</h3><span class="sec-rule">Attempt all · 1 mark each</span><span class="sec-marks" aria-label="4 marks">4</span></header><div class="items"><article class="item" id="q1a1" data-marks="1"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Node JS was developed by <span class="blank"><span class="fill">Ryan Dahl</span></span>.</p><div class="ans"><p>He released it in 2009. Node.js runs JavaScript on Google Chrome's V8 engine.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (A) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q1a2" data-marks="1"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">To check the version of Node, <span class="blank"><span class="fill">node -v</span></span> command is used.</p><div class="ans"><p><code>node --version</code> also works, for example it prints <code>v22.11.0</code>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (A) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q1a3" data-marks="1"><div class="item-no" aria-hidden="true">3</div><div class="item-main"><p class="ask">npm stands for <span class="blank"><span class="fill">Node Package Manager</span></span>.</p><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (A) 3 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q1a4" data-marks="1"><div class="item-no" aria-hidden="true">4</div><div class="item-main"><p class="ask">In REPL, <span class="blank"><span class="fill">_ (underscore)</span></span> is used to get the last result.</p><div class="ans"><p>Example: after <code>5 + 3</code> gives <code>8</code>, typing <code>_ * 2</code> gives <code>16</code>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (A) 4 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q1b" data-marks="2"><header class="sec-head"><span class="sec-letter">(B)</span><h3 class="sec-title">Answer in brief</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="2 marks">2</span></header><div class="items"><article class="item" id="q1b1" data-marks="2"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">What is REPL ?</p><div class="ans"><p><strong>REPL</strong> stands for <strong>Read – Eval – Print – Loop</strong>. It is Node's <strong>interactive shell</strong>, where we type JavaScript and see the result at once.</p>
+<ul>
+<li><strong>Read</strong> – reads what we type</li>
+<li><strong>Eval</strong> – runs (evaluates) it</li>
+<li><strong>Print</strong> – shows the result</li>
+<li><strong>Loop</strong> – waits for the next input</li>
+</ul>
+<p>We start it by typing <code>node</code> in the terminal. Useful commands: <code>.help</code>, <code>.editor</code>, <code>.save</code>, <code>.load</code>, and <code>.exit</code> (or Ctrl+C twice).</p>
+<div class="code"><div class="code-bar"><span>Terminal session</span><button type="button" class="copy">Copy</button></div><pre><code class="language-plaintext">$ node
+&gt; 10 + 20
+30
+&gt; _ * 2
+60
+&gt; .exit
+</code></pre></div></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (B) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q1b2" data-marks="2"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">List out NodeJS Console methods.</p><div class="ans"><ul>
+<li><code>console.log()</code> – prints a normal message</li>
+<li><code>console.info()</code> – prints an information message</li>
+<li><code>console.warn()</code> – prints a warning</li>
+<li><code>console.error()</code> – prints an error message</li>
+<li><code>console.table()</code> – shows an array or object as a table</li>
+<li><code>console.time()</code> / <code>console.timeEnd()</code> – measure how long code takes</li>
+<li><code>console.count()</code> – counts how many times it was called</li>
+<li><code>console.assert()</code> – prints an error only if a condition is false</li>
+<li><code>console.dir()</code> – shows all properties of an object</li>
+<li><code>console.clear()</code> – clears the console</li>
+</ul></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (B) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q1c" data-marks="3"><header class="sec-head"><span class="sec-letter">(C)</span><h3 class="sec-title">Answer in detail</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="3 marks">3</span></header><div class="items"><article class="item" id="q1c1" data-marks="3"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Differentiate : Node JS V/s. Angular JS</p><div class="ans"><div class="table-wrap cols-4"><table>
+<thead>
+<tr>
+<th>Point</th>
+<th>Node.js</th>
+<th>AngularJS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What it is</td>
+<td>A <strong>runtime environment</strong> that runs JavaScript outside the browser</td>
+<td>A <strong>front-end framework</strong> for building web pages</td>
+</tr>
+<tr>
+<td>Runs on</td>
+<td><strong>Server</strong></td>
+<td><strong>Browser</strong> (client side)</td>
+</tr>
+<tr>
+<td>Used for</td>
+<td>Back-end work: servers, APIs, real-time apps</td>
+<td>Front-end work: single-page applications</td>
+</tr>
+<tr>
+<td>Written in</td>
+<td>C, C++ and JavaScript</td>
+<td>JavaScript</td>
+</tr>
+<tr>
+<td>Design</td>
+<td>Event-driven, non-blocking I/O</td>
+<td>MVC (Model–View–Controller)</td>
+</tr>
+<tr>
+<td>How we get it</td>
+<td>Installed on the computer</td>
+<td>Added to an HTML page with a <code>&lt;script&gt;</code> tag</td>
+</tr>
+</tbody>
+</table></div>
+<p>Both can work together: AngularJS shows the pages and Node.js serves the data (this is part of the MEAN stack).</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (C) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q1c2" data-marks="3"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Differentiate : Node JS V/s. AJAX</p><div class="ans"><div class="table-wrap cols-4"><table>
+<thead>
+<tr>
+<th>Point</th>
+<th>Node.js</th>
+<th>AJAX</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What it is</td>
+<td>A <strong>server-side JavaScript runtime</strong></td>
+<td>A <strong>browser technique</strong>: Asynchronous JavaScript and XML</td>
+</tr>
+<tr>
+<td>Runs on</td>
+<td>Server</td>
+<td>Browser</td>
+</tr>
+<tr>
+<td>Purpose</td>
+<td>Build web servers, APIs and tools</td>
+<td>Update part of a page <strong>without reloading</strong> it</td>
+</tr>
+<tr>
+<td>Works with</td>
+<td>V8 engine and modules like <code>http</code>, <code>fs</code></td>
+<td><code>XMLHttpRequest</code> or <code>fetch()</code></td>
+</tr>
+<tr>
+<td>Can it create a server?</td>
+<td>Yes</td>
+<td>No, it only sends requests to a server</td>
+</tr>
+<tr>
+<td>Example</td>
+<td>A login API on the server</td>
+<td>Live search suggestions while typing</td>
+</tr>
+</tbody>
+</table></div>
+<p>In real apps they work together: AJAX in the browser calls an API that is built with Node.js.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (C) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q1d" data-marks="5"><header class="sec-head"><span class="sec-letter">(D)</span><h3 class="sec-title">Write a note on</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="5 marks">5</span></header><div class="items"><article class="item" id="q1d1" data-marks="5"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">How to create Node file with JavaScript ?</p><div class="ans"><p>A Node file is a plain <strong>JavaScript file with the <code>.js</code> extension</strong> that we run with the <code>node</code> command instead of a browser.</p>
+<h4>Steps</h4>
+<ol>
+<li><strong>Install Node.js</strong> from nodejs.org and check it with <code>node -v</code>.</li>
+<li><strong>Make a project folder</strong> and open it in the terminal.</li>
+<li>(Optional) Create <code>package.json</code> with <code>npm init -y</code>.</li>
+<li><strong>Create a file</strong> such as <code>app.js</code> in VS Code or Notepad.</li>
+<li><strong>Write JavaScript code</strong> in it and save.</li>
+<li><strong>Run it</strong> with <code>node app.js</code> and see the output in the terminal.</li>
+</ol>
+<div class="code"><div class="code-bar"><span>Terminal</span><button type="button" class="copy">Copy</button></div><pre><code class="language-bash">mkdir myapp
+cd myapp
+npm init -y
+node app.js
+</code></pre></div>
+<h4>Example 1: a simple program</h4>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">// app.js
+const name = 'Node.js';
+const add = (a, b) =&gt; a + b;
+
+console.log('Hello from ' + name);
+console.log('Sum is', add(10, 20));
+</code></pre></div>
+<div class="code" data-kind="output"><div class="code-bar"><span>Output</span><button type="button" class="copy">Copy</button></div><pre><code class="language-plaintext">Hello from Node.js
+Sum is 30
+</code></pre></div>
+<h4>Example 2: a web server file</h4>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">// server.js
+const http = require('http');
+
+const server = http.createServer((req, res) =&gt; {
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.end('&lt;h1&gt;My first Node server&lt;/h1&gt;');
+});
+
+server.listen(3000, () =&gt; console.log('Server running at http://localhost:3000'));
+</code></pre></div>
+<p>Run <code>node server.js</code> and open <code>http://localhost:3000</code> in the browser. Press <strong>Ctrl+C</strong> to stop the server.</p>
+<h4>Points to remember</h4>
+<ul>
+<li>Node has <strong>no <code>window</code> or <code>document</code></strong>, because there is no web page; instead it has modules such as <code>fs</code> and <code>http</code>.</li>
+<li>Built-in modules are loaded with <code>require()</code>.</li>
+<li>The <code>nodemon</code> tool restarts the file automatically every time we save it.</li>
+</ul></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (D) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q1d2" data-marks="5"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Explain Node JS process model.</p><div class="ans"><p>The <strong>process model</strong> explains how Node.js handles many client requests at the same time. Node.js uses a <strong>single-threaded, event-driven, non-blocking I/O</strong> model.</p>
+<h4>Traditional web server model</h4>
+<p>Servers like Apache or IIS (classic setup) create <strong>one thread for each request</strong>. While a thread waits for a file or database, it sits idle (it is <strong>blocked</strong>). Thousands of users need thousands of threads, which uses a lot of memory.</p>
+<h4>Node.js model</h4>
+<figure class="diagram"><div class="scroll"><svg class="dg" style="--dw: 506px; --dmin: 326px" viewBox="0 0 440 270" role="img" aria-label="Requests enter the event queue, the single-threaded event loop handles them, sends slow I/O to the thread pool, and runs the callback when the work is done">
+<defs>
+<marker id="ah-pm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ah"/></marker>
+</defs>
+<rect class="b" x="10" y="30" width="90" height="70" rx="10"/>
+<text class="t-b" x="55" y="60" text-anchor="middle">Clients</text>
+<text class="t-sub" x="55" y="78" text-anchor="middle">many requests</text>
+<rect class="b" x="150" y="30" width="100" height="70" rx="10"/>
+<text class="t-b" x="200" y="60" text-anchor="middle">Event queue</text>
+<text class="t-sub" x="200" y="78" text-anchor="middle">waiting tasks</text>
+<rect class="b-acc" x="300" y="30" width="110" height="70" rx="10"/>
+<text class="t-b" x="355" y="60" text-anchor="middle">Event loop</text>
+<text class="t-sub" x="355" y="78" text-anchor="middle">one main thread</text>
+<rect class="b" x="300" y="186" width="110" height="74" rx="10"/>
+<text class="t-b" x="355" y="210" text-anchor="middle">Thread pool</text>
+<text class="t-sub" x="355" y="228" text-anchor="middle">libuv workers</text>
+<text class="t-sub" x="355" y="244" text-anchor="middle">file · DB · network</text>
+<line class="e" x1="102" y1="65" x2="146" y2="65" marker-end="url(#ah-pm)"/>
+<text class="t-sub halo" x="124" y="55" text-anchor="middle">requests</text>
+<line class="e" x1="252" y1="65" x2="296" y2="65" marker-end="url(#ah-pm)"/>
+<text class="t-sub halo" x="274" y="55" text-anchor="middle">next</text>
+<line class="e dash" x1="330" y1="102" x2="330" y2="182" marker-end="url(#ah-pm)"/>
+<text class="t-sub halo" x="322" y="150" text-anchor="end">slow I/O</text>
+<line class="e" x1="380" y1="184" x2="380" y2="104" marker-end="url(#ah-pm)"/>
+<text class="t-sub halo" x="388" y="150">callback</text>
+<path class="e-acc" d="M314,102 V128 H55 V104" marker-end="url(#ah-pm)"/>
+<text class="t-acc halo" x="185" y="146" text-anchor="middle">response</text>
+</svg></div><figcaption>The single event loop never waits: slow work goes to the thread pool, and its callback comes back to the loop when the work is finished.</figcaption></figure>
+
+<ol>
+<li>Clients send requests, and Node places them in the <strong>event queue</strong>.</li>
+<li>The <strong>event loop</strong>, running on <strong>one main thread</strong>, picks the requests one by one.</li>
+<li>If a request is quick (no waiting), it is processed and the <strong>response</strong> is sent at once.</li>
+<li>If a request needs slow I/O (reading a file, a database query, a network call), Node <strong>hands it to the thread pool</strong> (managed by the <strong>libuv</strong> library) and moves on to the next request <strong>without waiting</strong>.</li>
+<li>When the slow work finishes, its <strong>callback</strong> goes back to the queue, and the event loop runs it and sends the response.</li>
+</ol>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">const fs = require('fs');
+
+console.log('1. Start');
+fs.readFile('data.txt', 'utf8', (err, data) =&gt; {
+  console.log('3. File reading finished');     // callback runs later
+});
+console.log('2. Next task runs without waiting');
+</code></pre></div>
+<div class="code" data-kind="output"><div class="code-bar"><span>Output</span><button type="button" class="copy">Copy</button></div><pre><code class="language-plaintext">1. Start
+2. Next task runs without waiting
+3. File reading finished
+</code></pre></div>
+<h4>Advantages</h4>
+<ul>
+<li>One thread can serve <strong>thousands of connections</strong> using little memory.</li>
+<li>Very fast for I/O-heavy apps such as chat, APIs and streaming.</li>
+</ul>
+<h4>Limitation</h4>
+<p><strong>CPU-heavy work</strong> (image processing, huge calculations) keeps the single thread busy and slows every user. For such work, Node offers worker threads or child processes.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (D) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section></section>
+<section class="q" id="q2" aria-labelledby="q2-title"><header class="q-head"><p class="q-no">Q.2</p><h2 id="q2-title">Modules, NPM, query string and URL</h2><p class="q-total">14 marks</p></header><section class="sec" id="q2a" data-marks="1"><header class="sec-head"><span class="sec-letter">(A)</span><h3 class="sec-title">Answer the following</h3><span class="sec-rule">Attempt all · 1 mark each</span><span class="sec-marks" aria-label="4 marks">4</span></header><div class="items"><article class="item" id="q2a1" data-marks="1"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">What is buffer ?</p><div class="ans"><p>A <strong>Buffer</strong> is a temporary memory area that stores <strong>raw binary data (bytes)</strong>. Node uses buffers for files, network streams and images, for example <code>Buffer.from('Hi')</code> gives <code>&lt;Buffer 48 69&gt;</code>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (A) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q2a2" data-marks="1"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">List out NodeJS modules.</p><div class="ans"><p>Core modules: <code>http</code>, <code>fs</code>, <code>path</code>, <code>url</code>, <code>querystring</code>, <code>os</code>, <code>events</code>, <code>util</code>, <code>stream</code>, <code>crypto</code>. (Modules are of three types: core, local and third-party.)</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (A) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q2a3" data-marks="1"><div class="item-no" aria-hidden="true">3</div><div class="item-main"><p class="ask">URL stands for <span class="blank"><span class="fill">Uniform Resource Locator</span></span>.</p><div class="ans"><p>It is the address of a resource on the web, like <code>https://example.com/about</code>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (A) 3 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q2a4" data-marks="1"><div class="item-no" aria-hidden="true">4</div><div class="item-main"><p class="ask">The Query String module used to convert query string into JSON object. (True/False)</p><div class="ans"><p class="verdict"><span class="pill pill-true">True</span></p><p><code>querystring.parse('name=Ravi&amp;age=21')</code> gives the object <code>{ name: 'Ravi', age: '21' }</code>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (A) 4 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q2b" data-marks="2"><header class="sec-head"><span class="sec-letter">(B)</span><h3 class="sec-title">Answer in brief</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="2 marks">2</span></header><div class="items"><article class="item" id="q2b1" data-marks="2"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Explain in brief : NPM</p><div class="ans"><p><strong>NPM (Node Package Manager)</strong> is the default package manager of Node.js and is installed along with it. It has two parts: an online <strong>registry</strong> (npmjs.com) with millions of free packages, and a <strong>command-line tool</strong> to install and manage them.</p>
+<ul>
+<li><code>npm init</code> – creates <code>package.json</code></li>
+<li><code>npm install express</code> – installs a package into <code>node_modules</code></li>
+<li><code>npm install -g nodemon</code> – installs a tool globally</li>
+<li><code>npm uninstall express</code>, <code>npm update</code>, <code>npm list</code></li>
+</ul>
+<p>The list of installed packages is saved in <code>package.json</code>, so anyone can reinstall them with <code>npm install</code>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (B) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q2b2" data-marks="2"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">How to install package globally ?</p><div class="ans"><p>We add the <strong><code>-g</code></strong> (global) flag: <strong><code>npm install -g &lt;package-name&gt;</code></strong>. A global package is installed in a system folder, not inside the project, so its command works <strong>from any folder</strong>. It is used for tools such as <code>nodemon</code>, <code>typescript</code> and <code>@angular/cli</code>.</p>
+<div class="code"><div class="code-bar"><span>Terminal</span><button type="button" class="copy">Copy</button></div><pre><code class="language-bash">npm install -g nodemon      # install globally
+nodemon --version           # works from any folder
+npm list -g --depth=0       # see all global packages
+npm uninstall -g nodemon    # remove it
+</code></pre></div>
+<p>On Linux or macOS you may need to add <code>sudo</code> in front.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (B) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q2c" data-marks="3"><header class="sec-head"><span class="sec-letter">(C)</span><h3 class="sec-title">Answer in detail</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="3 marks">3</span></header><div class="items"><article class="item" id="q2c1" data-marks="3"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Explain primitive datatypes.</p><div class="ans"><p>JavaScript, and so Node.js, has <strong>7 primitive data types</strong>. A primitive holds <strong>one simple value</strong>; it cannot be changed (immutable) and is copied by value.</p>
+<div class="table-wrap cols-4"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Example</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>String</td>
+<td><code>'Ravi'</code></td>
+<td>Text</td>
+</tr>
+<tr>
+<td>Number</td>
+<td><code>25</code>, <code>3.14</code></td>
+<td>Whole and decimal numbers</td>
+</tr>
+<tr>
+<td>BigInt</td>
+<td><code>123n</code></td>
+<td>Very large whole numbers</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td><code>true</code>, <code>false</code></td>
+<td>Yes or no</td>
+</tr>
+<tr>
+<td>Undefined</td>
+<td><code>let x;</code></td>
+<td>Declared but no value yet</td>
+</tr>
+<tr>
+<td>Null</td>
+<td><code>let y = null;</code></td>
+<td>Empty on purpose</td>
+</tr>
+<tr>
+<td>Symbol</td>
+<td><code>Symbol('id')</code></td>
+<td>A unique identifier</td>
+</tr>
+</tbody>
+</table></div>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">console.log(typeof 'Ravi');        // string
+console.log(typeof 25);            // number
+console.log(typeof 123n);          // bigint
+console.log(typeof true);          // boolean
+console.log(typeof undefined);     // undefined
+console.log(typeof null);          // object  (an old JavaScript quirk)
+console.log(typeof Symbol('id'));  // symbol
+</code></pre></div></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (C) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q2c2" data-marks="3"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Explain local module.</p><div class="ans"><p>A <strong>local module</strong> is a module that <strong>we create ourselves</strong> inside our project. It is not built into Node and not downloaded from npm. Local modules let us split code into small files and reuse it.</p>
+<ol>
+<li>Create a file, for example <code>calc.js</code>, and write functions in it.</li>
+<li><strong>Export</strong> them with <code>module.exports</code>.</li>
+<li><strong>Import</strong> the file in another file with <code>require('./calc')</code>. The path starts with <code>./</code>.</li>
+</ol>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">// calc.js  (local module)
+function add(a, b) { return a + b; }
+function sub(a, b) { return a - b; }
+module.exports = { add, sub };
+</code></pre></div>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">// app.js
+const calc = require('./calc');
+console.log(calc.add(10, 5));   // 15
+console.log(calc.sub(10, 5));   // 5
+</code></pre></div></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (C) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q2d" data-marks="5"><header class="sec-head"><span class="sec-letter">(D)</span><h3 class="sec-title">Write a note on</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="5 marks">5</span></header><div class="items"><article class="item" id="q2d1" data-marks="5"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Explain Query String module.</p><div class="ans"><p>The <strong><code>querystring</code></strong> module is a <strong>built-in (core) module</strong> used to work with the <strong>query string</strong> of a URL, which is the part after <code>?</code>, like <code>name=Ravi&amp;age=21</code>. It can turn a query string into an object, and an object back into a query string.</p>
+<p>We load it with <code>const querystring = require('querystring');</code></p>
+<div class="table-wrap cols-3"><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>parse()</code> (also <code>decode()</code>)</td>
+<td>Query string → object</td>
+</tr>
+<tr>
+<td><code>stringify()</code> (also <code>encode()</code>)</td>
+<td>Object → query string</td>
+</tr>
+<tr>
+<td><code>escape()</code></td>
+<td>Encodes special characters (space becomes <code>%20</code>)</td>
+</tr>
+<tr>
+<td><code>unescape()</code></td>
+<td>Decodes them back</td>
+</tr>
+</tbody>
+</table></div>
+<h4>Example</h4>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">const querystring = require('querystring');
+
+// 1. parse: string to object
+const obj = querystring.parse('name=Ravi&amp;age=21&amp;city=Rajkot');
+console.log(JSON.stringify(obj));   // {&quot;name&quot;:&quot;Ravi&quot;,&quot;age&quot;:&quot;21&quot;,&quot;city&quot;:&quot;Rajkot&quot;}
+console.log(obj.name);              // Ravi
+
+// 2. stringify: object to string
+console.log(querystring.stringify({ course: 'MSc IT', sem: 3 }));   // course=MSc%20IT&amp;sem=3
+
+// 3. custom separators: ';' between pairs and ':' between key and value
+console.log(querystring.parse('name:Ravi;age:21', ';', ':').name);   // Ravi
+
+// 4. escape and unescape
+console.log(querystring.escape('a b&amp;c'));         // a%20b%26c
+console.log(querystring.unescape('a%20b%26c'));   // a b&amp;c
+</code></pre></div>
+<h4>Using it in a web server</h4>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">const http = require('http');
+const querystring = require('querystring');
+
+http.createServer((req, res) =&gt; {
+  const q = querystring.parse(req.url.split('?')[1] || '');
+  res.end('Hello ' + (q.name || 'guest'));
+}).listen(3000);
+// http://localhost:3000/?name=Ravi  shows  Hello Ravi
+</code></pre></div>
+<h4>Points to remember</h4>
+<ul>
+<li>All values come back as <strong>strings</strong> (<code>age</code> is <code>'21'</code>, not <code>21</code>).</li>
+<li>If a key repeats, its values come back as an array.</li>
+<li><code>querystring</code> is an older (legacy) module; new code can also use <code>URLSearchParams</code>.</li>
+</ul></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (D) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q2d2" data-marks="5"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Write a note on URL module.</p><div class="ans"><p>The <strong><code>url</code></strong> module is a built-in module that <strong>splits a web address into its parts</strong> (protocol, host, path, query and so on), so we can read each part easily. Node offers the modern <strong><code>URL</code> class</strong> (recommended) and the older <strong><code>url.parse()</code></strong> method.</p>
+<figure class="diagram"><div class="scroll"><svg class="dg" style="--dw: 506px; --dmin: 326px" viewBox="0 0 440 84" role="img" aria-label="Parts of a URL: protocol https, host example.com:8080 made of hostname and port, pathname /students/list, search ?year=2024&amp;sem=3 and hash #top">
+<text class="t-mono" x="17" y="44" textLength="406" lengthAdjust="spacingAndGlyphs">https://example.com:8080/students/list?year=2024&amp;sem=3#top</text>
+<path class="e-acc" d="M73,26 V20 H185 V26"/>
+<text class="t-acc" x="129" y="14" text-anchor="middle">host</text>
+<path class="e-acc" d="M17,50 V56 H59 V50"/>
+<path class="e-acc" d="M73,50 V56 H150 V50"/>
+<path class="e-acc" d="M157,50 V56 H185 V50"/>
+<path class="e-acc" d="M188,50 V56 H283 V50"/>
+<path class="e-acc" d="M286,50 V56 H395 V50"/>
+<path class="e-acc" d="M398,50 V56 H423 V50"/>
+<text class="t-sub" x="38" y="72" text-anchor="middle">protocol</text>
+<text class="t-sub" x="111" y="72" text-anchor="middle">hostname</text>
+<text class="t-sub" x="171" y="72" text-anchor="middle">port</text>
+<text class="t-sub" x="235" y="72" text-anchor="middle">pathname</text>
+<text class="t-sub" x="340" y="72" text-anchor="middle">search</text>
+<text class="t-sub" x="410" y="72" text-anchor="middle">hash</text>
+</svg></div><figcaption>The parts of a URL, with the names the url module uses for them.</figcaption></figure>
+
+<h4>1. Modern way: the <code>URL</code> class</h4>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">const myUrl = new URL('https://example.com:8080/students/list?year=2024&amp;sem=3#top');
+
+console.log(myUrl.protocol);                  // https:
+console.log(myUrl.host);                      // example.com:8080
+console.log(myUrl.hostname);                  // example.com
+console.log(myUrl.port);                      // 8080
+console.log(myUrl.pathname);                  // /students/list
+console.log(myUrl.search);                    // ?year=2024&amp;sem=3
+console.log(myUrl.searchParams.get('year'));  // 2024
+console.log(myUrl.hash);                      // #top
+</code></pre></div>
+<h4>2. Older way: <code>url.parse()</code></h4>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">const url = require('url');
+const q = url.parse('http://localhost:3000/default.htm?year=2024&amp;month=march', true);
+
+console.log(q.host);        // localhost:3000
+console.log(q.pathname);    // /default.htm
+console.log(q.search);      // ?year=2024&amp;month=march
+console.log(q.query.month); // march   (true = turn the query into an object)
+</code></pre></div>
+<h4>Uses of the URL module</h4>
+<ul>
+<li>In a web server, read <code>req.url</code> to find which <strong>page</strong> (pathname) the user wants.</li>
+<li>Read <strong>form values</strong> sent in the query string.</li>
+<li>Build URLs from parts with <code>url.format()</code> or by setting properties of a <code>URL</code> object.</li>
+</ul>
+<p>So the URL module saves us from cutting the address string by hand and makes routing and reading data simple.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (D) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section></section>
+<section class="q" id="q3" aria-labelledby="q3-title"><header class="q-head"><p class="q-no">Q.3</p><h2 id="q3-title">File system and HTTP</h2><p class="q-total">14 marks</p></header><section class="sec" id="q3a" data-marks="1"><header class="sec-head"><span class="sec-letter">(A)</span><h3 class="sec-title">Answer the following</h3><span class="sec-rule">Attempt all · 1 mark each</span><span class="sec-marks" aria-label="4 marks">4</span></header><div class="items"><article class="item" id="q3a1" data-marks="1"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">http stands for <span class="blank"><span class="fill">HyperText Transfer Protocol</span></span>.</p><div class="ans"><p>The rules browsers and servers use to send web pages and data.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (A) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q3a2" data-marks="1"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask"><span class="blank"><span class="fill">fs.appendFile()</span></span> method is used to append the data to the file.</p><div class="ans"><p>It adds data at the end of the file and creates the file if it does not exist.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (A) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q3a3" data-marks="1"><div class="item-no" aria-hidden="true">3</div><div class="item-main"><p class="ask"><span class="blank"><span class="fill">fs.open()</span></span> method is used to create, read, or write a file.</p><div class="ans"><p>The flag decides the mode, for example <code>'r'</code> to read, <code>'w'</code> to write (creates the file), <code>'a'</code> to append.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (A) 3 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q3a4" data-marks="1"><div class="item-no" aria-hidden="true">4</div><div class="item-main"><p class="ask">To delete a directory, <span class="blank"><span class="fill">fs.rmdir()</span></span> method is used.</p><div class="ans"><p>For a folder that is not empty, use <code>fs.rm(path, { recursive: true })</code>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (A) 4 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q3b" data-marks="2"><header class="sec-head"><span class="sec-letter">(B)</span><h3 class="sec-title">Answer in brief</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="2 marks">2</span></header><div class="items"><article class="item" id="q3b1" data-marks="2"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Define : fs.renameSync()</p><div class="ans"><p><code>fs.renameSync(oldPath, newPath)</code> <strong>renames a file, or moves it to another folder, synchronously</strong>. "Sync" means Node <strong>waits</strong> until renaming is finished before running the next line. It throws an error if the file does not exist.</p>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">const fs = require('fs');
+
+try {
+  fs.renameSync('old.txt', 'new.txt');
+  console.log('File renamed');
+} catch (err) {
+  console.log('Error:', err.message);
+}
+</code></pre></div></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (B) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q3b2" data-marks="2"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">List out modes for opening a file.</p><div class="ans"><p>The mode (called a <strong>flag</strong>) is passed to <code>fs.open()</code>, for example <code>fs.open('demo.txt', 'w', callback)</code>.</p>
+<div class="table-wrap cols-3"><table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>r</code></td>
+<td>Read only. Error if the file does not exist (default).</td>
+</tr>
+<tr>
+<td><code>r+</code></td>
+<td>Read and write. Error if the file does not exist.</td>
+</tr>
+<tr>
+<td><code>w</code></td>
+<td>Write only. Creates the file, or empties it if it exists.</td>
+</tr>
+<tr>
+<td><code>w+</code></td>
+<td>Read and write. Creates or empties the file.</td>
+</tr>
+<tr>
+<td><code>wx</code></td>
+<td>Like <code>w</code>, but fails if the file already exists.</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td>Append (add at the end). Creates the file if missing.</td>
+</tr>
+<tr>
+<td><code>a+</code></td>
+<td>Read and append. Creates the file if missing.</td>
+</tr>
+<tr>
+<td><code>ax</code></td>
+<td>Like <code>a</code>, but fails if the file already exists.</td>
+</tr>
+</tbody>
+</table></div></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (B) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q3c" data-marks="3"><header class="sec-head"><span class="sec-letter">(C)</span><h3 class="sec-title">Answer in detail</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="3 marks">3</span></header><div class="items"><article class="item" id="q3c1" data-marks="3"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Write a code to write a file.</p><div class="ans"><div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">const fs = require('fs');
+
+// Asynchronous: Node does not wait, the callback runs when writing is done
+fs.writeFile('student.txt', 'Name: Riya\nCourse: MSc IT', (err) =&gt; {
+  if (err) {
+    console.log('Error:', err.message);
+    return;
+  }
+  console.log('File written successfully');
+});
+</code></pre></div>
+<div class="code" data-kind="output"><div class="code-bar"><span>Output</span><button type="button" class="copy">Copy</button></div><pre><code class="language-plaintext">File written successfully
+</code></pre></div>
+<ul>
+<li><code>fs.writeFile(file, data, callback)</code> <strong>creates</strong> the file if it does not exist, and <strong>replaces</strong> the old content if it does.</li>
+<li>The callback receives an <code>err</code> object if something goes wrong (for example, no permission).</li>
+<li>The synchronous version is <code>fs.writeFileSync('student.txt', 'Hello');</code>, which blocks until it finishes.</li>
+</ul></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (C) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q3c2" data-marks="3"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Write a code to delete a file.</p><div class="ans"><div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">const fs = require('fs');
+
+fs.unlink('student.txt', (err) =&gt; {
+  if (err) {
+    console.log('Could not delete:', err.message);
+    return;
+  }
+  console.log('File deleted successfully');
+});
+</code></pre></div>
+<div class="code" data-kind="output"><div class="code-bar"><span>Output</span><button type="button" class="copy">Copy</button></div><pre><code class="language-plaintext">File deleted successfully
+</code></pre></div>
+<ul>
+<li><code>fs.unlink(path, callback)</code> deletes the file at that path.</li>
+<li>If the file is missing, <code>err.message</code> is <code>ENOENT: no such file or directory, unlink 'student.txt'</code>.</li>
+<li>Synchronous way with a check first:</li>
+</ul>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">if (fs.existsSync('student.txt')) {
+  fs.unlinkSync('student.txt');
+  console.log('Deleted');
+}
+</code></pre></div></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (C) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q3d" data-marks="5"><header class="sec-head"><span class="sec-letter">(D)</span><h3 class="sec-title">Write a note on</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="5 marks">5</span></header><div class="items"><article class="item" id="q3d1" data-marks="5"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">How to read content in file ? Explain with example.</p><div class="ans"><p>The <strong><code>fs</code> (file system)</strong> module gives several ways to read a file:</p>
+<ol>
+<li><strong><code>fs.readFile()</code></strong> – asynchronous, with a callback. Best choice in most programs.</li>
+<li><strong><code>fs.readFileSync()</code></strong> – synchronous; Node waits until the file is read.</li>
+<li><strong><code>fs.promises.readFile()</code></strong> – asynchronous, used with <code>async</code> / <code>await</code>.</li>
+<li><strong><code>fs.createReadStream()</code></strong> – reads <strong>big files in small pieces</strong> (chunks).</li>
+</ol>
+<p><strong>Syntax:</strong> <code>fs.readFile(path, encoding, callback(err, data))</code>. If we do not give the encoding <code>'utf8'</code>, <code>data</code> comes back as a Buffer (raw bytes) instead of text.</p>
+<h4>Example</h4>
+<p>Suppose <code>data.txt</code> contains the line <code>Hello from the file!</code></p>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">const fs = require('fs');
+
+// 1. Asynchronous read
+fs.readFile('data.txt', 'utf8', (err, data) =&gt; {
+  if (err) return console.log('Error:', err.message);
+  console.log('Async:', data);
+});
+
+// 2. Synchronous read
+const text = fs.readFileSync('data.txt', 'utf8');
+console.log('Sync:', text);
+</code></pre></div>
+<div class="code" data-kind="output"><div class="code-bar"><span>Output</span><button type="button" class="copy">Copy</button></div><pre><code class="language-plaintext">Sync: Hello from the file!
+Async: Hello from the file!
+</code></pre></div>
+<p>The <strong>sync</strong> line prints first, because the async callback runs only after the file has been read in the background.</p>
+<h4>With async / await</h4>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">const fsp = require('fs').promises;
+
+async function show() {
+  try {
+    const data = await fsp.readFile('data.txt', 'utf8');
+    console.log(data);
+  } catch (err) {
+    console.log('Error:', err.message);
+  }
+}
+show();
+</code></pre></div>
+<h4>For a large file: stream</h4>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">const stream = fs.createReadStream('big.log', 'utf8');
+stream.on('data', (chunk) =&gt; console.log('Got', chunk.length, 'characters'));
+stream.on('end', () =&gt; console.log('Finished reading'));
+</code></pre></div>
+<h4>Points to remember</h4>
+<ul>
+<li>Always handle the error; a missing file gives the error code <code>ENOENT</code>.</li>
+<li>Use <code>'utf8'</code> to get text instead of a Buffer.</li>
+<li>In servers, prefer the asynchronous methods so other users are not kept waiting.</li>
+</ul></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (D) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q3d2" data-marks="5"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Write a code to handle http request for Web Server.</p><div class="ans"><p>A web server receives a <strong>request</strong> from the browser and sends back a <strong>response</strong>. Node's built-in <strong><code>http</code></strong> module lets us build one and decide what to send for each URL.</p>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">const http = require('http');
+
+const server = http.createServer((req, res) =&gt; {
+  console.log(req.method, req.url);                     // log every request
+
+  if (req.method === 'GET' &amp;&amp; req.url === '/') {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.end('&lt;h1&gt;Home Page&lt;/h1&gt;');
+
+  } else if (req.method === 'GET' &amp;&amp; req.url === '/about') {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.end('&lt;h1&gt;About Us&lt;/h1&gt;');
+
+  } else if (req.method === 'GET' &amp;&amp; req.url === '/api/students') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify([{ id: 1, name: 'Riya' }, { id: 2, name: 'Aman' }]));
+
+  } else if (req.method === 'POST' &amp;&amp; req.url === '/submit') {
+    let body = '';
+    req.on('data', (chunk) =&gt; body += chunk);           // collect sent data
+    req.on('end', () =&gt; {
+      res.writeHead(200, { 'Content-Type': 'text/plain' });
+      res.end('Received: ' + body);
+    });
+
+  } else {
+    res.writeHead(404, { 'Content-Type': 'text/html' });
+    res.end('&lt;h1&gt;404 - Page not found&lt;/h1&gt;');
+  }
+});
+
+server.listen(3000, () =&gt; console.log('Server running at http://localhost:3000'));
+</code></pre></div>
+<h4>How it works</h4>
+<ul>
+<li><code>require('http')</code> loads the built-in module.</li>
+<li><code>http.createServer(callback)</code> creates the server. The callback runs for <strong>every request</strong> and gets two objects: <strong><code>req</code></strong> (the request: <code>url</code>, <code>method</code>, <code>headers</code>) and <strong><code>res</code></strong> (the response we send).</li>
+<li><code>res.writeHead(status, headers)</code> sets the status code (200 OK, 404 Not Found) and the content type.</li>
+<li><code>res.end(data)</code> sends the data and finishes the response.</li>
+<li><code>req.on('data')</code> and <code>req.on('end')</code> collect the body of a POST request.</li>
+<li><code>server.listen(3000)</code> starts the server on port 3000.</li>
+</ul>
+<div class="table-wrap cols-3"><table>
+<thead>
+<tr>
+<th>URL in browser</th>
+<th>Response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>http://localhost:3000/</code></td>
+<td>Home Page</td>
+</tr>
+<tr>
+<td><code>http://localhost:3000/about</code></td>
+<td>About Us</td>
+</tr>
+<tr>
+<td><code>http://localhost:3000/api/students</code></td>
+<td>JSON list of students</td>
+</tr>
+<tr>
+<td><code>http://localhost:3000/xyz</code></td>
+<td>404 - Page not found</td>
+</tr>
+</tbody>
+</table></div></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (D) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section></section>
+<section class="q" id="q4" aria-labelledby="q4-title"><header class="q-head"><p class="q-no">Q.4</p><h2 id="q4-title">Events and MySQL database</h2><p class="q-total">14 marks</p></header><section class="sec" id="q4a" data-marks="1"><header class="sec-head"><span class="sec-letter">(A)</span><h3 class="sec-title">Answer the following</h3><span class="sec-rule">Attempt all · 1 mark each</span><span class="sec-marks" aria-label="4 marks">4</span></header><div class="items"><article class="item" id="q4a1" data-marks="1"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">emitter.removeListener() method removes all listeners, or those of the specified event. (True/False)</p><div class="ans"><p class="verdict"><span class="pill pill-false">False</span></p><p><code>removeListener()</code> (or <code>off()</code>) removes only <strong>one</strong> given listener. Removing all listeners is done by <code>removeAllListeners()</code>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (A) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q4a2" data-marks="1"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Explain EventEmitter.</p><div class="ans"><p><code>EventEmitter</code> is a class in Node's built-in <strong><code>events</code></strong> module used to <strong>create and handle custom events</strong>: <code>on()</code> registers a listener and <code>emit()</code> fires the event.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (A) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q4a3" data-marks="1"><div class="item-no" aria-hidden="true">3</div><div class="item-main"><p class="ask">Event Handler is a function that performs some actions for a particular event happening. (True/False)</p><div class="ans"><p class="verdict"><span class="pill pill-true">True</span></p><p>The handler (also called a listener) runs every time its event is emitted.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (A) 3 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q4a4" data-marks="1"><div class="item-no" aria-hidden="true">4</div><div class="item-main"><p class="ask">Write the query for creating database.</p><div class="ans"><p><code>CREATE DATABASE college;</code> In Node: <code>con.query('CREATE DATABASE college', callback)</code>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (A) 4 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q4b" data-marks="2"><header class="sec-head"><span class="sec-letter">(B)</span><h3 class="sec-title">Answer in brief</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="2 marks">2</span></header><div class="items"><article class="item" id="q4b1" data-marks="2"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">What is synchronous call ?</p><div class="ans"><p>A <strong>synchronous call</strong> runs <strong>one task at a time, in order</strong>. Each line waits for the line before it to finish, so a slow task (like reading a big file) <strong>blocks</strong> the whole program until it is done.</p>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">const fs = require('fs');
+console.log('Start');
+const data = fs.readFileSync('data.txt', 'utf8');   // program waits here
+console.log(data);
+console.log('End');
+</code></pre></div>
+<p>The output is always in this order: <code>Start</code>, the file content, <code>End</code>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (B) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q4b2" data-marks="2"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Explain event loop.</p><div class="ans"><p>The <strong>event loop</strong> is what lets Node.js do <strong>non-blocking work on a single thread</strong>. It keeps checking: when the main code (the call stack) is empty, it takes the next ready callback (a finished timer, file read or network reply) from the queue and runs it. This repeats as long as there is work.</p>
+<p>Its phases run in order: <strong>timers → pending callbacks → poll (I/O) → check (<code>setImmediate</code>) → close callbacks</strong>.</p>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">console.log('A');
+setTimeout(() =&gt; console.log('B'), 0);
+console.log('C');
+// Output: A C B
+</code></pre></div>
+<p><code>B</code> comes last because its callback waits in the queue until the main code has finished.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (B) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q4c" data-marks="3"><header class="sec-head"><span class="sec-letter">(C)</span><h3 class="sec-title">Answer in detail</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="3 marks">3</span></header><div class="items"><article class="item" id="q4c1" data-marks="3"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">How to pass arguments to an event ?</p><div class="ans"><p>We write the extra values <strong>after the event name in <code>emit()</code></strong>. The listener function receives them as <strong>parameters, in the same order</strong>.</p>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">const EventEmitter = require('events');
+const emitter = new EventEmitter();
+
+emitter.on('result', (name, marks, grade) =&gt; {
+  console.log(`${name} scored ${marks} marks (Grade ${grade})`);
+});
+
+emitter.emit('result', 'Riya', 87, 'A');
+emitter.emit('result', 'Aman', 72, 'B');
+</code></pre></div>
+<div class="code" data-kind="output"><div class="code-bar"><span>Output</span><button type="button" class="copy">Copy</button></div><pre><code class="language-plaintext">Riya scored 87 marks (Grade A)
+Aman scored 72 marks (Grade B)
+</code></pre></div>
+<p>Any number and type of values can be passed. For many values, it is neater to pass one object: <code>emitter.emit('order', { id: 1, total: 500 })</code>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (C) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q4c2" data-marks="3"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Explain Extend EventEmitter Class.</p><div class="ans"><p>We can make <strong>our own class that extends <code>EventEmitter</code></strong>. The new class gets all the event methods (<code>on</code>, <code>emit</code>, <code>once</code>), so its objects can <strong>raise their own events</strong>. Many Node objects, such as the HTTP server and streams, work this way.</p>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">const EventEmitter = require('events');
+
+class School extends EventEmitter {
+  admit(student) {
+    console.log(`Admitting ${student}...`);
+    this.emit('admitted', student);            // raise our own event
+  }
+}
+
+const school = new School();
+school.on('admitted', (name) =&gt; console.log(`Welcome email sent to ${name}`));
+school.admit('Neha');
+</code></pre></div>
+<div class="code" data-kind="output"><div class="code-bar"><span>Output</span><button type="button" class="copy">Copy</button></div><pre><code class="language-plaintext">Admitting Neha...
+Welcome email sent to Neha
+</code></pre></div>
+<p>If the class has its own constructor, it must call <code>super()</code> first. Older code did the same with <code>util.inherits(School, EventEmitter)</code>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (C) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q4d" data-marks="5"><header class="sec-head"><span class="sec-letter">(D)</span><h3 class="sec-title">Write a note on</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="5 marks">5</span></header><div class="items"><article class="item" id="q4d1" data-marks="5"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Write a code to create emp table with the fields eno and ename and insert five records.</p><div class="ans"><p><strong>Before running:</strong> start the MySQL server, create a database named <code>company</code>, and install the driver with <code>npm install mysql</code>.</p>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">const mysql = require('mysql');
+
+const con = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'company'
+});
+
+con.connect((err) =&gt; {
+  if (err) throw err;
+  console.log('Connected to MySQL');
+
+  // 1. Create the table
+  const createSql = 'CREATE TABLE emp (eno INT PRIMARY KEY, ename VARCHAR(50))';
+  con.query(createSql, (err) =&gt; {
+    if (err) throw err;
+    console.log('Table emp created');
+
+    // 2. Insert five records with one query
+    const insertSql = 'INSERT INTO emp (eno, ename) VALUES ?';
+    const values = [
+      [1, 'Riya'],
+      [2, 'Aman'],
+      [3, 'Neha'],
+      [4, 'Karan'],
+      [5, 'Pooja']
+    ];
+    con.query(insertSql, [values], (err, result) =&gt; {
+      if (err) throw err;
+      console.log('Records inserted:', result.affectedRows);
+      con.end();                                    // close the connection
+    });
+  });
+});
+</code></pre></div>
+<div class="code" data-kind="output"><div class="code-bar"><span>Output</span><button type="button" class="copy">Copy</button></div><pre><code class="language-plaintext">Connected to MySQL
+Table emp created
+Records inserted: 5
+</code></pre></div>
+<h4>How it works</h4>
+<ol>
+<li><code>mysql.createConnection()</code> stores the server details: host, user, password and database.</li>
+<li><code>con.connect()</code> opens the connection.</li>
+<li><code>con.query()</code> runs any SQL command. The first query creates the <code>emp</code> table with <code>eno</code> (number, primary key) and <code>ename</code> (text).</li>
+<li><code>VALUES ?</code> with the nested array <code>[values]</code> inserts <strong>all five rows in one query</strong>.</li>
+<li><code>result.affectedRows</code> tells how many rows were added, and <code>con.end()</code> closes the connection.</li>
+</ol>
+<blockquote>
+<p><strong>Tip:</strong> With MySQL 8, if you get an authentication error, install <code>mysql2</code> and write <code>require('mysql2')</code>. The rest of the code stays the same.</p>
+</blockquote></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (D) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q4d2" data-marks="5"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Write a code for display above records of the emp table.</p><div class="ans"><p>We use the SQL query <strong><code>SELECT * FROM emp</code></strong>. Node returns the rows as an <strong>array of objects</strong>, where each object has the column names as keys, like <code>{ eno: 1, ename: 'Riya' }</code>.</p>
+<h4>Way 1: show the records in the terminal</h4>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">const mysql = require('mysql');
+
+const con = mysql.createConnection({
+  host: 'localhost', user: 'root', password: '', database: 'company'
+});
+
+con.connect((err) =&gt; {
+  if (err) throw err;
+
+  con.query('SELECT * FROM emp', (err, rows) =&gt; {
+    if (err) throw err;
+
+    console.log('ENO  ENAME');
+    rows.forEach((row) =&gt; {
+      console.log(row.eno + '    ' + row.ename);
+    });
+    con.end();
+  });
+});
+</code></pre></div>
+<div class="code" data-kind="output"><div class="code-bar"><span>Output</span><button type="button" class="copy">Copy</button></div><pre><code class="language-plaintext">ENO  ENAME
+1    Riya
+2    Aman
+3    Neha
+4    Karan
+5    Pooja
+</code></pre></div>
+<h4>Way 2: show the records on a web page</h4>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">const http = require('http');
+
+http.createServer((req, res) =&gt; {
+  con.query('SELECT * FROM emp', (err, rows) =&gt; {
+    if (err) { res.end('Database error'); return; }
+
+    let html = '&lt;h2&gt;Employee List&lt;/h2&gt;&lt;table border=&quot;1&quot;&gt;&lt;tr&gt;&lt;th&gt;Eno&lt;/th&gt;&lt;th&gt;Ename&lt;/th&gt;&lt;/tr&gt;';
+    rows.forEach((r) =&gt; {
+      html += `&lt;tr&gt;&lt;td&gt;${r.eno}&lt;/td&gt;&lt;td&gt;${r.ename}&lt;/td&gt;&lt;/tr&gt;`;
+    });
+    html += '&lt;/table&gt;';
+
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.end(html);
+  });
+}).listen(3000, () =&gt; console.log('Open http://localhost:3000'));
+</code></pre></div>
+<p>(Here <code>con</code> is the same connection created above, without calling <code>con.end()</code>.)</p>
+<h4>Points to remember</h4>
+<ul>
+<li>The callback gets <code>(err, rows, fields)</code>: <code>rows</code> holds the data and <code>fields</code> holds column details.</li>
+<li>To show one record, use a placeholder: <code>con.query('SELECT * FROM emp WHERE eno = ?', [3], callback)</code>.</li>
+<li><code>console.table(rows)</code> prints the same records as a neat table.</li>
+</ul></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (D) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section></section>
+<section class="q" id="q5" aria-labelledby="q5-title"><header class="q-head"><p class="q-no">Q.5</p><h2 id="q5-title">Express.js</h2><p class="q-total">14 marks</p></header><section class="sec" id="q5a" data-marks="1"><header class="sec-head"><span class="sec-letter">(A)</span><h3 class="sec-title">Answer the following</h3><span class="sec-rule">Attempt all · 1 mark each</span><span class="sec-marks" aria-label="4 marks">4</span></header><div class="items"><article class="item" id="q5a1" data-marks="1"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">What is express framework ?</p><div class="ans"><p><strong>Express.js</strong> is a <strong>fast, minimal web framework for Node.js</strong> that makes it easy to build websites and REST APIs. It gives routing, middleware and helpers like <code>res.send()</code> and <code>res.json()</code>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (A) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q5a2" data-marks="1"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Explain : cookie</p><div class="ans"><p>A <strong>cookie</strong> is a small piece of data (a name and value) that the <strong>server stores in the user's browser</strong>. The browser sends it back with every request, so the server can remember the user (login, cart, settings).</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (A) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q5a3" data-marks="1"><div class="item-no" aria-hidden="true">3</div><div class="item-main"><p class="ask"><span class="blank"><span class="fill">npm install -g express</span></span> command will install latest version of express.js globally.</p><div class="ans"><p><code>npm install -g express@latest</code> asks for the newest version explicitly. Inside a project we normally run <code>npm install express</code>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (A) 3 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q5a4" data-marks="1"><div class="item-no" aria-hidden="true">4</div><div class="item-main"><p class="ask">What is template engine ?</p><div class="ans"><p>A <strong>template engine</strong> lets us write HTML files with placeholders (like <code>&lt;%= name %&gt;</code>) that are <strong>filled with real data on the server</strong> before the page is sent. Examples: <strong>EJS, Pug, Handlebars</strong>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (A) 4 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q5b" data-marks="2"><header class="sec-head"><span class="sec-letter">(B)</span><h3 class="sec-title">Answer in brief</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="2 marks">2</span></header><div class="items"><article class="item" id="q5b1" data-marks="2"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Explain response object.</p><div class="ans"><p>The <strong>response object (<code>res</code>)</strong> is the <strong>reply that Express sends back</strong> to the browser. It is the second parameter of every route handler, <code>(req, res)</code>.</p>
+<ul>
+<li><code>res.send()</code> – send text or HTML</li>
+<li><code>res.json()</code> – send JSON data</li>
+<li><code>res.status(404)</code> – set the status code</li>
+<li><code>res.sendFile()</code> – send a file</li>
+<li><code>res.render()</code> – send a page made from a template</li>
+<li><code>res.redirect('/login')</code> – send the user to another URL</li>
+<li><code>res.cookie()</code> / <code>res.clearCookie()</code> – set or remove a cookie</li>
+</ul>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">app.get('/api/student', (req, res) =&gt; {
+  res.status(200).json({ name: 'Riya', sem: 3 });
+});
+</code></pre></div></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (B) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q5b2" data-marks="2"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Explain file upload.</p><div class="ans"><p><strong>File upload</strong> means sending a file (photo, PDF) <strong>from the user's computer to the server</strong> through a form. The form must use <code>method="post"</code> and <strong><code>enctype="multipart/form-data"</code></strong>. Express cannot read such forms by itself, so we use the <strong>multer</strong> middleware, which saves the file and puts its details in <code>req.file</code>.</p>
+<div class="code"><div class="code-bar"><span>HTML</span><button type="button" class="copy">Copy</button></div><pre><code class="language-xml">&lt;form action=&quot;/upload&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;
+  &lt;input type=&quot;file&quot; name=&quot;photo&quot;&gt;
+  &lt;button&gt;Upload&lt;/button&gt;
+&lt;/form&gt;
+</code></pre></div>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });      // save files in the uploads folder
+
+app.post('/upload', upload.single('photo'), (req, res) =&gt; {
+  res.send('Uploaded: ' + req.file.originalname);
+});
+</code></pre></div></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (B) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q5c" data-marks="3"><header class="sec-head"><span class="sec-letter">(C)</span><h3 class="sec-title">Answer in detail</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="3 marks">3</span></header><div class="items"><article class="item" id="q5c1" data-marks="3"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">How to manage cookie ? Explain.</p><div class="ans"><p>Managing cookies means <strong>setting, reading and deleting</strong> them. To read cookies easily, we use the <strong><code>cookie-parser</code></strong> middleware (<code>npm install cookie-parser</code>).</p>
+<ul>
+<li><strong>Set:</strong> <code>res.cookie(name, value, options)</code>. Useful options: <code>maxAge</code> (life in milliseconds), <code>httpOnly</code> (JavaScript in the page cannot read it, which is safer), <code>secure</code> (sent only over HTTPS).</li>
+<li><strong>Read:</strong> <code>req.cookies.name</code></li>
+<li><strong>Delete:</strong> <code>res.clearCookie(name)</code></li>
+</ul>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">const express = require('express');
+const cookieParser = require('cookie-parser');
+const app = express();
+app.use(cookieParser());
+
+app.get('/set', (req, res) =&gt; {
+  res.cookie('username', 'Riya', { maxAge: 24 * 60 * 60 * 1000, httpOnly: true });   // 1 day
+  res.send('Cookie saved');
+});
+
+app.get('/get', (req, res) =&gt; {
+  res.send('Hello ' + (req.cookies.username || 'guest'));
+});
+
+app.get('/clear', (req, res) =&gt; {
+  res.clearCookie('username');
+  res.send('Cookie deleted');
+});
+
+app.listen(3000);
+</code></pre></div>
+<p>Visiting <code>/set</code> and then <code>/get</code> shows <strong>Hello Riya</strong>. After <code>/clear</code>, <code>/get</code> shows <strong>Hello guest</strong>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (C) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q5c2" data-marks="3"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Write a note on route parameters.</p><div class="ans"><p><strong>Route parameters</strong> are <strong>named parts of a URL path that capture values</strong>. We write them with a colon, like <code>/students/:id</code>, and read the values from <strong><code>req.params</code></strong>.</p>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">app.get('/students/:id', (req, res) =&gt; {
+  res.send('Student ID: ' + req.params.id);
+});
+
+app.get('/students/:sid/marks/:subject', (req, res) =&gt; {
+  const { sid, subject } = req.params;
+  res.send(`Marks of student ${sid} in ${subject}`);
+});
+</code></pre></div>
+<div class="table-wrap cols-4"><table>
+<thead>
+<tr>
+<th>URL</th>
+<th><code>req.params</code></th>
+<th>Response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/students/25</code></td>
+<td><code>{ id: '25' }</code></td>
+<td>Student ID: 25</td>
+</tr>
+<tr>
+<td><code>/students/7/marks/maths</code></td>
+<td><code>{ sid: '7', subject: 'maths' }</code></td>
+<td>Marks of student 7 in maths</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>Values are always <strong>strings</strong>; use <code>Number(req.params.id)</code> to get a number.</li>
+<li>Route parameters identify <strong>which item</strong> (<code>/students/25</code>); a query string is used for optional filters (<code>/students?sort=name</code>).</li>
+</ul></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (C) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q5d" data-marks="5"><header class="sec-head"><span class="sec-letter">(D)</span><h3 class="sec-title">Write a note on</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="5 marks">5</span></header><div class="items"><article class="item" id="q5d1" data-marks="5"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Explain : how to send static file ?</p><div class="ans"><p><strong>Static files</strong> are files sent to the browser <strong>exactly as they are</strong>, without any processing: HTML pages, CSS, client-side JavaScript, images and PDFs. Express gives two ways to send them.</p>
+<h4>Way 1: <code>express.static()</code> – serve a whole folder</h4>
+<div class="code"><div class="code-bar"><span>Folder structure</span><button type="button" class="copy">Copy</button></div><pre><code class="language-plaintext">project/
+├── app.js
+└── public/
+    ├── index.html
+    ├── css/style.css
+    └── images/logo.png
+</code></pre></div>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">const express = require('express');
+const path = require('path');
+const app = express();
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.listen(3000, () =&gt; console.log('Running on http://localhost:3000'));
+</code></pre></div>
+<p>Now these URLs work (the folder name <code>public</code> is <strong>not</strong> part of the URL):</p>
+<ul>
+<li><code>http://localhost:3000/</code> shows <code>index.html</code> automatically</li>
+<li><code>http://localhost:3000/css/style.css</code></li>
+<li><code>http://localhost:3000/images/logo.png</code></li>
+</ul>
+<p>To add a prefix, write <code>app.use('/static', express.static('public'))</code>; then the URL becomes <code>/static/css/style.css</code>.</p>
+<h4>Way 2: <code>res.sendFile()</code> – send one particular file</h4>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">app.get('/about', (req, res) =&gt; {
+  res.sendFile(path.join(__dirname, 'views', 'about.html'));
+});
+</code></pre></div>
+<p><code>res.sendFile()</code> needs an <strong>absolute path</strong>, so we build it with <code>path.join(__dirname, ...)</code>. To make the browser download a file instead of showing it, use <code>res.download('files/report.pdf')</code>.</p>
+<div class="table-wrap cols-4"><table>
+<thead>
+<tr>
+<th>Point</th>
+<th><code>express.static()</code></th>
+<th><code>res.sendFile()</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sends</td>
+<td>Every file in a folder</td>
+<td>One file chosen in a route</td>
+</tr>
+<tr>
+<td>Where written</td>
+<td><code>app.use()</code> middleware</td>
+<td>Inside a route handler</td>
+</tr>
+<tr>
+<td>Best for</td>
+<td>CSS, images, scripts</td>
+<td>A page for a specific URL</td>
+</tr>
+</tbody>
+</table></div>
+<p>In both ways Express sets the correct <code>Content-Type</code> from the file extension, and sends 404 if the file does not exist.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (D) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q5d2" data-marks="5"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">List out request object methods and explain any three.</p><div class="ans"><p>The <strong>request object (<code>req</code>)</strong> holds everything about the <strong>request the browser sent</strong>: the URL, method, headers and data. It is the first parameter of a route handler.</p>
+<div class="table-wrap cols-3"><table>
+<thead>
+<tr>
+<th>Property / method</th>
+<th>What it gives</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>req.params</code></td>
+<td>Route parameters, like <code>id</code> in <code>/user/:id</code></td>
+</tr>
+<tr>
+<td><code>req.query</code></td>
+<td>Query string values, like <code>?page=2</code></td>
+</tr>
+<tr>
+<td><code>req.body</code></td>
+<td>Data sent by a form or as JSON (POST)</td>
+</tr>
+<tr>
+<td><code>req.cookies</code></td>
+<td>Cookies (with cookie-parser)</td>
+</tr>
+<tr>
+<td><code>req.method</code></td>
+<td>The HTTP method: GET, POST and so on</td>
+</tr>
+<tr>
+<td><code>req.url</code> / <code>req.path</code></td>
+<td>The requested URL / path</td>
+</tr>
+<tr>
+<td><code>req.ip</code> / <code>req.hostname</code></td>
+<td>The client's IP address / the host name</td>
+</tr>
+<tr>
+<td><code>req.get('header')</code></td>
+<td>The value of a request header</td>
+</tr>
+<tr>
+<td><code>req.is('json')</code></td>
+<td>Checks the type of data sent</td>
+</tr>
+</tbody>
+</table></div>
+<h4>1. <code>req.params</code></h4>
+<p>Holds the values of <strong>route parameters</strong>. For the route <code>/user/:id</code> and the URL <code>/user/15</code>, <code>req.params.id</code> is <code>'15'</code>.</p>
+<h4>2. <code>req.query</code></h4>
+<p>Holds the values from the <strong>query string</strong> (after <code>?</code>). For <code>/search?q=node&amp;page=2</code>, <code>req.query.q</code> is <code>'node'</code> and <code>req.query.page</code> is <code>'2'</code>.</p>
+<h4>3. <code>req.body</code></h4>
+<p>Holds the <strong>data sent in the body</strong> of a POST or PUT request, such as a login form. We must first add the body-reading middleware <code>express.json()</code> and <code>express.urlencoded()</code>.</p>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">const express = require('express');
+const app = express();
+app.use(express.json());                           // read JSON body
+app.use(express.urlencoded({ extended: true }));   // read HTML form body
+
+app.get('/user/:id', (req, res) =&gt; {                // req.params
+  res.send('User id: ' + req.params.id);
+});
+
+app.get('/search', (req, res) =&gt; {                  // req.query
+  res.send(`Searching &quot;${req.query.q}&quot;, page ${req.query.page}`);
+});
+
+app.post('/login', (req, res) =&gt; {                  // req.body
+  res.send('Welcome ' + req.body.username);
+});
+
+app.get('/info', (req, res) =&gt; {                    // req.get()
+  res.send('Your browser: ' + req.get('User-Agent'));
+});
+
+app.listen(3000);
+</code></pre></div>
+<div class="table-wrap cols-3"><table>
+<thead>
+<tr>
+<th>Request</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET /user/15</code></td>
+<td>User id: 15</td>
+</tr>
+<tr>
+<td><code>GET /search?q=node&amp;page=2</code></td>
+<td>Searching "node", page 2</td>
+</tr>
+<tr>
+<td><code>POST /login</code> with <code>username=Riya</code></td>
+<td>Welcome Riya</td>
+</tr>
+</tbody>
+</table></div></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (D) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section></section>
+  </main>
+
+  <footer class="foot wrap">
+    <p>Model answers sized to the marks of each question. Teachers sometimes expect the exact wording from class notes, so read these alongside your notes.</p>
+    <p>Tick the circle next to a question once you have revised it. Your ticks are saved in this browser only.</p>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+<script>
+(function () {
+  var app = document.querySelector(".app");
+  var paper = document.getElementById("paper");
+  var key = "msc-sem3-solved:" + app.dataset.slug;
+  var items = Array.prototype.slice.call(document.querySelectorAll(".item"));
+  var done = new Set();
+  try { (JSON.parse(localStorage.getItem(key)) || []).forEach(function (id) { done.add(id); }); } catch (e) {}
+
+  function save() {
+    try { localStorage.setItem(key, JSON.stringify(Array.from(done))); } catch (e) {}
+  }
+  function paint() {
+    var n = 0;
+    items.forEach(function (it) {
+      var on = done.has(it.id);
+      if (on) n++;
+      it.classList.toggle("is-done", on);
+      it.querySelector(".done").setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    document.getElementById("done-count").textContent = n;
+    document.getElementById("done-bar").style.width = (items.length ? n / items.length * 100 : 0) + "%";
+  }
+  paint();
+
+  document.addEventListener("click", function (ev) {
+    var t = ev.target.closest("button, .blank");
+    if (!t) return;
+    if (t.classList.contains("done")) {
+      var id = t.closest(".item").id;
+      if (done.has(id)) done.delete(id); else done.add(id);
+      save(); paint();
+    } else if (t.classList.contains("reveal") || t.classList.contains("blank")) {
+      var it = t.closest(".item");
+      if (it) it.classList.add("shown");
+    } else if (t.dataset.filter) {
+      paper.dataset.filter = t.dataset.filter;
+      document.querySelectorAll("[data-filter]").forEach(function (b) {
+        if (b.tagName === "BUTTON") b.setAttribute("aria-pressed", b === t ? "true" : "false");
+      });
+    } else if (t.id === "selftest") {
+      var on = !app.classList.contains("selftest");
+      app.classList.toggle("selftest", on);
+      t.setAttribute("aria-pressed", on ? "true" : "false");
+      if (!on) items.forEach(function (it) { it.classList.remove("shown"); });
+    } else if (t.classList.contains("copy")) {
+      var code = t.closest(".code").querySelector("code");
+      var flash = function (label) { t.textContent = label; setTimeout(function () { t.textContent = "Copy"; }, 1600); };
+      var select = function () {
+        var r = document.createRange(); r.selectNodeContents(code);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        flash("Press Ctrl+C");
+      };
+      try {
+        navigator.clipboard.writeText(code.innerText).then(function () { flash("Copied"); }, select);
+      } catch (e) { select(); }
+    }
+  });
+
+  if ("IntersectionObserver" in window) {
+    var links = {};
+    document.querySelectorAll(".qnav a").forEach(function (a) { links[a.getAttribute("href").slice(1)] = a; });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        Object.keys(links).forEach(function (k) { links[k].removeAttribute("aria-current"); });
+        if (links[e.target.id]) links[e.target.id].setAttribute("aria-current", "true");
+      });
+    }, { rootMargin: "-25% 0px -65% 0px" });
+    document.querySelectorAll(".q").forEach(function (s) { io.observe(s); });
+  }
+
+  if (window.hljs) {
+    hljs.configure({ ignoreUnescapedHTML: true });
+    document.querySelectorAll("pre code[class*='language-']:not(.language-plaintext)").forEach(function (el) {
+      try { hljs.highlightElement(el); } catch (e) {}
+    });
+  }
+})();
+</script>
+</body>
+</html>

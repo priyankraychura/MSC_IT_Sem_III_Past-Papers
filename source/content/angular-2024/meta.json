@@ -1,0 +1,14 @@
+{
+  "file": "CS-15_Angular_Nov-2024",
+  "title": "Angular Nov 2024 Solutions",
+  "code": "CS-15",
+  "session": "Oct–Nov 2024",
+  "subject": "Web Development Using Angular Framework",
+  "printed": "M.SC. (IT&CA) (2022) SEMESTER-3 OCT-2024 · Paper 003-3083003",
+  "time": "2.5 hours",
+  "total": "70",
+  "description": "Solved CS-15 Angular question paper (M.Sc. IT & CA Sem 3, Oct–Nov 2024) with simple answers sized to the marks of each question.",
+  "hljs_extra": [],
+  "light": {"paper": "#fcfbfc", "sheet": "#ffffff", "well": "#f4edf0", "rule": "#ece3e7", "rule_strong": "#d6c8cf", "code_bg": "#fbf7f9", "accent": "#c4153a", "accent_strong": "#a10f2e", "accent_soft": "#fcebef"},
+  "dark": {"paper": "#141114", "sheet": "#1c181b", "well": "#262025", "rule": "#332a30", "rule_strong": "#4b3f46", "code_bg": "#191518", "accent": "#ff7a93", "accent_strong": "#ff9cb0", "accent_soft": "#3a1a24", "on_accent": "#1a0a10", "ink": "#eceef2", "ink_2": "#b9bfca", "ink_3": "#959ca9", "ok": "#71d49c", "ok_soft": "#173526", "bad": "#ff8f86", "bad_soft": "#3d1a18", "syn_key": "#d9a3f6", "syn_str": "#a3d891", "syn_num": "#f4b971", "syn_com": "#8a92a0", "syn_fn": "#86c1ff", "syn_type": "#f2cd7d", "syn_tag": "#ff978c", "syn_attr": "#eeb882", "syn_built": "#70dbcb"}
+}

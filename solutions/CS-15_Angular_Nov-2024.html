@@ -1,0 +1,1362 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Solved CS-15 Angular question paper (M.Sc. IT &amp; CA Sem 3, Oct–Nov 2024) with simple answers sized to the marks of each question.">
+<title>Angular Nov 2024 Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&display=swap">
+<style>
+/* Layout: an exam answer sheet. Question number in a left gutter, the answer in one
+   readable column, the marks in the right margin where the printed paper puts them. */
+:root {
+  --paper: #fcfbfc; --sheet: #ffffff; --well: #f4edf0; --rule: #ece3e7; --rule-strong: #d6c8cf; --code-bg: #fbf7f9; --accent: #c4153a; --accent-strong: #a10f2e; --accent-soft: #fcebef;
+  --on-accent: #ffffff;
+  --ink: #16181d; --ink-2: #474d59; --ink-3: #676e7b;
+  --ok: #1d7444; --ok-soft: #e4f3ea; --bad: #b42318; --bad-soft: #fbe9e7;
+  --syn-key: #8f2bb0; --syn-str: #18794e; --syn-num: #a8530a; --syn-com: #757b86;
+  --syn-fn: #1c5fc4; --syn-type: #8f5400; --syn-tag: #b42318; --syn-attr: #8a4b14; --syn-built: #0f766e;
+  --f-display: "Source Serif 4", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --s-cap: 0.8125rem; --s-small: 0.9375rem; --s-body: 1.0625rem; --s-ask: 1.25rem;
+  --s-h2: 1.5rem; --s-title: clamp(1.85rem, 1.25rem + 2.6vw, 2.75rem);
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --paper: #141114; --sheet: #1c181b; --well: #262025; --rule: #332a30; --rule-strong: #4b3f46; --code-bg: #191518; --accent: #ff7a93; --accent-strong: #ff9cb0; --accent-soft: #3a1a24; --on-accent: #1a0a10; --ink: #eceef2; --ink-2: #b9bfca; --ink-3: #959ca9; --ok: #71d49c; --ok-soft: #173526; --bad: #ff8f86; --bad-soft: #3d1a18; --syn-key: #d9a3f6; --syn-str: #a3d891; --syn-num: #f4b971; --syn-com: #8a92a0; --syn-fn: #86c1ff; --syn-type: #f2cd7d; --syn-tag: #ff978c; --syn-attr: #eeb882; --syn-built: #70dbcb; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --paper: #141114; --sheet: #1c181b; --well: #262025; --rule: #332a30; --rule-strong: #4b3f46; --code-bg: #191518; --accent: #ff7a93; --accent-strong: #ff9cb0; --accent-soft: #3a1a24; --on-accent: #1a0a10; --ink: #eceef2; --ink-2: #b9bfca; --ink-3: #959ca9; --ok: #71d49c; --ok-soft: #173526; --bad: #ff8f86; --bad-soft: #3d1a18; --syn-key: #d9a3f6; --syn-str: #a3d891; --syn-num: #f4b971; --syn-com: #8a92a0; --syn-fn: #86c1ff; --syn-type: #f2cd7d; --syn-tag: #ff978c; --syn-attr: #eeb882; --syn-built: #70dbcb; color-scheme: dark; }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 7.5rem; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--f-body); font-size: var(--s-body); line-height: 1.6;
+}
+img, svg { max-width: 100%; }
+[hidden] { display: none !important; }
+a { color: var(--accent-strong); text-underline-offset: 0.15em; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+button { font: inherit; }
+.wrap { max-width: 57rem; margin-inline: auto; padding-inline: 20px; }
+
+/* ---------- cover ---------- */
+.cover { padding-block: 2.75rem 0.5rem; }
+.eyebrow {
+  margin: 0 0 0.9rem; font-size: var(--s-cap); font-weight: 700;
+  letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-3);
+}
+.cover h1 {
+  margin: 0; font-family: var(--f-display); font-size: var(--s-title); font-weight: 650;
+  line-height: 1.1; letter-spacing: -0.012em; text-wrap: balance;
+}
+.cover h1 .kicker {
+  display: block; margin-bottom: 0.6rem; font-family: var(--f-mono); font-size: 1rem;
+  font-weight: 600; letter-spacing: 0.02em; color: var(--accent-strong);
+}
+.printed { margin: 1rem 0 0; font-family: var(--f-mono); font-size: var(--s-cap); color: var(--ink-2); }
+.facts {
+  display: flex; flex-wrap: wrap; gap: 0.75rem 2.25rem; margin: 1.6rem 0 0;
+  padding-top: 1.1rem; border-top: 1px solid var(--rule);
+}
+.facts div { display: grid; gap: 0.15rem; }
+.facts dt {
+  font-size: var(--s-cap); font-weight: 700; letter-spacing: 0.07em;
+  text-transform: uppercase; color: var(--ink-3);
+}
+.facts dd {
+  margin: 0; font-family: var(--f-display); font-size: var(--s-ask); font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- how much to write ---------- */
+.guide { padding-block: 1.75rem 1.5rem; }
+.guide h2 {
+  margin: 0 0 0.8rem; font-size: var(--s-cap); font-weight: 700; letter-spacing: 0.09em;
+  text-transform: uppercase; color: var(--ink-3);
+}
+.guide-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.75rem; }
+.guide-cell {
+  display: grid; gap: 0.4rem; align-content: start; padding: 0.95rem 1rem;
+  background: var(--sheet); border: 1px solid var(--rule); border-radius: var(--radius);
+}
+.guide-cell .m { display: flex; align-items: baseline; gap: 0.4rem; font-weight: 700; }
+.guide-cell .m b {
+  font-family: var(--f-display); font-size: 2rem; line-height: 1; color: var(--accent-strong);
+}
+.guide-cell p { margin: 0; font-size: var(--s-small); line-height: 1.45; color: var(--ink-2); }
+.guide-note { margin: 0.9rem 0 0; font-size: var(--s-small); color: var(--ink-2); max-width: 46rem; }
+
+/* ---------- toolbar ---------- */
+.toolbar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: var(--paper); border-block: 1px solid var(--rule);
+}
+.toolbar .wrap {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem 0.9rem; padding-block: 0.55rem;
+}
+.qnav { display: flex; gap: 0.2rem; }
+.qnav a {
+  padding: 0.38rem 0.62rem; border-radius: 999px; font-family: var(--f-mono); font-size: 0.875rem;
+  font-weight: 600; color: var(--ink-2); text-decoration: none;
+}
+.qnav a:hover { background: var(--well); color: var(--ink); }
+.qnav a[aria-current="true"] { background: var(--accent); color: var(--on-accent); }
+.seg { display: inline-flex; align-items: center; gap: 2px; padding: 3px; border-radius: 999px; background: var(--well); }
+.seg-label {
+  padding-inline: 0.55rem 0.3rem; font-size: 0.6875rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3);
+}
+.seg button {
+  min-width: 2rem; padding: 0.36rem 0.55rem; border: 0; border-radius: 999px; background: transparent;
+  font-family: var(--f-mono); font-size: 0.8125rem; font-weight: 600; color: var(--ink-2); cursor: pointer;
+}
+.seg button:hover { color: var(--ink); }
+.seg button[aria-pressed="true"] { background: var(--sheet); color: var(--ink); box-shadow: 0 0 0 1px var(--rule-strong); }
+.switch {
+  display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.3rem 0.2rem; border: 0;
+  background: transparent; color: var(--ink-2); font-size: 0.875rem; font-weight: 700; cursor: pointer;
+}
+.switch .knob {
+  position: relative; width: 2.1rem; height: 1.2rem; border-radius: 999px;
+  background: var(--rule-strong); transition: background 0.2s;
+}
+.switch .knob::after {
+  content: ""; position: absolute; top: 0.15rem; left: 0.15rem; width: 0.9rem; height: 0.9rem;
+  border-radius: 50%; background: var(--sheet); transition: transform 0.2s;
+}
+.switch[aria-pressed="true"] { color: var(--ink); }
+.switch[aria-pressed="true"] .knob { background: var(--accent); }
+.switch[aria-pressed="true"] .knob::after { transform: translateX(0.9rem); }
+.progress {
+  display: flex; align-items: center; gap: 0.55rem; margin: 0 0 0 auto;
+  font-family: var(--f-mono); font-size: 0.75rem; color: var(--ink-2); font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.progress b { color: var(--ink); }
+.progress .bar { width: 4.5rem; height: 6px; border-radius: 999px; background: var(--well); overflow: hidden; }
+.progress .bar i { display: block; width: 0; height: 100%; background: var(--accent); transition: width 0.3s; }
+
+/* ---------- questions & sections ---------- */
+.q { padding-block: 2.75rem 0.5rem; }
+.q-head {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: baseline;
+  gap: 0.2rem 0.9rem; padding-bottom: 0.8rem; border-bottom: 2px solid var(--ink);
+}
+.q-no { margin: 0; font-family: var(--f-mono); font-size: var(--s-ask); font-weight: 600; color: var(--accent-strong); }
+.q-head h2 {
+  margin: 0; font-family: var(--f-display); font-size: var(--s-h2); font-weight: 650;
+  line-height: 1.2; text-wrap: balance;
+}
+.q-total { margin: 0; font-family: var(--f-mono); font-size: var(--s-cap); color: var(--ink-3); white-space: nowrap; }
+.sec { padding-top: 1.5rem; }
+.sec-head {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.65rem;
+  padding-bottom: 0.6rem; border-bottom: 1px solid var(--rule);
+}
+.sec-letter { font-family: var(--f-display); font-size: var(--s-ask); font-weight: 700; color: var(--ink-3); }
+.sec-title { margin: 0; font-family: var(--f-display); font-size: var(--s-ask); font-weight: 600; }
+.sec-rule {
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3);
+}
+.sec-marks {
+  display: inline-grid; place-items: center; width: 2.3rem; height: 2.3rem; margin-left: auto;
+  border: 1.5px solid var(--ink); border-radius: 50%;
+  font-family: var(--f-mono); font-size: 0.9375rem; font-weight: 600; font-variant-numeric: tabular-nums;
+}
+#paper[data-filter="1"] .sec:not([data-marks="1"]),
+#paper[data-filter="2"] .sec:not([data-marks="2"]),
+#paper[data-filter="3"] .sec:not([data-marks="3"]),
+#paper[data-filter="5"] .sec:not([data-marks="5"]) { display: none; }
+
+/* ---------- one question item ---------- */
+.item {
+  display: grid; grid-template-columns: 2rem minmax(0, 1fr) 3rem;
+  grid-template-areas: "no main side"; gap: 0 0.8rem; padding-block: 1.15rem;
+  border-bottom: 1px solid var(--rule);
+}
+.items > .item:last-child, .item:has(+ .or) { border-bottom: 0; }
+.item-no { grid-area: no; padding-top: 0.12rem; font-family: var(--f-display); font-size: var(--s-body); font-weight: 700; color: var(--ink-3); }
+.item-main { grid-area: main; min-width: 0; }
+.item-side { grid-area: side; display: flex; flex-direction: column; align-items: flex-end; gap: 0.7rem; }
+.ask {
+  margin: 0; font-family: var(--f-display); font-size: var(--s-ask); font-weight: 600;
+  line-height: 1.4; text-wrap: pretty;
+}
+.item.is-done .ask { color: var(--ink-2); }
+.or {
+  display: flex; align-items: center; gap: 0.8rem; margin-left: 2.8rem; color: var(--ink-3);
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+}
+.or::before, .or::after { content: ""; flex: 1; border-top: 1px dashed var(--rule-strong); }
+
+.wt { display: inline-flex; flex-direction: column; align-items: center; gap: 0.3rem; }
+.wt b { font-family: var(--f-mono); font-size: 1rem; font-weight: 600; line-height: 1; }
+.wt small { font-size: 0.625rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+.wt .bars { display: flex; gap: 2px; }
+.wt .bars i { width: 4px; height: 10px; border-radius: 1px; background: var(--rule-strong); }
+.wt[data-m="1"] i:nth-child(-n+1), .wt[data-m="2"] i:nth-child(-n+2),
+.wt[data-m="3"] i:nth-child(-n+3), .wt[data-m="5"] i { background: var(--accent); }
+.done {
+  display: grid; place-items: center; width: 2rem; height: 2rem; padding: 0; border-radius: 50%;
+  border: 1.5px solid var(--rule-strong); background: transparent; color: transparent; cursor: pointer;
+}
+.done svg { width: 14px; height: 14px; }
+.done:hover { border-color: var(--accent); color: var(--ink-3); }
+.done[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: var(--on-accent); }
+
+/* fill-in blanks and true/false */
+.blank {
+  display: inline-block; min-width: 6ch; padding: 0 0.15em; line-height: 1.3;
+  border-bottom: 2px solid var(--accent);
+}
+.blank .fill { font-family: var(--f-body); font-weight: 700; color: var(--accent-strong); }
+.verdict { margin: 0 0 0.45rem; }
+.pill {
+  display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.32rem 0.65rem; border-radius: 999px;
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+}
+.pill-true { background: var(--ok-soft); color: var(--ok); }
+.pill-false { background: var(--bad-soft); color: var(--bad); }
+.pill-true::before { content: "\2713"; }
+.pill-false::before { content: "\2715"; }
+
+/* self-test mode */
+.reveal {
+  display: none; align-items: center; margin-top: 0.75rem; padding: 0.5rem 0.9rem; border: 0;
+  border-radius: 999px; background: var(--accent-soft); color: var(--accent-strong);
+  font-size: 0.875rem; font-weight: 700; cursor: pointer;
+}
+.selftest .item:not(.shown) .reveal { display: inline-flex; }
+.selftest .item:not(.shown) .ans { display: none; }
+.selftest .item:not(.shown) .blank .fill { color: transparent; user-select: none; }
+.selftest .item:not(.shown) .blank { cursor: pointer; }
+
+/* ---------- answer body ---------- */
+.ans { margin-top: 0.65rem; color: var(--ink); }
+.ans > :first-child { margin-top: 0; }
+.ans > :last-child { margin-bottom: 0; }
+.ans p, .ans ul, .ans ol { margin: 0.6rem 0; }
+.ans ul, .ans ol { padding-left: 1.3rem; }
+.ans li { margin: 0.3rem 0; padding-left: 0.15rem; }
+.ans li::marker { color: var(--accent-strong); font-weight: 700; }
+.ans strong { font-weight: 700; }
+.ans h4 {
+  margin: 1.2rem 0 0.35rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--accent-strong);
+}
+:not(pre) > code {
+  padding: 0.08em 0.34em; border-radius: 5px; background: var(--well);
+  font-family: var(--f-mono); font-size: 0.86em; overflow-wrap: anywhere;
+}
+.ans blockquote {
+  margin: 0.9rem 0; padding: 0.65rem 0.9rem; border-radius: var(--radius);
+  background: var(--accent-soft); color: var(--ink);
+}
+.ans blockquote p { margin: 0.2rem 0; }
+.code { margin: 0.85rem 0; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--code-bg); overflow: hidden; }
+.code-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 0.3rem 0.45rem 0.3rem 0.85rem; border-bottom: 1px solid var(--rule);
+  font-family: var(--f-mono); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--ink-3);
+}
+.copy {
+  padding: 0.28rem 0.55rem; border: 1px solid var(--rule-strong); border-radius: 6px; background: var(--sheet);
+  font-family: var(--f-mono); font-size: 0.6875rem; font-weight: 600; color: var(--ink-2); cursor: pointer;
+}
+.copy:hover { color: var(--ink); border-color: var(--ink-3); }
+.code pre { margin: 0; padding: 0.85rem 1rem; overflow-x: auto; font-family: var(--f-mono); font-size: 0.84rem; line-height: 1.6; tab-size: 2; }
+.code[data-kind="output"] { background: var(--sheet); border-style: dashed; }
+.code[data-kind="output"] .code-bar { border-bottom-style: dashed; }
+.hljs-keyword, .hljs-selector-tag, .hljs-doctag, .hljs-meta .hljs-keyword { color: var(--syn-key); }
+.hljs-string, .hljs-regexp, .hljs-selector-attr { color: var(--syn-str); }
+.hljs-number, .hljs-literal { color: var(--syn-num); }
+.hljs-comment, .hljs-quote { color: var(--syn-com); font-style: italic; }
+.hljs-title, .hljs-section, .hljs-title.function_ { color: var(--syn-fn); }
+.hljs-title.class_, .hljs-type { color: var(--syn-type); }
+.hljs-tag, .hljs-name, .hljs-selector-id, .hljs-selector-class { color: var(--syn-tag); }
+.hljs-attr, .hljs-attribute, .hljs-property { color: var(--syn-attr); }
+.hljs-built_in, .hljs-meta, .hljs-symbol, .hljs-variable.language_, .hljs-template-variable { color: var(--syn-built); }
+.hljs-subst, .hljs-params, .hljs-tag .hljs-string ~ .hljs-string { color: inherit; }
+.hljs-tag .hljs-string { color: var(--syn-str); }
+.table-wrap { margin: 0.85rem 0; overflow-x: auto; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--sheet); }
+.table-wrap table { width: 100%; border-collapse: collapse; font-size: var(--s-small); line-height: 1.45; }
+.table-wrap th, .table-wrap td { padding: 0.55rem 0.8rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--rule); }
+.table-wrap th { background: var(--well); font-size: 0.875rem; font-weight: 700; }
+.table-wrap td:first-child { font-weight: 700; }
+.table-wrap tr:last-child td { border-bottom: 0; }
+.table-wrap.cols-3 table { min-width: 21rem; }
+.table-wrap.cols-4 table, .table-wrap.cols-5 table { min-width: 34rem; }
+
+/* ---------- diagrams ---------- */
+.diagram { margin: 1rem 0; padding: 0.9rem; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--sheet); }
+.diagram .scroll { overflow-x: auto; }
+.diagram svg { display: block; width: 100%; height: auto; margin-inline: auto; max-width: var(--dw, 100%); min-width: var(--dmin, 0px); }
+.diagram figcaption { margin-top: 0.6rem; font-size: var(--s-cap); line-height: 1.45; color: var(--ink-2); }
+.dg { font-family: var(--f-body); font-size: 13px; }
+.dg text { fill: var(--ink); }
+.dg .t-b { font-weight: 700; }
+.dg .t-sub { fill: var(--ink-2); font-size: 11.5px; }
+.dg .t-acc { fill: var(--accent-strong); font-weight: 700; }
+.dg .t-mono { font-family: var(--f-mono); font-size: 12px; }
+.dg .b { fill: var(--paper); stroke: var(--rule-strong); stroke-width: 1.5; }
+.dg .b-acc { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.5; }
+.dg .b-well { fill: var(--well); stroke: none; }
+.dg .e { fill: none; stroke: var(--ink-3); stroke-width: 1.5; }
+.dg .e-acc { fill: none; stroke: var(--accent); stroke-width: 1.75; }
+.dg .dash { stroke-dasharray: 5 4; }
+.dg .ah { fill: var(--ink-3); }
+.dg .ah-acc { fill: var(--accent); }
+.dg .halo { paint-order: stroke; stroke: var(--sheet); stroke-width: 5px; stroke-linejoin: round; }
+
+.foot { margin-top: 3rem; padding-block: 1.5rem 3rem; border-top: 1px solid var(--rule); font-size: var(--s-cap); color: var(--ink-3); }
+.foot p { margin: 0.3rem 0; max-width: 46rem; }
+
+@media (max-width: 760px) {
+  .guide-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .wrap { padding-inline: 16px; }
+  body { font-size: 1rem; }
+  .toolbar .wrap { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 0.6rem; }
+  .toolbar .wrap::-webkit-scrollbar { display: none; }
+  .qnav a { padding-inline: 0.5rem; }
+  .seg-label { display: none; }
+  .switch, .progress { flex: none; }
+  .diagram { padding: 0.5rem 0.25rem; }
+  .item { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "no side" "main main"; gap: 0.35rem 0.8rem; }
+  .item-side { flex-direction: row; align-items: center; }
+  .wt { flex-direction: row-reverse; gap: 0.45rem; }
+  .or { margin-left: 0; }
+  .q-head { grid-template-columns: auto minmax(0, 1fr); }
+  .q-total { grid-column: 2; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+}
+</style>
+
+</head>
+<body>
+<div class="app" data-slug="angular-2024">
+  <header class="cover wrap">
+    <p class="eyebrow">M.Sc. (IT &amp; CA) · Semester 3 · Solved question paper</p>
+    <h1><span class="kicker">CS-15 · Oct–Nov 2024</span>Web Development Using Angular Framework</h1>
+    <p class="printed">M.SC. (IT&amp;CA) (2022) SEMESTER-3 OCT-2024 · Paper 003-3083003</p>
+    <dl class="facts">
+      <div><dt>Time</dt><dd>2.5 hours</dd></div>
+      <div><dt>Total</dt><dd>70 marks</dd></div>
+      <div><dt>Questions</dt><dd>5 × 14 marks</dd></div>
+      <div><dt>Answers solved</dt><dd>50</dd></div>
+    </dl>
+  </header>
+
+  <section class="guide wrap" aria-labelledby="guide-title">
+    <h2 id="guide-title">How much to write for each mark</h2>
+    <div class="guide-grid">
+      <div class="guide-cell"><span class="m"><b>1</b> mark</span><p>One word or one line. Fill the blank, say True or False, or give a one-line meaning.</p></div>
+      <div class="guide-cell"><span class="m"><b>2</b> marks</span><p>Three or four lines. A definition plus two key points or a tiny example.</p></div>
+      <div class="guide-cell"><span class="m"><b>3</b> marks</span><p>A definition, three or four points, and a small table or code example.</p></div>
+      <div class="guide-cell"><span class="m"><b>5</b> marks</span><p>A full note: meaning, diagram or code, five or six points, and a closing line.</p></div>
+    </div>
+    <p class="guide-note">In (B), (C) and (D) you answer any one of the two options. Both options are solved here, so pick the one you know better.</p>
+  </section>
+
+  <nav class="toolbar" aria-label="Paper controls">
+    <div class="wrap">
+      <div class="qnav"><a href="#q1" title="Introduction, setup and MVC">Q1</a><a href="#q2" title="Data binding and directives">Q2</a><a href="#q3" title="Dependency injection, services and HttpClient">Q3</a><a href="#q4" title="Routing">Q4</a><a href="#q5" title="Forms, validation and events">Q5</a></div>
+      <div class="seg" role="group" aria-label="Show questions by marks">
+        <span class="seg-label">Marks</span>
+        <button type="button" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" data-filter="1" aria-pressed="false">1</button>
+        <button type="button" data-filter="2" aria-pressed="false">2</button>
+        <button type="button" data-filter="3" aria-pressed="false">3</button>
+        <button type="button" data-filter="5" aria-pressed="false">5</button>
+      </div>
+      <button type="button" class="switch" id="selftest" aria-pressed="false"><span class="knob" aria-hidden="true"></span>Hide answers</button>
+      <p class="progress"><span><b id="done-count">0</b>/50 revised</span><span class="bar" aria-hidden="true"><i id="done-bar"></i></span></p>
+    </div>
+  </nav>
+
+  <main id="paper" class="wrap" data-filter="all">
+<section class="q" id="q1" aria-labelledby="q1-title"><header class="q-head"><p class="q-no">Q.1</p><h2 id="q1-title">Introduction, setup and MVC</h2><p class="q-total">14 marks</p></header><section class="sec" id="q1a" data-marks="1"><header class="sec-head"><span class="sec-letter">(A)</span><h3 class="sec-title">Answer the following</h3><span class="sec-rule">Attempt all · 1 mark each</span><span class="sec-marks" aria-label="4 marks">4</span></header><div class="items"><article class="item" id="q1a1" data-marks="1"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">What is AngularJS?</p><div class="ans"><p>AngularJS is a free, open-source <strong>JavaScript framework made by Google</strong> for building dynamic <strong>single-page web applications</strong>. It adds extra features to HTML, such as directives (<code>ng-model</code>, <code>ng-repeat</code>) and two-way data binding.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (A) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q1a2" data-marks="1"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">The full form of NPM is <span class="blank"><span class="fill">Node Package Manager</span></span>.</p><div class="ans"><p>NPM installs and manages the packages (ready-made code libraries) that Node.js and Angular projects need.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (A) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q1a3" data-marks="1"><div class="item-no" aria-hidden="true">3</div><div class="item-main"><p class="ask">AngularJS provides Reusable components. True/False?</p><div class="ans"><p class="verdict"><span class="pill pill-true">True</span></p><p>Directives and components are written once and can be used again anywhere in the app, like one <code>&lt;student-card&gt;</code> used on many pages.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (A) 3 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q1a4" data-marks="1"><div class="item-no" aria-hidden="true">4</div><div class="item-main"><p class="ask">The full form of SPA is <span class="blank"><span class="fill">Single Page Application</span></span>.</p><div class="ans"><p>An SPA loads one HTML page and then changes only the needed part of it, without reloading the whole page (Gmail works like this).</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (A) 4 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q1b" data-marks="2"><header class="sec-head"><span class="sec-letter">(B)</span><h3 class="sec-title">Answer in brief</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="2 marks">2</span></header><div class="items"><article class="item" id="q1b1" data-marks="2"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">What is CLI and when to use it in Angular?</p><div class="ans"><p><strong>Angular CLI</strong> (Command Line Interface) is a tool that we run in the terminal to create, run and build Angular apps. Its command is <code>ng</code>, and we install it with <code>npm install -g @angular/cli</code>.</p>
+<p>We use it when we want to:</p>
+<ul>
+<li><strong>create</strong> a new project: <code>ng new my-app</code></li>
+<li><strong>generate</strong> parts of the app: <code>ng generate component home</code> (also service, module, pipe)</li>
+<li><strong>run</strong> the app on a local server: <code>ng serve</code></li>
+<li><strong>build</strong> the final app for hosting: <code>ng build</code>, or <strong>test</strong> it: <code>ng test</code></li>
+</ul></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (B) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q1b2" data-marks="2"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Differentiate AngularJS v/s Angular.</p><div class="ans"><div class="table-wrap cols-4"><table>
+<thead>
+<tr>
+<th>Point</th>
+<th>AngularJS</th>
+<th>Angular</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Version</td>
+<td>1.x (released 2010)</td>
+<td>2 and above (from 2016)</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>JavaScript</td>
+<td>TypeScript</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>MVC with controllers and <code>$scope</code></td>
+<td>Component-based</td>
+</tr>
+<tr>
+<td>Binding syntax</td>
+<td><code>ng-bind</code>, <code>ng-model</code></td>
+<td><code>[property]</code>, <code>(event)</code>, <code>[(ngModel)]</code></td>
+</tr>
+<tr>
+<td>Tools and speed</td>
+<td>No official CLI, slower</td>
+<td>Angular CLI, faster and mobile friendly</td>
+</tr>
+</tbody>
+</table></div></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (B) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q1c" data-marks="3"><header class="sec-head"><span class="sec-letter">(C)</span><h3 class="sec-title">Answer in detail</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="3 marks">3</span></header><div class="items"><article class="item" id="q1c1" data-marks="3"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">How do you create your first Angular Project? Give steps.</p><div class="ans"><p><strong>Step 1 – Install Node.js.</strong> Download the LTS version from nodejs.org. It installs npm too. Check with <code>node -v</code> and <code>npm -v</code>.</p>
+<p><strong>Step 2 – Install Angular CLI</strong> globally, then check it.</p>
+<p><strong>Step 3 – Create the project</strong> with <code>ng new</code>. The CLI asks a few questions (stylesheet type, routing). Press Enter to accept the defaults.</p>
+<p><strong>Step 4 – Run the project.</strong> Go into the folder and start the development server.</p>
+<div class="code"><div class="code-bar"><span>Terminal</span><button type="button" class="copy">Copy</button></div><pre><code class="language-bash">npm install -g @angular/cli      # step 2
+ng version                       # check the CLI
+
+ng new my-first-app              # step 3
+cd my-first-app                  # step 4
+ng serve --open                  # opens http://localhost:4200
+</code></pre></div>
+<p><strong>Step 5 – Edit the app.</strong> Open <code>src/app/app.component.html</code> (called <code>app.html</code> in the newest versions), change the text and save. The browser reloads by itself and shows the change.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (C) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q1c2" data-marks="3"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">What is Component? How many Components are there in angularJS?</p><div class="ans"><p>A <strong>component</strong> is a reusable building block of the screen. A header, a menu or a student list can each be a component. Every component has three parts:</p>
+<ul>
+<li><strong>Template</strong> – the HTML that is shown</li>
+<li><strong>Class</strong> – the TypeScript code (data and functions)</li>
+<li><strong>Metadata</strong> – the <code>@Component</code> decorator that joins them (selector, template, styles)</li>
+</ul>
+<p><strong>How many?</strong> There is no fixed number. An app can have as many components as it needs. Every app starts with one root component (<code>AppComponent</code>), and all other components sit inside it like a tree. The command <code>ng generate component hello</code> creates 4 files for one component: <code>.ts</code>, <code>.html</code>, <code>.css</code> and <code>.spec.ts</code> (test).</p>
+<div class="code"><div class="code-bar"><span>TypeScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-typescript">import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-hello',                  // used in HTML as &lt;app-hello&gt;
+  template: '&lt;h2&gt;Hello {{ name }}&lt;/h2&gt;'
+})
+export class HelloComponent {
+  name = 'Priya';
+}
+</code></pre></div>
+<p>In AngularJS (version 1.5 and above), a component is made with <code>app.component('hello', { template: '...', controller: function () {...} })</code>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (C) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q1d" data-marks="5"><header class="sec-head"><span class="sec-letter">(D)</span><h3 class="sec-title">Write a note on</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="5 marks">5</span></header><div class="items"><article class="item" id="q1d1" data-marks="5"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">How to install Node and NPM on windows?</p><div class="ans"><p><strong>Node.js</strong> lets us run JavaScript outside the browser, and <strong>NPM</strong> (Node Package Manager) installs libraries. NPM comes inside the Node.js installer, so one setup installs both. Angular needs both of them.</p>
+<h4>Steps to install</h4>
+<ol>
+<li>Open <strong>nodejs.org</strong> and download the <strong>LTS</strong> (Long Term Support) version, "Windows Installer (.msi)", 64-bit.</li>
+<li>Double-click the downloaded <code>.msi</code> file and click <strong>Next</strong>.</li>
+<li>Accept the licence agreement and click <strong>Next</strong>.</li>
+<li>Keep the default install folder <code>C:\Program Files\nodejs\</code>.</li>
+<li>On the <strong>Custom Setup</strong> screen, keep <strong>npm package manager</strong> and <strong>Add to PATH</strong> selected.</li>
+<li>Click <strong>Install</strong>, allow admin permission, then click <strong>Finish</strong>.</li>
+</ol>
+<h4>Check the installation</h4>
+<p>Open a new <strong>Command Prompt</strong> and type:</p>
+<div class="code"><div class="code-bar"><span>Terminal</span><button type="button" class="copy">Copy</button></div><pre><code class="language-bash">node -v        # shows the Node version, for example v22.11.0
+npm -v         # shows the npm version, for example 10.9.0
+</code></pre></div>
+<h4>Test with a small program</h4>
+<p>Create a file <code>hello.js</code> that contains <code>console.log("Node is working");</code> and run it with <code>node hello.js</code>. If the message prints, Node is ready.</p>
+<blockquote>
+<p><strong>Tip:</strong> If you see "node is not recognized", close and reopen Command Prompt, or restart the PC so the new PATH is loaded. To update npm later, run <code>npm install -g npm@latest</code>.</p>
+</blockquote></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (D) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q1d2" data-marks="5"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Explain MVC Framework.</p><div class="ans"><p><strong>MVC</strong> stands for <strong>Model – View – Controller</strong>. It is a design pattern that divides an application into three parts, so that the data, the screen and the logic are kept separate. AngularJS follows this pattern.</p>
+<ul>
+<li><strong>Model</strong> – holds the <strong>data</strong> of the app. In AngularJS, data is stored on <code>$scope</code>.</li>
+<li><strong>View</strong> – what the <strong>user sees</strong>: the HTML page with expressions like <code>{{ name }}</code>.</li>
+<li><strong>Controller</strong> – the <strong>logic</strong> that connects Model and View. It reacts to user actions and updates the data. In AngularJS it is a JavaScript function attached with <code>ng-controller</code>.</li>
+</ul>
+<figure class="diagram"><div class="scroll"><svg class="dg" style="--dw: 529px; --dmin: 340px" viewBox="0 0 460 290" role="img" aria-label="MVC cycle: user action goes from View to Controller, Controller updates the Model, and data binding updates the View">
+<defs>
+<marker id="ah-mvc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ah"/></marker>
+<marker id="ah-mvc-acc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ah-acc"/></marker>
+</defs>
+<rect class="b" x="10" y="30" width="170" height="70" rx="10"/>
+<text class="t-b" x="95" y="60" text-anchor="middle">View</text>
+<text class="t-sub" x="95" y="80" text-anchor="middle">HTML with {{ name }}</text>
+<rect class="b" x="280" y="30" width="170" height="70" rx="10"/>
+<text class="t-b" x="365" y="60" text-anchor="middle">Controller</text>
+<text class="t-sub" x="365" y="80" text-anchor="middle">JS function, $scope</text>
+<rect class="b-acc" x="145" y="200" width="170" height="70" rx="10"/>
+<text class="t-b" x="230" y="230" text-anchor="middle">Model</text>
+<text class="t-sub" x="230" y="250" text-anchor="middle">data on $scope</text>
+<line class="e" x1="182" y1="65" x2="276" y2="65" marker-end="url(#ah-mvc)"/>
+<text class="t-sub halo" x="229" y="56" text-anchor="middle">user action</text>
+<line class="e" x1="365" y1="102" x2="302" y2="197" marker-end="url(#ah-mvc)"/>
+<text class="t-sub halo" x="346" y="156">updates data</text>
+<line class="e-acc" x1="158" y1="197" x2="95" y2="102" marker-end="url(#ah-mvc-acc)"/>
+<text class="t-acc halo" x="114" y="156" text-anchor="end">view refreshes</text>
+<text class="t-sub halo" x="114" y="172" text-anchor="end">(data binding)</text>
+</svg></div><figcaption>The user acts on the View, the Controller changes the Model, and data binding shows the new data in the View again.</figcaption></figure>
+
+<h4>Example in AngularJS</h4>
+<div class="code"><div class="code-bar"><span>HTML</span><button type="button" class="copy">Copy</button></div><pre><code class="language-xml">&lt;div ng-app=&quot;myApp&quot; ng-controller=&quot;StudentCtrl&quot;&gt;
+  &lt;p&gt;Name: {{ student.name }}&lt;/p&gt;                &lt;!-- View --&gt;
+  &lt;button ng-click=&quot;changeName()&quot;&gt;Change&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  var app = angular.module('myApp', []);
+  app.controller('StudentCtrl', function ($scope) {   // Controller
+    $scope.student = { name: 'Riya' };                 // Model
+    $scope.changeName = function () {
+      $scope.student.name = 'Aman';                    // View updates by itself
+    };
+  });
+&lt;/script&gt;
+</code></pre></div>
+<h4>Advantages of MVC</h4>
+<ul>
+<li><strong>Separation of work:</strong> design, data and logic stay in different places.</li>
+<li><strong>Easy to maintain:</strong> a change in the view does not break the logic.</li>
+<li><strong>Easy to test:</strong> controllers and models can be tested alone.</li>
+<li><strong>Teamwork:</strong> designers and developers can work at the same time.</li>
+<li><strong>Reusable code:</strong> one model can be shown in many views.</li>
+</ul>
+<p>In short, MVC keeps an app organised, and AngularJS adds automatic data binding so the View and Model stay in sync.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (D) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section></section>
+<section class="q" id="q2" aria-labelledby="q2-title"><header class="q-head"><p class="q-no">Q.2</p><h2 id="q2-title">Data binding and directives</h2><p class="q-total">14 marks</p></header><section class="sec" id="q2a" data-marks="1"><header class="sec-head"><span class="sec-letter">(A)</span><h3 class="sec-title">Answer the following</h3><span class="sec-rule">Attempt all · 1 mark each</span><span class="sec-marks" aria-label="4 marks">4</span></header><div class="items"><article class="item" id="q2a1" data-marks="1"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">What is Data Binding in AngularJS?</p><div class="ans"><p>Data binding is the <strong>automatic syncing of data between the model (JavaScript data) and the view (HTML)</strong>. When the data changes, the page updates by itself, and in two-way binding, user input updates the data too.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (A) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q2a2" data-marks="1"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Which Directive is used for Data Binding in AngularJS?</p><div class="ans"><p>The <strong><code>ng-model</code></strong> directive is used for two-way data binding. (<code>ng-bind</code> and <code>{{ }}</code> give one-way binding.)</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (A) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q2a3" data-marks="1"><div class="item-no" aria-hidden="true">3</div><div class="item-main"><p class="ask">ng-app Directive Defines and links AngularJS application to HTML. TRUE/FALSE?</p><div class="ans"><p class="verdict"><span class="pill pill-true">True</span></p><p><code>ng-app</code> marks the root element of the AngularJS application and starts (bootstraps) it automatically when the page loads.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (A) 3 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q2a4" data-marks="1"><div class="item-no" aria-hidden="true">4</div><div class="item-main"><p class="ask">What is async in AngularJS?</p><div class="ans"><p><code>async</code> is a built-in <strong>pipe</strong> that waits for an Observable or Promise and shows its latest value in the template, for example <code>{{ students$ | async }}</code>. It also unsubscribes by itself when the component is removed.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (A) 4 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q2b" data-marks="2"><header class="sec-head"><span class="sec-letter">(B)</span><h3 class="sec-title">Answer in brief</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="2 marks">2</span></header><div class="items"><article class="item" id="q2b1" data-marks="2"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Explain ng-init Directive.</p><div class="ans"><p><code>ng-init</code> is an AngularJS directive that <strong>creates variables and gives them starting values</strong> in the current scope, directly in the HTML.</p>
+<div class="code"><div class="code-bar"><span>HTML</span><button type="button" class="copy">Copy</button></div><pre><code class="language-xml">&lt;div ng-app=&quot;&quot; ng-init=&quot;name='Ravi'; marks=85&quot;&gt;
+  &lt;p&gt;{{ name }} scored {{ marks }} marks&lt;/p&gt;
+&lt;/div&gt;
+</code></pre></div>
+<p>Output: <strong>Ravi scored 85 marks</strong>. In real apps, starting values are usually set in the controller; <code>ng-init</code> is handy for small demos.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (B) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q2b2" data-marks="2"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Explain ngif in angular.</p><div class="ans"><p><code>*ngIf</code> is a <strong>structural directive</strong>. It <strong>adds</strong> an element to the page when the condition is true and <strong>removes</strong> it from the DOM when the condition is false (it is not just hidden).</p>
+<div class="code"><div class="code-bar"><span>HTML</span><button type="button" class="copy">Copy</button></div><pre><code class="language-xml">&lt;p *ngIf=&quot;isLoggedIn; else loginBox&quot;&gt;Welcome back!&lt;/p&gt;
+&lt;ng-template #loginBox&gt;
+  &lt;button&gt;Login&lt;/button&gt;
+&lt;/ng-template&gt;
+</code></pre></div>
+<p>If <code>isLoggedIn</code> is true, "Welcome back!" is shown; otherwise the Login button is shown. (AngularJS uses <code>ng-if</code>; Angular 17+ also allows <code>@if (isLoggedIn) { ... }</code>.)</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (B) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q2c" data-marks="3"><header class="sec-head"><span class="sec-letter">(C)</span><h3 class="sec-title">Answer in detail</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="3 marks">3</span></header><div class="items"><article class="item" id="q2c1" data-marks="3"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Differentiate Property Binding v/s String Interpolation.</p><div class="ans"><p>Both send data <strong>one way, from the component class to the view</strong>. The difference is in how and where they are used.</p>
+<div class="table-wrap cols-4"><table>
+<thead>
+<tr>
+<th>Point</th>
+<th>String Interpolation</th>
+<th>Property Binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Syntax</td>
+<td><code>{{ value }}</code></td>
+<td><code>[property]="value"</code></td>
+</tr>
+<tr>
+<td>Used for</td>
+<td>Showing text on the page</td>
+<td>Setting a property of an element, like <code>[src]</code>, <code>[disabled]</code></td>
+</tr>
+<tr>
+<td>Value type</td>
+<td>Always turned into a <strong>string</strong></td>
+<td>Keeps the real type (true/false, number, object)</td>
+</tr>
+<tr>
+<td>Example</td>
+<td><code>&lt;h1&gt;{{ title }}&lt;/h1&gt;</code></td>
+<td><code>&lt;button [disabled]="isSaving"&gt;Save&lt;/button&gt;</code></td>
+</tr>
+</tbody>
+</table></div>
+<div class="code"><div class="code-bar"><span>TypeScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-typescript">export class AppComponent {
+  title = 'Student Portal';
+  logoUrl = 'assets/logo.png';
+  isSaving = true;
+}
+</code></pre></div>
+<div class="code"><div class="code-bar"><span>HTML</span><button type="button" class="copy">Copy</button></div><pre><code class="language-xml">&lt;h1&gt;{{ title }}&lt;/h1&gt;                         &lt;!-- interpolation --&gt;
+&lt;img [src]=&quot;logoUrl&quot;&gt;                        &lt;!-- property binding --&gt;
+&lt;button [disabled]=&quot;isSaving&quot;&gt;Save&lt;/button&gt;  &lt;!-- needs a real boolean --&gt;
+</code></pre></div>
+<p>Use interpolation for text and property binding for non-text values such as true/false.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (C) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q2c2" data-marks="3"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Give steps to create multiple module in Angular.</p><div class="ans"><p>A big app is split into <strong>feature modules</strong> (for example Admin and Student) so each part is organised separately.</p>
+<ol>
+<li><strong>Create the modules</strong> with the CLI: <code>ng generate module admin</code> and <code>ng generate module student</code>.</li>
+<li><strong>Create components inside each module:</strong> <code>ng generate component admin/dashboard</code>. The CLI adds it to <code>AdminModule</code> automatically.</li>
+<li><strong>Export</strong> the component from its module so other modules can use it.</li>
+<li><strong>Import</strong> the feature modules into the root <code>AppModule</code>.</li>
+<li><strong>Use</strong> the component's selector, for example <code>&lt;app-dashboard&gt;&lt;/app-dashboard&gt;</code>, and run <code>ng serve</code>.</li>
+</ol>
+<div class="code"><div class="code-bar"><span>TypeScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-typescript">// admin/admin.module.ts
+@NgModule({
+  declarations: [DashboardComponent],
+  imports: [CommonModule],
+  exports: [DashboardComponent]          // step 3
+})
+export class AdminModule {}
+
+// app.module.ts
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, AdminModule, StudentModule],   // step 4
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+</code></pre></div>
+<p>Note: Angular 17+ creates standalone apps by default. To work with modules, create the project with <code>ng new my-app --no-standalone</code>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (C) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q2d" data-marks="5"><header class="sec-head"><span class="sec-letter">(D)</span><h3 class="sec-title">Write a note on</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="5 marks">5</span></header><div class="items"><article class="item" id="q2d1" data-marks="5"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Describe ng-model for two way Data Binding process.</p><div class="ans"><p><strong>Two-way data binding</strong> means data flows <strong>both ways</strong>: from the model to the view, and from the view back to the model. In AngularJS this is done with the <strong><code>ng-model</code></strong> directive.</p>
+<p><code>ng-model</code> connects an input control (<code>input</code>, <code>select</code>, <code>textarea</code>) to a variable on <code>$scope</code>.</p>
+<figure class="diagram"><div class="scroll"><svg class="dg" style="--dw: 529px; --dmin: 340px" viewBox="0 0 460 150" role="img" aria-label="ng-model links the input box in the View with $scope.name in the Model in both directions">
+<defs>
+<marker id="ah-ngm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ah-acc"/></marker>
+</defs>
+<rect class="b" x="10" y="30" width="170" height="90" rx="10"/>
+<text class="t-b" x="95" y="68" text-anchor="middle">View (input box)</text>
+<text class="t-sub t-mono" x="95" y="90" text-anchor="middle">ng-model="name"</text>
+<rect class="b-acc" x="280" y="30" width="170" height="90" rx="10"/>
+<text class="t-b" x="365" y="68" text-anchor="middle">Model</text>
+<text class="t-sub t-mono" x="365" y="90" text-anchor="middle">$scope.name</text>
+<line class="e-acc" x1="183" y1="58" x2="276" y2="58" marker-end="url(#ah-ngm)"/>
+<text class="t-sub halo" x="229" y="49" text-anchor="middle">user types</text>
+<line class="e-acc" x1="277" y1="92" x2="184" y2="92" marker-end="url(#ah-ngm)"/>
+<text class="t-sub halo" x="229" y="111" text-anchor="middle">code sets value</text>
+</svg></div><figcaption>ng-model keeps the input box and the scope variable equal. A change on either side shows up on the other side at once.</figcaption></figure>
+
+<h4>How the process works</h4>
+<ol>
+<li><code>ng-model="name"</code> links the input box to <code>$scope.name</code> (it creates the variable if it does not exist).</li>
+<li><strong>View to Model:</strong> when the user types, AngularJS copies the new text into <code>$scope.name</code>.</li>
+<li><strong>Model to View:</strong> when code changes <code>$scope.name</code>, the input box and every <code>{{ name }}</code> on the page update.</li>
+<li>AngularJS notices these changes through its <strong>digest cycle</strong>, which watches the scope for new values.</li>
+</ol>
+<h4>Example</h4>
+<div class="code"><div class="code-bar"><span>HTML</span><button type="button" class="copy">Copy</button></div><pre><code class="language-xml">&lt;div ng-app=&quot;myApp&quot; ng-controller=&quot;FormCtrl&quot;&gt;
+  &lt;input type=&quot;text&quot; ng-model=&quot;name&quot;&gt;
+  &lt;p&gt;Hello, {{ name }}!&lt;/p&gt;
+  &lt;button ng-click=&quot;reset()&quot;&gt;Reset&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  angular.module('myApp', []).controller('FormCtrl', function ($scope) {
+    $scope.name = 'Riya';                          // model to view
+    $scope.reset = function () { $scope.name = ''; };
+  });
+&lt;/script&gt;
+</code></pre></div>
+<p>As you type in the box, the "Hello" line changes at the same moment. Clicking <strong>Reset</strong> clears both.</p>
+<h4>Extra features of ng-model</h4>
+<ul>
+<li>Adds CSS classes such as <code>ng-valid</code>, <code>ng-invalid</code>, <code>ng-dirty</code>, <code>ng-touched</code> for styling.</li>
+<li>Supports validation with <code>required</code>, <code>ng-minlength</code>, <code>type="email"</code>.</li>
+<li>In Angular (2+), the same idea is written as <code>[(ngModel)]="name"</code> (called "banana in a box") and needs <code>FormsModule</code>.</li>
+</ul></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (D) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q2d2" data-marks="5"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Explain Form module and how you pass inputs and variables to components?</p><div class="ans"><h4>Part 1: Form modules</h4>
+<p>Angular gives two modules for building forms:</p>
+<ul>
+<li><strong><code>FormsModule</code></strong> – for <strong>template-driven forms</strong>. The form is written mostly in HTML using <code>ngModel</code>, <code>ngForm</code> and <code>(ngSubmit)</code>. Good for simple forms.</li>
+<li><strong><code>ReactiveFormsModule</code></strong> – for <strong>reactive forms</strong>. The form is built in TypeScript with <code>FormGroup</code> and <code>FormControl</code>. Good for large forms and complex validation.</li>
+</ul>
+<p>We import the module before using form features:</p>
+<div class="code"><div class="code-bar"><span>TypeScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-typescript">import { FormsModule } from '@angular/forms';
+
+@NgModule({
+  imports: [BrowserModule, FormsModule],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+</code></pre></div>
+<div class="code"><div class="code-bar"><span>HTML</span><button type="button" class="copy">Copy</button></div><pre><code class="language-xml">&lt;form #f=&quot;ngForm&quot; (ngSubmit)=&quot;save(f.value)&quot;&gt;
+  &lt;input name=&quot;city&quot; [(ngModel)]=&quot;city&quot; required&gt;
+  &lt;button type=&quot;submit&quot;&gt;Save&lt;/button&gt;
+&lt;/form&gt;
+</code></pre></div>
+<h4>Part 2: Passing inputs and variables to components</h4>
+<ul>
+<li><strong>Parent to child – <code>@Input()</code>:</strong> the child marks a property with <code>@Input()</code>, and the parent sends a value with property binding.</li>
+<li><strong>Child to parent – <code>@Output()</code>:</strong> the child sends data back with an <code>EventEmitter</code>, and the parent listens with event binding.</li>
+</ul>
+<div class="code"><div class="code-bar"><span>TypeScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-typescript">// student.component.ts (child)
+export class StudentComponent {
+  @Input() studentName = '';                     // receives data
+  @Output() selected = new EventEmitter&lt;string&gt;();
+
+  pick() { this.selected.emit(this.studentName); }   // sends data back
+}
+</code></pre></div>
+<div class="code"><div class="code-bar"><span>HTML</span><button type="button" class="copy">Copy</button></div><pre><code class="language-xml">&lt;!-- student.component.html --&gt;
+&lt;p (click)=&quot;pick()&quot;&gt;Student: {{ studentName }}&lt;/p&gt;
+
+&lt;!-- app.component.html (parent) --&gt;
+&lt;app-student [studentName]=&quot;name&quot; (selected)=&quot;onSelect($event)&quot;&gt;&lt;/app-student&gt;
+</code></pre></div>
+<p>Here the parent's <code>name</code> variable goes into the child, and when the child is clicked, <code>onSelect()</code> in the parent receives the student name. So <strong>FormsModule handles user input in forms</strong>, and <strong><code>@Input</code> / <code>@Output</code> move data between components</strong>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (D) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section></section>
+<section class="q" id="q3" aria-labelledby="q3-title"><header class="q-head"><p class="q-no">Q.3</p><h2 id="q3-title">Dependency injection, services and HttpClient</h2><p class="q-total">14 marks</p></header><section class="sec" id="q3a" data-marks="1"><header class="sec-head"><span class="sec-letter">(A)</span><h3 class="sec-title">Answer the following</h3><span class="sec-rule">Attempt all · 1 mark each</span><span class="sec-marks" aria-label="4 marks">4</span></header><div class="items"><article class="item" id="q3a1" data-marks="1"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Full form of DI is <span class="blank"><span class="fill">Dependency Injection</span></span>.</p><div class="ans"><p>It is a design pattern where a class <strong>receives</strong> the objects it needs (its dependencies) from outside instead of creating them itself.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (A) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q3a2" data-marks="1"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">List out 3 different kinds of dependency injection in angular.</p><div class="ans"><ol>
+<li><strong>Constructor injection</strong> (the main way Angular uses), 2. <strong>Setter / property injection</strong>, 3. <strong>Interface injection</strong>. (Angular providers can also supply a dependency with <code>useClass</code>, <code>useValue</code> or <code>useFactory</code>.)</li>
+</ol></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (A) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q3a3" data-marks="1"><div class="item-no" aria-hidden="true">3</div><div class="item-main"><p class="ask">Can we add multiple dependencies for one module using dependency injection. True/False?</p><div class="ans"><p class="verdict"><span class="pill pill-true">True</span></p><p>One module or class can depend on many things, for example <code>angular.module('app', ['ngRoute', 'ngAnimate'])</code>, or <code>constructor(private http: HttpClient, private router: Router)</code>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (A) 3 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q3a4" data-marks="1"><div class="item-no" aria-hidden="true">4</div><div class="item-main"><p class="ask">What does HttpClient do in Angular?</p><div class="ans"><p><code>HttpClient</code> is Angular's built-in service (from <code>@angular/common/http</code>) that <strong>sends HTTP requests to a server</strong> (GET, POST, PUT, DELETE) and gives back the response as an Observable.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (A) 4 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q3b" data-marks="2"><header class="sec-head"><span class="sec-letter">(B)</span><h3 class="sec-title">Answer in brief</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="2 marks">2</span></header><div class="items"><article class="item" id="q3b1" data-marks="2"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">What is the use of $inject in angularjs?</p><div class="ans"><p><code>$inject</code> is a property that <strong>lists a function's dependencies as strings</strong>. It keeps dependency injection working after the code is <strong>minified</strong>. A minifier renames <code>$scope</code> to something like <code>a</code>, and then AngularJS would not know what to inject; the string names fix this.</p>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">function StudentCtrl($scope, $http) { /* ... */ }
+StudentCtrl.$inject = ['$scope', '$http'];
+app.controller('StudentCtrl', StudentCtrl);
+</code></pre></div></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (B) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q3b2" data-marks="2"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">What is the use of AngularJS services?</p><div class="ans"><p>A <strong>service</strong> is a reusable object that holds code or data we want to <strong>share between controllers</strong>, for example calling the server, formatting dates, or keeping the logged-in user's details.</p>
+<ul>
+<li>A service is a <strong>singleton</strong>: the app creates only one copy and everyone shares it.</li>
+<li>It keeps controllers small and clean.</li>
+<li>Built-in services: <code>$http</code>, <code>$timeout</code>, <code>$interval</code>, <code>$location</code>, <code>$log</code>. Custom services are made with <code>service()</code> or <code>factory()</code>.</li>
+</ul></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (B) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q3c" data-marks="3"><header class="sec-head"><span class="sec-letter">(C)</span><h3 class="sec-title">Answer in detail</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="3 marks">3</span></header><div class="items"><article class="item" id="q3c1" data-marks="3"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">How to inject services in AngularJS? Explain with example.</p><div class="ans"><p>To use a service, we <strong>write its name as a parameter</strong> of the controller (or another service). AngularJS's <strong>injector</strong> sees the name, creates the service once, and passes it in.</p>
+<ol>
+<li>Create the service with <code>app.service()</code> (or <code>app.factory()</code>).</li>
+<li>Inject it into a controller by name. The array form keeps it safe after minification.</li>
+<li>Call its methods inside the controller.</li>
+</ol>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">var app = angular.module('myApp', []);
+
+app.service('MathService', function () {            // 1. create
+  this.square = function (n) { return n * n; };
+});
+
+app.controller('CalcCtrl', ['$scope', 'MathService',  // 2. inject
+  function ($scope, MathService) {
+    $scope.num = 4;
+    $scope.result = MathService.square($scope.num);   // 3. use
+  }]);
+</code></pre></div>
+<div class="code"><div class="code-bar"><span>HTML</span><button type="button" class="copy">Copy</button></div><pre><code class="language-xml">&lt;div ng-app=&quot;myApp&quot; ng-controller=&quot;CalcCtrl&quot;&gt;
+  Square of {{ num }} is {{ result }}
+&lt;/div&gt;
+</code></pre></div>
+<p>Output: <strong>Square of 4 is 16</strong>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (C) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q3c2" data-marks="3"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Explain Dependency Hierarchical Injector.</p><div class="ans"><p>Angular does not have just one injector. It has a <strong>tree of injectors</strong> that follows the tree of components. This is called the <strong>hierarchical injector</strong>.</p>
+<ul>
+<li><strong>Root injector</strong> – services with <code>providedIn: 'root'</code> live here. One copy is shared by the whole app.</li>
+<li><strong>Module injector</strong> – providers listed in a module (lazy-loaded modules get their own child injector).</li>
+<li><strong>Component (element) injector</strong> – providers listed in <code>@Component({ providers: [...] })</code>. That component and its children get their <strong>own new copy</strong>.</li>
+</ul>
+<p>When a component asks for a service, Angular checks the component's own injector first, then its parent, and keeps going <strong>up the tree to the root</strong>. The first match is used. If nothing is found, Angular throws <code>NullInjectorError: No provider for ...</code>.</p>
+<figure class="diagram"><div class="scroll"><svg class="dg" style="--dw: 471px; --dmin: 303px" viewBox="0 0 410 290" role="img" aria-label="ItemComponent asks for CartService; the search goes up to its parent CartComponent, which provides it">
+<defs>
+<marker id="ah-inj" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ah-acc"/></marker>
+</defs>
+<line class="e" x1="142" y1="60" x2="142" y2="86"/>
+<line class="e" x1="142" y1="132" x2="142" y2="158"/>
+<line class="e" x1="142" y1="204" x2="142" y2="230"/>
+<rect class="b" x="12" y="14" width="260" height="46" rx="10"/>
+<text class="t-b" x="142" y="34" text-anchor="middle">Root injector</text>
+<text class="t-sub" x="142" y="51" text-anchor="middle">providedIn: 'root' · shared copy</text>
+<rect class="b" x="12" y="86" width="260" height="46" rx="10"/>
+<text class="t-b" x="142" y="106" text-anchor="middle">AppComponent</text>
+<text class="t-sub" x="142" y="123" text-anchor="middle">no providers here</text>
+<rect class="b-acc" x="12" y="158" width="260" height="46" rx="10"/>
+<text class="t-b" x="142" y="178" text-anchor="middle">CartComponent</text>
+<text class="t-sub t-mono" x="142" y="195" text-anchor="middle">providers: [CartService]</text>
+<rect class="b" x="12" y="230" width="260" height="46" rx="10"/>
+<text class="t-b" x="142" y="250" text-anchor="middle">ItemComponent</text>
+<text class="t-sub" x="142" y="267" text-anchor="middle">needs CartService</text>
+<path class="e-acc" d="M274,253 H300 V181 H277" marker-end="url(#ah-inj)"/>
+<text class="t-sub halo" x="308" y="222">searches upward</text>
+<text class="t-acc halo" x="308" y="185">found here</text>
+</svg></div><figcaption>ItemComponent gets the CartService copy from its parent CartComponent. If CartComponent did not provide it, the search would continue up to the root injector.</figcaption></figure></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (C) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q3d" data-marks="5"><header class="sec-head"><span class="sec-letter">(D)</span><h3 class="sec-title">Write a note on</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="5 marks">5</span></header><div class="items"><article class="item" id="q3d1" data-marks="5"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">How to inject services into another services in angular?</p><div class="ans"><p>A service can <strong>use another service</strong>, just like a component can. We inject it through the <strong>constructor</strong> of the service. The service that receives the other service must have the <code>@Injectable()</code> decorator, because that tells Angular it has dependencies to fill.</p>
+<h4>Steps</h4>
+<ol>
+<li>Create the first service: <code>ng generate service logger</code>.</li>
+<li>Create the second service: <code>ng generate service student</code>.</li>
+<li>In <code>StudentService</code>, add <code>LoggerService</code> as a constructor parameter.</li>
+<li>Inject <code>StudentService</code> into a component and call its method.</li>
+</ol>
+<div class="code"><div class="code-bar"><span>TypeScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-typescript">// logger.service.ts
+@Injectable({ providedIn: 'root' })
+export class LoggerService {
+  log(msg: string) { console.log('[LOG] ' + msg); }
+}
+</code></pre></div>
+<div class="code"><div class="code-bar"><span>TypeScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-typescript">// student.service.ts
+@Injectable({ providedIn: 'root' })
+export class StudentService {
+  private students = ['Riya', 'Aman', 'Neha'];
+
+  constructor(private logger: LoggerService) {}    // service inside a service
+
+  getStudents() {
+    this.logger.log('Student list fetched');
+    return this.students;
+  }
+}
+</code></pre></div>
+<div class="code"><div class="code-bar"><span>TypeScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-typescript">// student-list.component.ts
+export class StudentListComponent implements OnInit {
+  students: string[] = [];
+  constructor(private studentService: StudentService) {}
+
+  ngOnInit() { this.students = this.studentService.getStudents(); }
+}
+</code></pre></div>
+<div class="code" data-kind="output"><div class="code-bar"><span>Output</span><button type="button" class="copy">Copy</button></div><pre><code class="language-plaintext">[LOG] Student list fetched
+</code></pre></div>
+<h4>Points to remember</h4>
+<ul>
+<li>Angular builds the chain by itself: it creates <code>LoggerService</code> first, then gives it to <code>StudentService</code>.</li>
+<li><code>providedIn: 'root'</code> makes one shared copy of each service.</li>
+<li>Avoid <strong>circular dependency</strong> (A needs B and B needs A); Angular shows an error for it.</li>
+<li>Newer code can also write <code>private logger = inject(LoggerService);</code> instead of a constructor parameter.</li>
+<li>In AngularJS the idea is the same: <code>app.service('StudentService', function (LoggerService) { ... })</code>.</li>
+</ul></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (D) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q3d2" data-marks="5"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">How to call REST API using HttpClient?</p><div class="ans"><p>A <strong>REST API</strong> is a server URL that sends and receives data, usually as JSON. Angular calls it with the <strong><code>HttpClient</code></strong> service.</p>
+<h4>Step 1: Make HttpClient available</h4>
+<div class="code"><div class="code-bar"><span>TypeScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-typescript">// app.module.ts
+import { HttpClientModule } from '@angular/common/http';
+
+@NgModule({
+  imports: [BrowserModule, HttpClientModule],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+</code></pre></div>
+<p>(In standalone apps, add <code>provideHttpClient()</code> to the providers in <code>app.config.ts</code>.)</p>
+<h4>Step 2: Create a service that calls the API</h4>
+<div class="code"><div class="code-bar"><span>TypeScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-typescript">// user.service.ts
+export interface User { id: number; name: string; }
+
+@Injectable({ providedIn: 'root' })
+export class UserService {
+  private url = 'https://jsonplaceholder.typicode.com/users';
+  constructor(private http: HttpClient) {}
+
+  getUsers(): Observable&lt;User[]&gt; { return this.http.get&lt;User[]&gt;(this.url); }
+  addUser(u: User)    { return this.http.post&lt;User&gt;(this.url, u); }
+  updateUser(u: User) { return this.http.put&lt;User&gt;(`${this.url}/${u.id}`, u); }
+  deleteUser(id: number) { return this.http.delete(`${this.url}/${id}`); }
+}
+</code></pre></div>
+<h4>Step 3: Subscribe in a component and show the data</h4>
+<div class="code"><div class="code-bar"><span>TypeScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-typescript">export class UserListComponent implements OnInit {
+  users: User[] = [];
+  error = '';
+  constructor(private userService: UserService) {}
+
+  ngOnInit() {
+    this.userService.getUsers().subscribe({
+      next: data =&gt; this.users = data,
+      error: () =&gt; this.error = 'Could not load users'
+    });
+  }
+}
+</code></pre></div>
+<div class="code"><div class="code-bar"><span>HTML</span><button type="button" class="copy">Copy</button></div><pre><code class="language-xml">&lt;ul&gt;
+  &lt;li *ngFor=&quot;let u of users&quot;&gt;{{ u.name }}&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p *ngIf=&quot;error&quot;&gt;{{ error }}&lt;/p&gt;
+</code></pre></div>
+<div class="table-wrap cols-3"><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>get()</code></td>
+<td>Read data</td>
+</tr>
+<tr>
+<td><code>post()</code></td>
+<td>Add new data</td>
+</tr>
+<tr>
+<td><code>put()</code></td>
+<td>Update data</td>
+</tr>
+<tr>
+<td><code>delete()</code></td>
+<td>Remove data</td>
+</tr>
+</tbody>
+</table></div>
+<h4>Points to remember</h4>
+<ul>
+<li>Every method returns an <strong>Observable</strong>. The request is sent only when we call <code>subscribe()</code>.</li>
+<li>The JSON response is turned into a JavaScript object automatically.</li>
+<li>Handle failures in the <code>error</code> part (or with the <code>catchError</code> operator).</li>
+</ul></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (D) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section></section>
+<section class="q" id="q4" aria-labelledby="q4-title"><header class="q-head"><p class="q-no">Q.4</p><h2 id="q4-title">Routing</h2><p class="q-total">14 marks</p></header><section class="sec" id="q4a" data-marks="1"><header class="sec-head"><span class="sec-letter">(A)</span><h3 class="sec-title">Answer the following</h3><span class="sec-rule">Attempt all · 1 mark each</span><span class="sec-marks" aria-label="4 marks">4</span></header><div class="items"><article class="item" id="q4a1" data-marks="1"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">What is routing in angularJS?</p><div class="ans"><p>Routing lets a single-page app <strong>show different views for different URLs without reloading the page</strong>. In AngularJS it is done with the <code>ngRoute</code> module (<code>$routeProvider</code> and <code>ng-view</code>).</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (A) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q4a2" data-marks="1"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">The router is a part of @angular/core model. True/false?</p><div class="ans"><p class="verdict"><span class="pill pill-false">False</span></p><p>The router is in its own package, <strong><code>@angular/router</code></strong>, not in <code>@angular/core</code>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (A) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q4a3" data-marks="1"><div class="item-no" aria-hidden="true">3</div><div class="item-main"><p class="ask">Define routerOutlet.</p><div class="ans"><p><code>&lt;router-outlet&gt;</code> is a directive that acts as a <strong>placeholder</strong> in the template. Angular shows the component of the current route at that place.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (A) 3 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q4a4" data-marks="1"><div class="item-no" aria-hidden="true">4</div><div class="item-main"><p class="ask">Which function is used to import RouterModule in a feature module?</p><div class="ans"><p><strong><code>RouterModule.forChild(routes)</code></strong>. (<code>forRoot()</code> is used only once, in the root module.)</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (A) 4 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q4b" data-marks="2"><header class="sec-head"><span class="sec-letter">(B)</span><h3 class="sec-title">Answer in brief</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="2 marks">2</span></header><div class="items"><article class="item" id="q4b1" data-marks="2"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">What is ngRoute module?</p><div class="ans"><p><code>ngRoute</code> is an <strong>AngularJS module that adds routing</strong> to an app, so we can move between views without a page reload. It comes in a separate file, <code>angular-route.js</code>, and gives us:</p>
+<ul>
+<li><code>$routeProvider</code> – to define the routes</li>
+<li><code>$routeParams</code> – to read values from the URL</li>
+<li><code>ng-view</code> – the place where the matched view is shown</li>
+</ul>
+<div class="code"><div class="code-bar"><span>HTML</span><button type="button" class="copy">Copy</button></div><pre><code class="language-xml">&lt;script src=&quot;angular-route.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  var app = angular.module('myApp', ['ngRoute']);   // add ngRoute as a dependency
+&lt;/script&gt;
+</code></pre></div></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (B) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q4b2" data-marks="2"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Differentiate RouterModule.forRoot() v/s RouterModule.forChild().</p><div class="ans"><div class="table-wrap cols-4"><table>
+<thead>
+<tr>
+<th>Point</th>
+<th><code>forRoot()</code></th>
+<th><code>forChild()</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Used in</td>
+<td>Root module (<code>AppModule</code> / <code>AppRoutingModule</code>)</td>
+<td>Feature modules, including lazy-loaded ones</td>
+</tr>
+<tr>
+<td>How many times</td>
+<td><strong>Only once</strong> in the whole app</td>
+<td>In every feature module that has routes</td>
+</tr>
+<tr>
+<td>Router service</td>
+<td>Creates the Router service and adds main routes</td>
+<td>Only adds extra routes; uses the same Router</td>
+</tr>
+<tr>
+<td>Example</td>
+<td><code>RouterModule.forRoot(appRoutes)</code></td>
+<td><code>RouterModule.forChild(adminRoutes)</code></td>
+</tr>
+</tbody>
+</table></div></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (B) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q4c" data-marks="3"><header class="sec-head"><span class="sec-letter">(C)</span><h3 class="sec-title">Answer in detail</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="3 marks">3</span></header><div class="items"><article class="item" id="q4c1" data-marks="3"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Explain $routeProvider and $routeParams.</p><div class="ans"><p><strong><code>$routeProvider</code></strong> is used inside <code>app.config()</code> to <strong>define routes</strong>. Each <code>.when(path, {...})</code> says which template and controller to show for a URL, and <code>.otherwise()</code> sets the default route.</p>
+<p><strong><code>$routeParams</code></strong> is a service that <strong>gives the values from the URL</strong>. If the route is <code>/student/:id</code> and the URL is <code>#!/student/7</code>, then <code>$routeParams.id</code> is <code>"7"</code>.</p>
+<div class="code"><div class="code-bar"><span>JavaScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-javascript">var app = angular.module('myApp', ['ngRoute']);
+
+app.config(function ($routeProvider) {
+  $routeProvider
+    .when('/', { template: '&lt;h2&gt;Home page&lt;/h2&gt;' })
+    .when('/student/:id', { templateUrl: 'student.html', controller: 'StudentCtrl' })
+    .otherwise({ redirectTo: '/' });
+});
+
+app.controller('StudentCtrl', function ($scope, $routeParams) {
+  $scope.id = $routeParams.id;          // &quot;7&quot; for #!/student/7
+});
+</code></pre></div>
+<div class="code"><div class="code-bar"><span>HTML</span><button type="button" class="copy">Copy</button></div><pre><code class="language-xml">&lt;a href=&quot;#!/&quot;&gt;Home&lt;/a&gt; | &lt;a href=&quot;#!/student/7&quot;&gt;Student 7&lt;/a&gt;
+&lt;div ng-view&gt;&lt;/div&gt;      &lt;!-- the chosen view appears here --&gt;
+</code></pre></div></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (C) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q4c2" data-marks="3"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">What are the main components of Angular routing? Explain in brief.</p><div class="ans"><ul>
+<li><strong>Routes</strong> – an array that maps a URL path to a component, like <code>{ path: 'about', component: AboutComponent }</code>.</li>
+<li><strong>RouterModule</strong> – the module that brings routing; we register routes with <code>RouterModule.forRoot(routes)</code>.</li>
+<li><strong><code>&lt;router-outlet&gt;</code></strong> – the placeholder where the matched component is displayed.</li>
+<li><strong><code>routerLink</code></strong> – used on links instead of <code>href</code>, so the page does not reload: <code>&lt;a routerLink="/about"&gt;About&lt;/a&gt;</code>.</li>
+<li><strong>Router service</strong> – to move to a page from code: <code>this.router.navigate(['/about'])</code>.</li>
+<li><strong>ActivatedRoute</strong> – to read values of the current route, such as <code>id</code> in <code>/student/:id</code>.</li>
+</ul>
+<div class="code"><div class="code-bar"><span>TypeScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-typescript">const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'student/:id', component: StudentComponent }
+];
+
+@NgModule({ imports: [RouterModule.forRoot(routes)], exports: [RouterModule] })
+export class AppRoutingModule {}
+</code></pre></div></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (C) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q4d" data-marks="5"><header class="sec-head"><span class="sec-letter">(D)</span><h3 class="sec-title">Write a note on</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="5 marks">5</span></header><div class="items"><article class="item" id="q4d1" data-marks="5"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">How would you handle wildcard routes in Angular Routing?</p><div class="ans"><p>A <strong>wildcard route</strong> uses the path <strong><code>'**'</code></strong> (two stars). It <strong>matches any URL</strong> that did not match the other routes. We use it to show a <strong>"404 – Page Not Found"</strong> page or to send the user back to the home page.</p>
+<h4>Steps</h4>
+<ol>
+<li>Create a component for the error page: <code>ng generate component page-not-found</code>.</li>
+<li>Add a route with <code>path: '**'</code> that loads this component.</li>
+<li>Put the wildcard route <strong>last</strong> in the routes array.</li>
+<li>(Optional) Add an empty-path route that redirects to home.</li>
+</ol>
+<div class="code"><div class="code-bar"><span>TypeScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-typescript">const routes: Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full' },   // default page
+  { path: 'home', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
+  { path: '**', component: PageNotFoundComponent }        // always last
+];
+</code></pre></div>
+<div class="code"><div class="code-bar"><span>HTML</span><button type="button" class="copy">Copy</button></div><pre><code class="language-xml">&lt;!-- page-not-found.component.html --&gt;
+&lt;h2&gt;404 – Page not found&lt;/h2&gt;
+&lt;a routerLink=&quot;/home&quot;&gt;Go back home&lt;/a&gt;
+</code></pre></div>
+<h4>Why must it be the last route?</h4>
+<p>The router checks routes <strong>from top to bottom</strong> and uses the <strong>first match</strong>. Since <code>'**'</code> matches everything, any route written after it would never be reached.</p>
+<h4>Example</h4>
+<ul>
+<li><code>/home</code> shows <code>HomeComponent</code>.</li>
+<li><code>/about</code> shows <code>AboutComponent</code>.</li>
+<li><code>/xyz</code> matches no route, so <code>PageNotFoundComponent</code> is shown.</li>
+</ul>
+<h4>Other ways</h4>
+<ul>
+<li>Redirect instead of showing a page: <code>{ path: '**', redirectTo: '/home' }</code>.</li>
+<li>In AngularJS the same job is done by <code>.otherwise({ redirectTo: '/' })</code> in <code>$routeProvider</code>.</li>
+</ul>
+<p>Wildcard routes make the app user-friendly, because a wrong or old link shows a helpful page instead of a blank screen.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (D) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q4d2" data-marks="5"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Explain Router.navigate and Router.navigateByUrl methods.</p><div class="ans"><p>Both methods are used to <strong>change the page from TypeScript code</strong>, for example after a login or a button click. First we inject the <code>Router</code> service in the constructor.</p>
+<h4><code>navigate()</code></h4>
+<ul>
+<li>Takes an <strong>array of path parts</strong> (called commands), like <code>['/student', 7]</code>.</li>
+<li>The path can be <strong>absolute</strong> or <strong>relative</strong> to the current route (using <code>relativeTo</code>).</li>
+<li>Extra options such as <code>queryParams</code> and <code>fragment</code> can be added.</li>
+</ul>
+<h4><code>navigateByUrl()</code></h4>
+<ul>
+<li>Takes a <strong>complete URL string</strong> (or a <code>UrlTree</code>), like <code>'/student/7'</code>.</li>
+<li>The URL is always treated as <strong>absolute</strong>, starting from the root.</li>
+</ul>
+<div class="code"><div class="code-bar"><span>TypeScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-typescript">import { Router, ActivatedRoute } from '@angular/router';
+
+export class LoginComponent {
+  constructor(private router: Router, private route: ActivatedRoute) {}
+
+  goToStudent(id: number) {
+    // goes to /student/7?tab=marks
+    this.router.navigate(['/student', id], { queryParams: { tab: 'marks' } });
+  }
+
+  goToDashboard() {
+    this.router.navigateByUrl('/dashboard');   // full path as a string
+  }
+
+  goToDetails() {
+    this.router.navigate(['details'], { relativeTo: this.route });  // relative path
+  }
+}
+</code></pre></div>
+<div class="table-wrap cols-4"><table>
+<thead>
+<tr>
+<th>Point</th>
+<th><code>navigate()</code></th>
+<th><code>navigateByUrl()</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Input</td>
+<td>Array of path parts</td>
+<td>Full URL string</td>
+</tr>
+<tr>
+<td>Path type</td>
+<td>Absolute or relative</td>
+<td>Always absolute</td>
+</tr>
+<tr>
+<td>Extra options</td>
+<td><code>queryParams</code>, <code>fragment</code>, <code>relativeTo</code></td>
+<td>Fewer options; URL is used as written</td>
+</tr>
+<tr>
+<td>Example</td>
+<td><code>navigate(['/user', id])</code></td>
+<td><code>navigateByUrl('/user/' + id)</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Both methods return a <strong>Promise</strong> that becomes <code>true</code> when navigation succeeds. Use <code>navigate()</code> when building a path from values, and <code>navigateByUrl()</code> when you already have the full URL.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (D) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section></section>
+<section class="q" id="q5" aria-labelledby="q5-title"><header class="q-head"><p class="q-no">Q.5</p><h2 id="q5-title">Forms, validation and events</h2><p class="q-total">14 marks</p></header><section class="sec" id="q5a" data-marks="1"><header class="sec-head"><span class="sec-letter">(A)</span><h3 class="sec-title">Answer the following</h3><span class="sec-rule">Attempt all · 1 mark each</span><span class="sec-marks" aria-label="4 marks">4</span></header><div class="items"><article class="item" id="q5a1" data-marks="1"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Give names of two types of forms in Angular?</p><div class="ans"><ol>
+<li><strong>Template-driven forms</strong> (built in HTML with <code>ngModel</code>), 2. <strong>Reactive forms</strong>, also called model-driven forms (built in TypeScript with <code>FormGroup</code> and <code>FormControl</code>).</li>
+</ol></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (A) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q5a2" data-marks="1"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Name any five events of angular forms.</p><div class="ans"><p><code>ng-submit</code>, <code>ng-change</code>, <code>ng-focus</code>, <code>ng-blur</code>, <code>ng-keyup</code> (in Angular 2+: <code>(ngSubmit)</code>, <code>(change)</code>, <code>(focus)</code>, <code>(blur)</code>, <code>(keyup)</code>).</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (A) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q5a3" data-marks="1"><div class="item-no" aria-hidden="true">3</div><div class="item-main"><p class="ask">What is the use of $dirty in form validation.</p><div class="ans"><p><code>$dirty</code> becomes <strong>true when the user has changed the value</strong> of a field (or any field of the form). We use it to show error messages only after the user starts typing.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (A) 3 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q5a4" data-marks="1"><div class="item-no" aria-hidden="true">4</div><div class="item-main"><p class="ask">What is the use of ng-mousemove?</p><div class="ans"><p><code>ng-mousemove</code> runs an AngularJS expression <strong>every time the mouse pointer moves over an element</strong>, for example to show the pointer's X and Y position.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (A) 4 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q5b" data-marks="2"><header class="sec-head"><span class="sec-letter">(B)</span><h3 class="sec-title">Answer in brief</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="2 marks">2</span></header><div class="items"><article class="item" id="q5b1" data-marks="2"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Explain ng-keyup and ng-keydown.</p><div class="ans"><ul>
+<li><strong><code>ng-keydown</code></strong> runs when a key is <strong>pressed down</strong>. It fires first, and keeps firing while the key is held.</li>
+<li><strong><code>ng-keyup</code></strong> runs when the key is <strong>released</strong>.</li>
+</ul>
+<div class="code"><div class="code-bar"><span>HTML</span><button type="button" class="copy">Copy</button></div><pre><code class="language-xml">&lt;div ng-app=&quot;&quot; ng-init=&quot;downs = 0&quot;&gt;
+  &lt;input ng-keydown=&quot;downs = downs + 1&quot; ng-keyup=&quot;last = $event.key&quot;&gt;
+  &lt;p&gt;Key presses: {{ downs }} | Last key released: {{ last }}&lt;/p&gt;
+&lt;/div&gt;
+</code></pre></div>
+<p>The order for one key is: keydown, then keyup. <code>$event</code> gives details such as which key was used.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (B) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q5b2" data-marks="2"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">What is the use of $invalid and $error?</p><div class="ans"><ul>
+<li><strong><code>$invalid</code></strong> is <strong>true when a field (or the whole form) breaks any validation rule</strong>. We use it to disable the submit button.</li>
+<li><strong><code>$error</code></strong> is an <strong>object that tells which rule failed</strong>, for example <code>{ required: true }</code> or <code>{ email: true }</code>. We use it to show the right message.</li>
+</ul>
+<div class="code"><div class="code-bar"><span>HTML</span><button type="button" class="copy">Copy</button></div><pre><code class="language-xml">&lt;form name=&quot;myForm&quot;&gt;
+  &lt;input type=&quot;email&quot; name=&quot;mail&quot; ng-model=&quot;mail&quot; required&gt;
+  &lt;span ng-show=&quot;myForm.mail.$error.required&quot;&gt;Email is required&lt;/span&gt;
+  &lt;span ng-show=&quot;myForm.mail.$error.email&quot;&gt;Enter a valid email&lt;/span&gt;
+  &lt;button ng-disabled=&quot;myForm.$invalid&quot;&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+</code></pre></div></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (B) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q5c" data-marks="3"><header class="sec-head"><span class="sec-letter">(C)</span><h3 class="sec-title">Answer in detail</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="3 marks">3</span></header><div class="items"><article class="item" id="q5c1" data-marks="3"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Explain ng-submit in form submission.</p><div class="ans"><p><code>ng-submit</code> connects a <strong>function to the form's submit event</strong>. The function runs when the user clicks a submit button or presses <strong>Enter</strong> inside a field. When the form has no <code>action</code> attribute, it also <strong>stops the page from reloading</strong>.</p>
+<div class="code"><div class="code-bar"><span>HTML</span><button type="button" class="copy">Copy</button></div><pre><code class="language-xml">&lt;div ng-app=&quot;myApp&quot; ng-controller=&quot;RegCtrl&quot;&gt;
+  &lt;form name=&quot;regForm&quot; ng-submit=&quot;register()&quot; novalidate&gt;
+    &lt;input name=&quot;uname&quot; ng-model=&quot;user.name&quot; placeholder=&quot;Your name&quot; required&gt;
+    &lt;button type=&quot;submit&quot; ng-disabled=&quot;regForm.$invalid&quot;&gt;Register&lt;/button&gt;
+  &lt;/form&gt;
+  &lt;p&gt;{{ message }}&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  angular.module('myApp', []).controller('RegCtrl', function ($scope) {
+    $scope.user = {};
+    $scope.register = function () {
+      $scope.message = 'Welcome, ' + $scope.user.name + '!';
+    };
+  });
+&lt;/script&gt;
+</code></pre></div>
+<ul>
+<li>Put <code>ng-submit</code> on the <code>&lt;form&gt;</code> tag, not on the button.</li>
+<li>Do not also add <code>ng-click</code> to the submit button, or the function runs twice.</li>
+<li>In Angular 2+, the same thing is written as <code>(ngSubmit)="register()"</code>.</li>
+</ul></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (C) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q5c2" data-marks="3"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">What is the use of $untouched, $touched and $pristine?</p><div class="ans"><p>These are <strong>state properties</strong> that AngularJS keeps for every form field. They tell us what the user has done with the field.</p>
+<div class="table-wrap cols-4"><table>
+<thead>
+<tr>
+<th>Property</th>
+<th>True when</th>
+<th>CSS class added</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$untouched</code></td>
+<td>The user has <strong>not visited</strong> the field yet</td>
+<td><code>ng-untouched</code></td>
+</tr>
+<tr>
+<td><code>$touched</code></td>
+<td>The user <strong>clicked into the field and then left it</strong></td>
+<td><code>ng-touched</code></td>
+</tr>
+<tr>
+<td><code>$pristine</code></td>
+<td>The value has <strong>not been changed</strong> yet (opposite of <code>$dirty</code>)</td>
+<td><code>ng-pristine</code></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Use:</strong> show an error only after the user has left the field, so the form does not look full of errors at the start.</p>
+<div class="code"><div class="code-bar"><span>HTML</span><button type="button" class="copy">Copy</button></div><pre><code class="language-xml">&lt;form name=&quot;f&quot;&gt;
+  &lt;input name=&quot;city&quot; ng-model=&quot;city&quot; required&gt;
+  &lt;span ng-show=&quot;f.city.$touched &amp;&amp; f.city.$invalid&quot;&gt;City is required&lt;/span&gt;
+&lt;/form&gt;
+
+&lt;style&gt;
+  input.ng-touched.ng-invalid { border: 2px solid red; }
+&lt;/style&gt;
+</code></pre></div></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (C) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q5d" data-marks="5"><header class="sec-head"><span class="sec-letter">(D)</span><h3 class="sec-title">Write a note on</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="5 marks">5</span></header><div class="items"><article class="item" id="q5d1" data-marks="5"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">What are the built-in validators in Angular forms, and how do you use them?</p><div class="ans"><p><strong>Validators</strong> check what the user typed and mark a field as <strong>valid</strong> or <strong>invalid</strong>. Angular gives ready-made validators in the <code>Validators</code> class of <code>@angular/forms</code>.</p>
+<div class="table-wrap cols-5"><table>
+<thead>
+<tr>
+<th>Validator</th>
+<th>What it checks</th>
+<th>Template-driven form</th>
+<th>Reactive form</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>required</td>
+<td>Field is not empty</td>
+<td><code>required</code></td>
+<td><code>Validators.required</code></td>
+</tr>
+<tr>
+<td>minlength</td>
+<td>At least n characters</td>
+<td><code>minlength="3"</code></td>
+<td><code>Validators.minLength(3)</code></td>
+</tr>
+<tr>
+<td>maxlength</td>
+<td>At most n characters</td>
+<td><code>maxlength="10"</code></td>
+<td><code>Validators.maxLength(10)</code></td>
+</tr>
+<tr>
+<td>pattern</td>
+<td>Matches a pattern (regex)</td>
+<td><code>pattern="[0-9]{10}"</code></td>
+<td><code>Validators.pattern('[0-9]{10}')</code></td>
+</tr>
+<tr>
+<td>email</td>
+<td>Proper email format</td>
+<td><code>email</code></td>
+<td><code>Validators.email</code></td>
+</tr>
+<tr>
+<td>min / max</td>
+<td>Number is in a range</td>
+<td><code>min="18"</code> <code>max="60"</code></td>
+<td><code>Validators.min(18)</code>, <code>Validators.max(60)</code></td>
+</tr>
+<tr>
+<td>requiredTrue</td>
+<td>Checkbox must be ticked</td>
+<td><code>required</code> on a checkbox</td>
+<td><code>Validators.requiredTrue</code></td>
+</tr>
+</tbody>
+</table></div>
+<h4>1. Using validators in a template-driven form</h4>
+<p>We write them as <strong>HTML attributes</strong> on the input:</p>
+<div class="code"><div class="code-bar"><span>HTML</span><button type="button" class="copy">Copy</button></div><pre><code class="language-xml">&lt;form #f=&quot;ngForm&quot;&gt;
+  &lt;input name=&quot;username&quot; ngModel required minlength=&quot;3&quot; #u=&quot;ngModel&quot;&gt;
+  &lt;small *ngIf=&quot;u.touched &amp;&amp; u.errors?.['required']&quot;&gt;Name is required&lt;/small&gt;
+  &lt;small *ngIf=&quot;u.errors?.['minlength']&quot;&gt;Use at least 3 letters&lt;/small&gt;
+  &lt;button [disabled]=&quot;f.invalid&quot;&gt;Save&lt;/button&gt;
+&lt;/form&gt;
+</code></pre></div>
+<h4>2. Using validators in a reactive form</h4>
+<p>We pass them <strong>in the TypeScript code</strong> when creating each <code>FormControl</code>:</p>
+<div class="code"><div class="code-bar"><span>TypeScript</span><button type="button" class="copy">Copy</button></div><pre><code class="language-typescript">this.form = new FormGroup({
+  email: new FormControl('', [Validators.required, Validators.email]),
+  age:   new FormControl('', [Validators.min(18), Validators.max(60)]),
+  phone: new FormControl('', Validators.pattern('[0-9]{10}'))
+});
+</code></pre></div>
+<div class="code"><div class="code-bar"><span>HTML</span><button type="button" class="copy">Copy</button></div><pre><code class="language-xml">&lt;form [formGroup]=&quot;form&quot; (ngSubmit)=&quot;save()&quot;&gt;
+  &lt;input formControlName=&quot;email&quot; placeholder=&quot;Email&quot;&gt;
+  &lt;small *ngIf=&quot;form.get('email')?.hasError('email')&quot;&gt;Invalid email&lt;/small&gt;
+  &lt;button [disabled]=&quot;form.invalid&quot;&gt;Save&lt;/button&gt;
+&lt;/form&gt;
+</code></pre></div>
+<h4>Points to remember</h4>
+<ul>
+<li>Each failed rule appears in the control's <strong><code>errors</code></strong> object, such as <code>{ required: true }</code>.</li>
+<li>A control has status flags <code>valid</code>, <code>invalid</code>, <code>touched</code>, <code>dirty</code>.</li>
+<li>Angular adds CSS classes <code>ng-valid</code> and <code>ng-invalid</code>, so we can colour wrong fields.</li>
+<li>If built-in validators are not enough, we can write a <strong>custom validator</strong> function.</li>
+</ul></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (D) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q5d2" data-marks="5"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Explain different Mouse events in angularJS.</p><div class="ans"><p>AngularJS has a <strong>directive for each mouse event</strong>. We put the directive on an element, and AngularJS runs the given expression when that event happens.</p>
+<div class="table-wrap cols-3"><table>
+<thead>
+<tr>
+<th>Directive</th>
+<th>Runs when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ng-click</code></td>
+<td>The element is clicked</td>
+</tr>
+<tr>
+<td><code>ng-dblclick</code></td>
+<td>The element is double-clicked</td>
+</tr>
+<tr>
+<td><code>ng-mousedown</code></td>
+<td>A mouse button is pressed down on the element</td>
+</tr>
+<tr>
+<td><code>ng-mouseup</code></td>
+<td>The mouse button is released</td>
+</tr>
+<tr>
+<td><code>ng-mouseenter</code></td>
+<td>The pointer enters the element</td>
+</tr>
+<tr>
+<td><code>ng-mouseleave</code></td>
+<td>The pointer leaves the element</td>
+</tr>
+<tr>
+<td><code>ng-mousemove</code></td>
+<td>The pointer moves inside the element</td>
+</tr>
+<tr>
+<td><code>ng-mouseover</code></td>
+<td>The pointer moves onto the element or one of its children</td>
+</tr>
+</tbody>
+</table></div>
+<h4>Example</h4>
+<div class="code"><div class="code-bar"><span>HTML</span><button type="button" class="copy">Copy</button></div><pre><code class="language-xml">&lt;div ng-app=&quot;&quot; ng-init=&quot;count = 0; msg = 'Move the mouse here'&quot;&gt;
+  &lt;div style=&quot;padding: 30px; border: 1px solid #999&quot;
+       ng-mouseenter=&quot;msg = 'Mouse entered'&quot;
+       ng-mouseleave=&quot;msg = 'Mouse left'&quot;
+       ng-mousemove=&quot;x = $event.offsetX; y = $event.offsetY&quot;
+       ng-click=&quot;count = count + 1&quot;
+       ng-dblclick=&quot;count = 0&quot;&gt;
+    {{ msg }} (X: {{ x }}, Y: {{ y }})
+  &lt;/div&gt;
+  &lt;p&gt;Clicks: {{ count }} (double-click the box to reset)&lt;/p&gt;
+&lt;/div&gt;
+</code></pre></div>
+<h4>Points to remember</h4>
+<ul>
+<li>One click fires events in this order: <strong>mousedown, mouseup, click</strong>.</li>
+<li><code>ng-mouseenter</code> fires once when entering the element; <code>ng-mouseover</code> fires again for every child element the pointer moves over.</li>
+<li>The special <strong><code>$event</code></strong> object gives details such as <code>clientX</code>, <code>clientY</code> and which button was pressed.</li>
+</ul>
+<p>Mouse event directives let us make the page interactive (hover effects, counters, drawing) without writing DOM code by hand.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (D) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section></section>
+  </main>
+
+  <footer class="foot wrap">
+    <p>Model answers sized to the marks of each question. Teachers sometimes expect the exact wording from class notes, so read these alongside your notes.</p>
+    <p>Tick the circle next to a question once you have revised it. Your ticks are saved in this browser only.</p>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+<script>
+(function () {
+  var app = document.querySelector(".app");
+  var paper = document.getElementById("paper");
+  var key = "msc-sem3-solved:" + app.dataset.slug;
+  var items = Array.prototype.slice.call(document.querySelectorAll(".item"));
+  var done = new Set();
+  try { (JSON.parse(localStorage.getItem(key)) || []).forEach(function (id) { done.add(id); }); } catch (e) {}
+
+  function save() {
+    try { localStorage.setItem(key, JSON.stringify(Array.from(done))); } catch (e) {}
+  }
+  function paint() {
+    var n = 0;
+    items.forEach(function (it) {
+      var on = done.has(it.id);
+      if (on) n++;
+      it.classList.toggle("is-done", on);
+      it.querySelector(".done").setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    document.getElementById("done-count").textContent = n;
+    document.getElementById("done-bar").style.width = (items.length ? n / items.length * 100 : 0) + "%";
+  }
+  paint();
+
+  document.addEventListener("click", function (ev) {
+    var t = ev.target.closest("button, .blank");
+    if (!t) return;
+    if (t.classList.contains("done")) {
+      var id = t.closest(".item").id;
+      if (done.has(id)) done.delete(id); else done.add(id);
+      save(); paint();
+    } else if (t.classList.contains("reveal") || t.classList.contains("blank")) {
+      var it = t.closest(".item");
+      if (it) it.classList.add("shown");
+    } else if (t.dataset.filter) {
+      paper.dataset.filter = t.dataset.filter;
+      document.querySelectorAll("[data-filter]").forEach(function (b) {
+        if (b.tagName === "BUTTON") b.setAttribute("aria-pressed", b === t ? "true" : "false");
+      });
+    } else if (t.id === "selftest") {
+      var on = !app.classList.contains("selftest");
+      app.classList.toggle("selftest", on);
+      t.setAttribute("aria-pressed", on ? "true" : "false");
+      if (!on) items.forEach(function (it) { it.classList.remove("shown"); });
+    } else if (t.classList.contains("copy")) {
+      var code = t.closest(".code").querySelector("code");
+      var flash = function (label) { t.textContent = label; setTimeout(function () { t.textContent = "Copy"; }, 1600); };
+      var select = function () {
+        var r = document.createRange(); r.selectNodeContents(code);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        flash("Press Ctrl+C");
+      };
+      try {
+        navigator.clipboard.writeText(code.innerText).then(function () { flash("Copied"); }, select);
+      } catch (e) { select(); }
+    }
+  });
+
+  if ("IntersectionObserver" in window) {
+    var links = {};
+    document.querySelectorAll(".qnav a").forEach(function (a) { links[a.getAttribute("href").slice(1)] = a; });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        Object.keys(links).forEach(function (k) { links[k].removeAttribute("aria-current"); });
+        if (links[e.target.id]) links[e.target.id].setAttribute("aria-current", "true");
+      });
+    }, { rootMargin: "-25% 0px -65% 0px" });
+    document.querySelectorAll(".q").forEach(function (s) { io.observe(s); });
+  }
+
+  if (window.hljs) {
+    hljs.configure({ ignoreUnescapedHTML: true });
+    document.querySelectorAll("pre code[class*='language-']:not(.language-plaintext)").forEach(function (el) {
+      try { hljs.highlightElement(el); } catch (e) {}
+    });
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "file": "CS-14_NodeJS_Nov-2025",
+  "title": "Node JS Nov 2025 Solutions",
+  "code": "CS-14",
+  "session": "Nov 2025",
+  "subject": "Node JS",
+  "printed": "M.SC. (IT & CA) CS SEMESTER-3 NOVEMBER 2025 (Regular) · Subject code 24CS-MSIT-CO-03-01002",
+  "time": "2.5 hours",
+  "total": "70",
+  "description": "Solved CS-14 Node JS question paper (M.Sc. IT & CA Sem 3, Nov 2025, regular) with simple answers sized to the marks of each question.",
+  "hljs_extra": [],
+  "light": {"paper": "#fafcfa", "sheet": "#ffffff", "well": "#ecf2ec", "rule": "#e0e8e0", "rule_strong": "#c6d3c6", "code_bg": "#f6faf6", "accent": "#2e7d32", "accent_strong": "#1f6424", "accent_soft": "#e8f3e7"},
+  "dark": {"paper": "#101410", "sheet": "#171c17", "well": "#1f261f", "rule": "#2b352b", "rule_strong": "#3e4b3e", "code_bg": "#131913", "accent": "#7bc96f", "accent_strong": "#9edb92", "accent_soft": "#1c331f", "on_accent": "#0a160a", "ink": "#eceef2", "ink_2": "#b9bfca", "ink_3": "#959ca9", "ok": "#71d49c", "ok_soft": "#173526", "bad": "#ff8f86", "bad_soft": "#3d1a18", "syn_key": "#d9a3f6", "syn_str": "#a3d891", "syn_num": "#f4b971", "syn_com": "#8a92a0", "syn_fn": "#86c1ff", "syn_type": "#f2cd7d", "syn_tag": "#ff978c", "syn_attr": "#eeb882", "syn_built": "#70dbcb"}
+}

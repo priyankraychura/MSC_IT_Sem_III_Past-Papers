@@ -1,0 +1,1575 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Solved CS-13 Flutter question paper (M.Sc. IT &amp; CA Sem 3, Oct–Nov 2024) with simple answers sized to the marks of each question.">
+<title>Flutter Nov 2024 Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&display=swap">
+<style>
+/* Layout: an exam answer sheet. Question number in a left gutter, the answer in one
+   readable column, the marks in the right margin where the printed paper puts them. */
+:root {
+  --paper: #fafbfd; --sheet: #ffffff; --well: #ecf1f8; --rule: #e1e7f0; --rule-strong: #c6d0df; --code-bg: #f6f9fd; --accent: #0553b1; --accent-strong: #04438f; --accent-soft: #e7f0fc;
+  --on-accent: #ffffff;
+  --ink: #16181d; --ink-2: #474d59; --ink-3: #676e7b;
+  --ok: #1d7444; --ok-soft: #e4f3ea; --bad: #b42318; --bad-soft: #fbe9e7;
+  --syn-key: #8f2bb0; --syn-str: #18794e; --syn-num: #a8530a; --syn-com: #757b86;
+  --syn-fn: #1c5fc4; --syn-type: #8f5400; --syn-tag: #b42318; --syn-attr: #8a4b14; --syn-built: #0f766e;
+  --f-display: "Source Serif 4", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --s-cap: 0.8125rem; --s-small: 0.9375rem; --s-body: 1.0625rem; --s-ask: 1.25rem;
+  --s-h2: 1.5rem; --s-title: clamp(1.85rem, 1.25rem + 2.6vw, 2.75rem);
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --paper: #0f1218; --sheet: #161b23; --well: #1d2430; --rule: #29313e; --rule-strong: #3b4657; --code-bg: #121821; --accent: #5cc8ff; --accent-strong: #8cd9ff; --accent-soft: #11304a; --on-accent: #06121c; --ink: #eceef2; --ink-2: #b9bfca; --ink-3: #959ca9; --ok: #71d49c; --ok-soft: #173526; --bad: #ff8f86; --bad-soft: #3d1a18; --syn-key: #d9a3f6; --syn-str: #a3d891; --syn-num: #f4b971; --syn-com: #8a92a0; --syn-fn: #86c1ff; --syn-type: #f2cd7d; --syn-tag: #ff978c; --syn-attr: #eeb882; --syn-built: #70dbcb; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --paper: #0f1218; --sheet: #161b23; --well: #1d2430; --rule: #29313e; --rule-strong: #3b4657; --code-bg: #121821; --accent: #5cc8ff; --accent-strong: #8cd9ff; --accent-soft: #11304a; --on-accent: #06121c; --ink: #eceef2; --ink-2: #b9bfca; --ink-3: #959ca9; --ok: #71d49c; --ok-soft: #173526; --bad: #ff8f86; --bad-soft: #3d1a18; --syn-key: #d9a3f6; --syn-str: #a3d891; --syn-num: #f4b971; --syn-com: #8a92a0; --syn-fn: #86c1ff; --syn-type: #f2cd7d; --syn-tag: #ff978c; --syn-attr: #eeb882; --syn-built: #70dbcb; color-scheme: dark; }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 7.5rem; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--f-body); font-size: var(--s-body); line-height: 1.6;
+}
+img, svg { max-width: 100%; }
+[hidden] { display: none !important; }
+a { color: var(--accent-strong); text-underline-offset: 0.15em; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+button { font: inherit; }
+.wrap { max-width: 57rem; margin-inline: auto; padding-inline: 20px; }
+
+/* ---------- cover ---------- */
+.cover { padding-block: 2.75rem 0.5rem; }
+.eyebrow {
+  margin: 0 0 0.9rem; font-size: var(--s-cap); font-weight: 700;
+  letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-3);
+}
+.cover h1 {
+  margin: 0; font-family: var(--f-display); font-size: var(--s-title); font-weight: 650;
+  line-height: 1.1; letter-spacing: -0.012em; text-wrap: balance;
+}
+.cover h1 .kicker {
+  display: block; margin-bottom: 0.6rem; font-family: var(--f-mono); font-size: 1rem;
+  font-weight: 600; letter-spacing: 0.02em; color: var(--accent-strong);
+}
+.printed { margin: 1rem 0 0; font-family: var(--f-mono); font-size: var(--s-cap); color: var(--ink-2); }
+.facts {
+  display: flex; flex-wrap: wrap; gap: 0.75rem 2.25rem; margin: 1.6rem 0 0;
+  padding-top: 1.1rem; border-top: 1px solid var(--rule);
+}
+.facts div { display: grid; gap: 0.15rem; }
+.facts dt {
+  font-size: var(--s-cap); font-weight: 700; letter-spacing: 0.07em;
+  text-transform: uppercase; color: var(--ink-3);
+}
+.facts dd {
+  margin: 0; font-family: var(--f-display); font-size: var(--s-ask); font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- how much to write ---------- */
+.guide { padding-block: 1.75rem 1.5rem; }
+.guide h2 {
+  margin: 0 0 0.8rem; font-size: var(--s-cap); font-weight: 700; letter-spacing: 0.09em;
+  text-transform: uppercase; color: var(--ink-3);
+}
+.guide-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.75rem; }
+.guide-cell {
+  display: grid; gap: 0.4rem; align-content: start; padding: 0.95rem 1rem;
+  background: var(--sheet); border: 1px solid var(--rule); border-radius: var(--radius);
+}
+.guide-cell .m { display: flex; align-items: baseline; gap: 0.4rem; font-weight: 700; }
+.guide-cell .m b {
+  font-family: var(--f-display); font-size: 2rem; line-height: 1; color: var(--accent-strong);
+}
+.guide-cell p { margin: 0; font-size: var(--s-small); line-height: 1.45; color: var(--ink-2); }
+.guide-note { margin: 0.9rem 0 0; font-size: var(--s-small); color: var(--ink-2); max-width: 46rem; }
+
+/* ---------- toolbar ---------- */
+.toolbar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: var(--paper); border-block: 1px solid var(--rule);
+}
+.toolbar .wrap {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem 0.9rem; padding-block: 0.55rem;
+}
+.qnav { display: flex; gap: 0.2rem; }
+.qnav a {
+  padding: 0.38rem 0.62rem; border-radius: 999px; font-family: var(--f-mono); font-size: 0.875rem;
+  font-weight: 600; color: var(--ink-2); text-decoration: none;
+}
+.qnav a:hover { background: var(--well); color: var(--ink); }
+.qnav a[aria-current="true"] { background: var(--accent); color: var(--on-accent); }
+.seg { display: inline-flex; align-items: center; gap: 2px; padding: 3px; border-radius: 999px; background: var(--well); }
+.seg-label {
+  padding-inline: 0.55rem 0.3rem; font-size: 0.6875rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3);
+}
+.seg button {
+  min-width: 2rem; padding: 0.36rem 0.55rem; border: 0; border-radius: 999px; background: transparent;
+  font-family: var(--f-mono); font-size: 0.8125rem; font-weight: 600; color: var(--ink-2); cursor: pointer;
+}
+.seg button:hover { color: var(--ink); }
+.seg button[aria-pressed="true"] { background: var(--sheet); color: var(--ink); box-shadow: 0 0 0 1px var(--rule-strong); }
+.switch {
+  display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.3rem 0.2rem; border: 0;
+  background: transparent; color: var(--ink-2); font-size: 0.875rem; font-weight: 700; cursor: pointer;
+}
+.switch .knob {
+  position: relative; width: 2.1rem; height: 1.2rem; border-radius: 999px;
+  background: var(--rule-strong); transition: background 0.2s;
+}
+.switch .knob::after {
+  content: ""; position: absolute; top: 0.15rem; left: 0.15rem; width: 0.9rem; height: 0.9rem;
+  border-radius: 50%; background: var(--sheet); transition: transform 0.2s;
+}
+.switch[aria-pressed="true"] { color: var(--ink); }
+.switch[aria-pressed="true"] .knob { background: var(--accent); }
+.switch[aria-pressed="true"] .knob::after { transform: translateX(0.9rem); }
+.progress {
+  display: flex; align-items: center; gap: 0.55rem; margin: 0 0 0 auto;
+  font-family: var(--f-mono); font-size: 0.75rem; color: var(--ink-2); font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.progress b { color: var(--ink); }
+.progress .bar { width: 4.5rem; height: 6px; border-radius: 999px; background: var(--well); overflow: hidden; }
+.progress .bar i { display: block; width: 0; height: 100%; background: var(--accent); transition: width 0.3s; }
+
+/* ---------- questions & sections ---------- */
+.q { padding-block: 2.75rem 0.5rem; }
+.q-head {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: baseline;
+  gap: 0.2rem 0.9rem; padding-bottom: 0.8rem; border-bottom: 2px solid var(--ink);
+}
+.q-no { margin: 0; font-family: var(--f-mono); font-size: var(--s-ask); font-weight: 600; color: var(--accent-strong); }
+.q-head h2 {
+  margin: 0; font-family: var(--f-display); font-size: var(--s-h2); font-weight: 650;
+  line-height: 1.2; text-wrap: balance;
+}
+.q-total { margin: 0; font-family: var(--f-mono); font-size: var(--s-cap); color: var(--ink-3); white-space: nowrap; }
+.sec { padding-top: 1.5rem; }
+.sec-head {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.65rem;
+  padding-bottom: 0.6rem; border-bottom: 1px solid var(--rule);
+}
+.sec-letter { font-family: var(--f-display); font-size: var(--s-ask); font-weight: 700; color: var(--ink-3); }
+.sec-title { margin: 0; font-family: var(--f-display); font-size: var(--s-ask); font-weight: 600; }
+.sec-rule {
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3);
+}
+.sec-marks {
+  display: inline-grid; place-items: center; width: 2.3rem; height: 2.3rem; margin-left: auto;
+  border: 1.5px solid var(--ink); border-radius: 50%;
+  font-family: var(--f-mono); font-size: 0.9375rem; font-weight: 600; font-variant-numeric: tabular-nums;
+}
+#paper[data-filter="1"] .sec:not([data-marks="1"]),
+#paper[data-filter="2"] .sec:not([data-marks="2"]),
+#paper[data-filter="3"] .sec:not([data-marks="3"]),
+#paper[data-filter="5"] .sec:not([data-marks="5"]) { display: none; }
+
+/* ---------- one question item ---------- */
+.item {
+  display: grid; grid-template-columns: 2rem minmax(0, 1fr) 3rem;
+  grid-template-areas: "no main side"; gap: 0 0.8rem; padding-block: 1.15rem;
+  border-bottom: 1px solid var(--rule);
+}
+.items > .item:last-child, .item:has(+ .or) { border-bottom: 0; }
+.item-no { grid-area: no; padding-top: 0.12rem; font-family: var(--f-display); font-size: var(--s-body); font-weight: 700; color: var(--ink-3); }
+.item-main { grid-area: main; min-width: 0; }
+.item-side { grid-area: side; display: flex; flex-direction: column; align-items: flex-end; gap: 0.7rem; }
+.ask {
+  margin: 0; font-family: var(--f-display); font-size: var(--s-ask); font-weight: 600;
+  line-height: 1.4; text-wrap: pretty;
+}
+.item.is-done .ask { color: var(--ink-2); }
+.or {
+  display: flex; align-items: center; gap: 0.8rem; margin-left: 2.8rem; color: var(--ink-3);
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+}
+.or::before, .or::after { content: ""; flex: 1; border-top: 1px dashed var(--rule-strong); }
+
+.wt { display: inline-flex; flex-direction: column; align-items: center; gap: 0.3rem; }
+.wt b { font-family: var(--f-mono); font-size: 1rem; font-weight: 600; line-height: 1; }
+.wt small { font-size: 0.625rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+.wt .bars { display: flex; gap: 2px; }
+.wt .bars i { width: 4px; height: 10px; border-radius: 1px; background: var(--rule-strong); }
+.wt[data-m="1"] i:nth-child(-n+1), .wt[data-m="2"] i:nth-child(-n+2),
+.wt[data-m="3"] i:nth-child(-n+3), .wt[data-m="5"] i { background: var(--accent); }
+.done {
+  display: grid; place-items: center; width: 2rem; height: 2rem; padding: 0; border-radius: 50%;
+  border: 1.5px solid var(--rule-strong); background: transparent; color: transparent; cursor: pointer;
+}
+.done svg { width: 14px; height: 14px; }
+.done:hover { border-color: var(--accent); color: var(--ink-3); }
+.done[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: var(--on-accent); }
+
+/* fill-in blanks and true/false */
+.blank {
+  display: inline-block; min-width: 6ch; padding: 0 0.15em; line-height: 1.3;
+  border-bottom: 2px solid var(--accent);
+}
+.blank .fill { font-family: var(--f-body); font-weight: 700; color: var(--accent-strong); }
+.verdict { margin: 0 0 0.45rem; }
+.pill {
+  display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.32rem 0.65rem; border-radius: 999px;
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+}
+.pill-true { background: var(--ok-soft); color: var(--ok); }
+.pill-false { background: var(--bad-soft); color: var(--bad); }
+.pill-true::before { content: "\2713"; }
+.pill-false::before { content: "\2715"; }
+
+/* self-test mode */
+.reveal {
+  display: none; align-items: center; margin-top: 0.75rem; padding: 0.5rem 0.9rem; border: 0;
+  border-radius: 999px; background: var(--accent-soft); color: var(--accent-strong);
+  font-size: 0.875rem; font-weight: 700; cursor: pointer;
+}
+.selftest .item:not(.shown) .reveal { display: inline-flex; }
+.selftest .item:not(.shown) .ans { display: none; }
+.selftest .item:not(.shown) .blank .fill { color: transparent; user-select: none; }
+.selftest .item:not(.shown) .blank { cursor: pointer; }
+
+/* ---------- answer body ---------- */
+.ans { margin-top: 0.65rem; color: var(--ink); }
+.ans > :first-child { margin-top: 0; }
+.ans > :last-child { margin-bottom: 0; }
+.ans p, .ans ul, .ans ol { margin: 0.6rem 0; }
+.ans ul, .ans ol { padding-left: 1.3rem; }
+.ans li { margin: 0.3rem 0; padding-left: 0.15rem; }
+.ans li::marker { color: var(--accent-strong); font-weight: 700; }
+.ans strong { font-weight: 700; }
+.ans h4 {
+  margin: 1.2rem 0 0.35rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--accent-strong);
+}
+:not(pre) > code {
+  padding: 0.08em 0.34em; border-radius: 5px; background: var(--well);
+  font-family: var(--f-mono); font-size: 0.86em; overflow-wrap: anywhere;
+}
+.ans blockquote {
+  margin: 0.9rem 0; padding: 0.65rem 0.9rem; border-radius: var(--radius);
+  background: var(--accent-soft); color: var(--ink);
+}
+.ans blockquote p { margin: 0.2rem 0; }
+.code { margin: 0.85rem 0; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--code-bg); overflow: hidden; }
+.code-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 0.3rem 0.45rem 0.3rem 0.85rem; border-bottom: 1px solid var(--rule);
+  font-family: var(--f-mono); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--ink-3);
+}
+.copy {
+  padding: 0.28rem 0.55rem; border: 1px solid var(--rule-strong); border-radius: 6px; background: var(--sheet);
+  font-family: var(--f-mono); font-size: 0.6875rem; font-weight: 600; color: var(--ink-2); cursor: pointer;
+}
+.copy:hover { color: var(--ink); border-color: var(--ink-3); }
+.code pre { margin: 0; padding: 0.85rem 1rem; overflow-x: auto; font-family: var(--f-mono); font-size: 0.84rem; line-height: 1.6; tab-size: 2; }
+.code[data-kind="output"] { background: var(--sheet); border-style: dashed; }
+.code[data-kind="output"] .code-bar { border-bottom-style: dashed; }
+.hljs-keyword, .hljs-selector-tag, .hljs-doctag, .hljs-meta .hljs-keyword { color: var(--syn-key); }
+.hljs-string, .hljs-regexp, .hljs-selector-attr { color: var(--syn-str); }
+.hljs-number, .hljs-literal { color: var(--syn-num); }
+.hljs-comment, .hljs-quote { color: var(--syn-com); font-style: italic; }
+.hljs-title, .hljs-section, .hljs-title.function_ { color: var(--syn-fn); }
+.hljs-title.class_, .hljs-type { color: var(--syn-type); }
+.hljs-tag, .hljs-name, .hljs-selector-id, .hljs-selector-class { color: var(--syn-tag); }
+.hljs-attr, .hljs-attribute, .hljs-property { color: var(--syn-attr); }
+.hljs-built_in, .hljs-meta, .hljs-symbol, .hljs-variable.language_, .hljs-template-variable { color: var(--syn-built); }
+.hljs-subst, .hljs-params, .hljs-tag .hljs-string ~ .hljs-string { color: inherit; }
+.hljs-tag .hljs-string { color: var(--syn-str); }
+.table-wrap { margin: 0.85rem 0; overflow-x: auto; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--sheet); }
+.table-wrap table { width: 100%; border-collapse: collapse; font-size: var(--s-small); line-height: 1.45; }
+.table-wrap th, .table-wrap td { padding: 0.55rem 0.8rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--rule); }
+.table-wrap th { background: var(--well); font-size: 0.875rem; font-weight: 700; }
+.table-wrap td:first-child { font-weight: 700; }
+.table-wrap tr:last-child td { border-bottom: 0; }
+.table-wrap.cols-3 table { min-width: 21rem; }
+.table-wrap.cols-4 table, .table-wrap.cols-5 table { min-width: 34rem; }
+
+/* ---------- diagrams ---------- */
+.diagram { margin: 1rem 0; padding: 0.9rem; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--sheet); }
+.diagram .scroll { overflow-x: auto; }
+.diagram svg { display: block; width: 100%; height: auto; margin-inline: auto; max-width: var(--dw, 100%); min-width: var(--dmin, 0px); }
+.diagram figcaption { margin-top: 0.6rem; font-size: var(--s-cap); line-height: 1.45; color: var(--ink-2); }
+.dg { font-family: var(--f-body); font-size: 13px; }
+.dg text { fill: var(--ink); }
+.dg .t-b { font-weight: 700; }
+.dg .t-sub { fill: var(--ink-2); font-size: 11.5px; }
+.dg .t-acc { fill: var(--accent-strong); font-weight: 700; }
+.dg .t-mono { font-family: var(--f-mono); font-size: 12px; }
+.dg .b { fill: var(--paper); stroke: var(--rule-strong); stroke-width: 1.5; }
+.dg .b-acc { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.5; }
+.dg .b-well { fill: var(--well); stroke: none; }
+.dg .e { fill: none; stroke: var(--ink-3); stroke-width: 1.5; }
+.dg .e-acc { fill: none; stroke: var(--accent); stroke-width: 1.75; }
+.dg .dash { stroke-dasharray: 5 4; }
+.dg .ah { fill: var(--ink-3); }
+.dg .ah-acc { fill: var(--accent); }
+.dg .halo { paint-order: stroke; stroke: var(--sheet); stroke-width: 5px; stroke-linejoin: round; }
+
+.foot { margin-top: 3rem; padding-block: 1.5rem 3rem; border-top: 1px solid var(--rule); font-size: var(--s-cap); color: var(--ink-3); }
+.foot p { margin: 0.3rem 0; max-width: 46rem; }
+
+@media (max-width: 760px) {
+  .guide-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .wrap { padding-inline: 16px; }
+  body { font-size: 1rem; }
+  .toolbar .wrap { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 0.6rem; }
+  .toolbar .wrap::-webkit-scrollbar { display: none; }
+  .qnav a { padding-inline: 0.5rem; }
+  .seg-label { display: none; }
+  .switch, .progress { flex: none; }
+  .diagram { padding: 0.5rem 0.25rem; }
+  .item { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "no side" "main main"; gap: 0.35rem 0.8rem; }
+  .item-side { flex-direction: row; align-items: center; }
+  .wt { flex-direction: row-reverse; gap: 0.45rem; }
+  .or { margin-left: 0; }
+  .q-head { grid-template-columns: auto minmax(0, 1fr); }
+  .q-total { grid-column: 2; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+}
+</style>
+
+</head>
+<body>
+<div class="app" data-slug="flutter-2024">
+  <header class="cover wrap">
+    <p class="eyebrow">M.Sc. (IT &amp; CA) · Semester 3 · Solved question paper</p>
+    <h1><span class="kicker">CS-13 · Oct–Nov 2024</span>Flutter App Development</h1>
+    <p class="printed">M.SC. (IT&amp;CA) (2022) SEMESTER-3 OCT-2024 · Paper 003-3083001</p>
+    <dl class="facts">
+      <div><dt>Time</dt><dd>2.5 hours</dd></div>
+      <div><dt>Total</dt><dd>70 marks</dd></div>
+      <div><dt>Questions</dt><dd>5 × 14 marks</dd></div>
+      <div><dt>Answers solved</dt><dd>50</dd></div>
+    </dl>
+  </header>
+
+  <section class="guide wrap" aria-labelledby="guide-title">
+    <h2 id="guide-title">How much to write for each mark</h2>
+    <div class="guide-grid">
+      <div class="guide-cell"><span class="m"><b>1</b> mark</span><p>One word or one line. Fill the blank, say True or False, or give a one-line meaning.</p></div>
+      <div class="guide-cell"><span class="m"><b>2</b> marks</span><p>Three or four lines. A definition plus two key points or a tiny example.</p></div>
+      <div class="guide-cell"><span class="m"><b>3</b> marks</span><p>A definition, three or four points, and a small table or code example.</p></div>
+      <div class="guide-cell"><span class="m"><b>5</b> marks</span><p>A full note: meaning, diagram or code, five or six points, and a closing line.</p></div>
+    </div>
+    <p class="guide-note">In (B), (C) and (D) you answer any one of the two options. Both options are solved here, so pick the one you know better.</p>
+  </section>
+
+  <nav class="toolbar" aria-label="Paper controls">
+    <div class="wrap">
+      <div class="qnav"><a href="#q1" title="Dart basics and Flutter architecture">Q1</a><a href="#q2" title="Layouts, widgets and navigation">Q2</a><a href="#q3" title="State management">Q3</a><a href="#q4" title="Networking, JSON and local storage">Q4</a><a href="#q5" title="Animations, device features, testing and localization">Q5</a></div>
+      <div class="seg" role="group" aria-label="Show questions by marks">
+        <span class="seg-label">Marks</span>
+        <button type="button" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" data-filter="1" aria-pressed="false">1</button>
+        <button type="button" data-filter="2" aria-pressed="false">2</button>
+        <button type="button" data-filter="3" aria-pressed="false">3</button>
+        <button type="button" data-filter="5" aria-pressed="false">5</button>
+      </div>
+      <button type="button" class="switch" id="selftest" aria-pressed="false"><span class="knob" aria-hidden="true"></span>Hide answers</button>
+      <p class="progress"><span><b id="done-count">0</b>/50 revised</span><span class="bar" aria-hidden="true"><i id="done-bar"></i></span></p>
+    </div>
+  </nav>
+
+  <main id="paper" class="wrap" data-filter="all">
+<section class="q" id="q1" aria-labelledby="q1-title"><header class="q-head"><p class="q-no">Q.1</p><h2 id="q1-title">Dart basics and Flutter architecture</h2><p class="q-total">14 marks</p></header><section class="sec" id="q1a" data-marks="1"><header class="sec-head"><span class="sec-letter">(A)</span><h3 class="sec-title">Answer the following</h3><span class="sec-rule">Attempt all · 1 mark each</span><span class="sec-marks" aria-label="4 marks">4</span></header><div class="items"><article class="item" id="q1a1" data-marks="1"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Flutter apps use <span class="blank"><span class="fill">Dart</span></span> programming language for creating an app.</p><div class="ans"><p>Dart is made by Google. It compiles to fast native code for mobile and desktop and to JavaScript for the web.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (A) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q1a2" data-marks="1"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask"><span class="blank"><span class="fill">flutter doctor</span></span> command checks your environment and displays a report of the status of your Flutter installation.</p><div class="ans"><p>It shows a tick or a cross for the Flutter SDK, Android toolchain, Xcode, Chrome, VS Code / Android Studio and connected devices.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (A) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q1a3" data-marks="1"><div class="item-no" aria-hidden="true">3</div><div class="item-main"><p class="ask">Every Dart program requires the top-level <span class="blank"><span class="fill">main()</span></span> function, where execution starts.</p><div class="ans"><p>In a Flutter app, <code>main()</code> usually calls <code>runApp(MyApp())</code>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (A) 3 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q1a4" data-marks="1"><div class="item-no" aria-hidden="true">4</div><div class="item-main"><p class="ask"><span class="blank"><span class="fill">Row</span></span> widget arranges its children in a horizontal direction on the screen.</p><div class="ans"><p>(<code>Column</code> arranges children vertically.)</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (A) 4 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q1b" data-marks="2"><header class="sec-head"><span class="sec-letter">(B)</span><h3 class="sec-title">Answer in brief</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="2 marks">2</span></header><div class="items"><article class="item" id="q1b1" data-marks="2"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">What is the use of pubspec.yaml file?</p><div class="ans"><p><code>pubspec.yaml</code> is the <strong>settings file of a Flutter project</strong>, written in YAML. It holds:</p>
+<ul>
+<li>the app's <strong>name, description and version</strong></li>
+<li>the <strong>Dart SDK version</strong> the project needs</li>
+<li><strong>dependencies</strong> (packages from pub.dev) and dev_dependencies</li>
+<li><strong>assets</strong> (images, JSON files) and custom <strong>fonts</strong></li>
+</ul>
+<div class="code"><div class="code-bar"><span>YAML</span><button type="button" class="copy">Copy</button></div><pre><code class="language-yaml">name: my_app
+version: 1.0.0+1
+environment:
+  sdk: &quot;&gt;=3.0.0 &lt;4.0.0&quot;
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.2.0
+flutter:
+  assets:
+    - assets/images/
+</code></pre></div>
+<p>After editing it, we run <code>flutter pub get</code> to download the packages.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (B) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q1b2" data-marks="2"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Explain Hot Reload feature of flutter.</p><div class="ans"><p><strong>Hot reload</strong> puts our code changes into the <strong>running app in about one second</strong>, without restarting it and <strong>without losing its state</strong> (the current page, typed text, counter value stay as they are).</p>
+<ul>
+<li><strong>How:</strong> save the file in VS Code / Android Studio, or press <code>r</code> in the terminal running <code>flutter run</code>.</li>
+<li>Flutter sends the changed code into the Dart VM and rebuilds the widgets.</li>
+<li><strong>Hot restart</strong> (<code>R</code>) restarts the app and clears the state. We need it after changing <code>main()</code>, <code>initState()</code> or global variables.</li>
+</ul>
+<p>This makes designing screens and fixing bugs very fast.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (B) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q1c" data-marks="3"><header class="sec-head"><span class="sec-letter">(C)</span><h3 class="sec-title">Answer in detail</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="3 marks">3</span></header><div class="items"><article class="item" id="q1c1" data-marks="3"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Explain loops in Dart with example.</p><div class="ans"><p>A <strong>loop</strong> repeats a block of code many times. Dart has these loops:</p>
+<ul>
+<li><strong>for</strong> – when we know how many times to repeat.</li>
+<li><strong>for-in</strong> – goes through each item of a list.</li>
+<li><strong>while</strong> – checks the condition first, then runs.</li>
+<li><strong>do-while</strong> – runs once first, then checks the condition, so it runs at least once.</li>
+<li><strong>forEach()</strong> – a method on lists that runs a function for every item.</li>
+</ul>
+<p><code>break</code> stops a loop, and <code>continue</code> skips to the next round.</p>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">void main() {
+  for (int i = 1; i &lt;= 3; i++) {          // for
+    print('for: $i');
+  }
+
+  var fruits = ['Apple', 'Mango'];
+  for (var f in fruits) {                 // for-in
+    print('for-in: $f');
+  }
+
+  int n = 1;
+  while (n &lt;= 2) {                        // while
+    print('while: $n');
+    n++;
+  }
+
+  int m = 5;
+  do {                                    // do-while runs once even though m &lt; 5 is false
+    print('do-while: $m');
+    m++;
+  } while (m &lt; 5);
+
+  fruits.forEach((f) =&gt; print('forEach: $f'));
+}
+</code></pre></div>
+<div class="code" data-kind="output"><div class="code-bar"><span>Output</span><button type="button" class="copy">Copy</button></div><pre><code class="language-plaintext">for: 1
+for: 2
+for: 3
+for-in: Apple
+for-in: Mango
+while: 1
+while: 2
+do-while: 5
+forEach: Apple
+forEach: Mango
+</code></pre></div></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (C) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q1c2" data-marks="3"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Explain Dart libraries.</p><div class="ans"><p>A <strong>library</strong> is a collection of ready-made code (classes, functions, constants) that we <strong>import</strong> and use. Every Dart file is also a library.</p>
+<p><strong>1. Core libraries</strong> – come with the Dart SDK:</p>
+<ul>
+<li><code>dart:core</code> – basic types like <code>int</code>, <code>String</code>, <code>List</code>, and <code>print()</code>. It is imported automatically.</li>
+<li><code>dart:math</code> – <code>sqrt()</code>, <code>max()</code>, <code>Random</code>.</li>
+<li><code>dart:async</code> – <code>Future</code> and <code>Stream</code> for asynchronous code.</li>
+<li><code>dart:convert</code> – <code>jsonEncode()</code> and <code>jsonDecode()</code>.</li>
+<li><code>dart:io</code> – files, sockets and HTTP (not on web).</li>
+</ul>
+<p><strong>2. Package libraries</strong> – downloaded from pub.dev, for example <code>import 'package:http/http.dart' as http;</code></p>
+<p><strong>3. Custom libraries</strong> – our own files, for example <code>import 'utils/helpers.dart';</code></p>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">import 'dart:math';
+import 'dart:convert' show jsonEncode;   // import only jsonEncode
+
+void main() {
+  print(sqrt(25));                        // 5.0
+  print(max(4, 9));                       // 9
+  print(jsonEncode({'name': 'Ravi'}));    // {&quot;name&quot;:&quot;Ravi&quot;}
+}
+</code></pre></div>
+<p>Import options: <code>as</code> gives a prefix, <code>show</code> imports only some names, <code>hide</code> imports all except some. Names starting with <code>_</code> are private to their library.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (C) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q1d" data-marks="5"><header class="sec-head"><span class="sec-letter">(D)</span><h3 class="sec-title">Write a note on</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="5 marks">5</span></header><div class="items"><article class="item" id="q1d1" data-marks="5"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Explain Flutter Architecture with diagram.</p><div class="ans"><p>Flutter has a <strong>layered architecture</strong>. Each layer is built on top of the layer below it, and the app we write sits at the very top. There are three main layers: <strong>Framework</strong>, <strong>Engine</strong> and <strong>Embedder</strong>.</p>
+<figure class="diagram"><div class="scroll"><svg class="dg" style="--dw: 506px; --dmin: 326px" viewBox="0 0 440 400" role="img" aria-label="Flutter layers from top to bottom: your app, the Dart framework, the C++ engine, and the platform embedder">
+<rect class="b-acc" x="8" y="8" width="424" height="38" rx="10"/>
+<text class="t-b" x="220" y="32" text-anchor="middle">Your app: widgets you write in Dart</text>
+<rect class="b-well" x="8" y="56" width="424" height="196" rx="12"/>
+<text class="t-b" x="20" y="84">Framework</text>
+<text class="t-sub" x="20" y="102">written in Dart</text>
+<rect class="b" x="150" y="66" width="133" height="30" rx="7"/>
+<text x="216" y="86" text-anchor="middle">Material</text>
+<rect class="b" x="291" y="66" width="133" height="30" rx="7"/>
+<text x="357" y="86" text-anchor="middle">Cupertino</text>
+<rect class="b" x="150" y="102" width="274" height="30" rx="7"/>
+<text x="287" y="122" text-anchor="middle">Widgets</text>
+<rect class="b" x="150" y="138" width="274" height="30" rx="7"/>
+<text x="287" y="158" text-anchor="middle">Rendering</text>
+<rect class="b" x="150" y="174" width="274" height="30" rx="7"/>
+<text x="287" y="194" text-anchor="middle">Animation · Painting · Gestures</text>
+<rect class="b" x="150" y="210" width="274" height="30" rx="7"/>
+<text x="287" y="230" text-anchor="middle">Foundation</text>
+<rect class="b-well" x="8" y="262" width="424" height="60" rx="12"/>
+<text class="t-b" x="20" y="288">Engine</text>
+<text class="t-sub" x="20" y="306">C / C++</text>
+<rect class="b" x="150" y="270" width="274" height="44" rx="7"/>
+<text x="287" y="288" text-anchor="middle">Skia / Impeller graphics, text</text>
+<text x="287" y="306" text-anchor="middle">Dart runtime, platform channels</text>
+<rect class="b-well" x="8" y="332" width="424" height="60" rx="12"/>
+<text class="t-b" x="20" y="358">Embedder</text>
+<text class="t-sub" x="20" y="376">per platform</text>
+<rect class="b" x="150" y="340" width="274" height="44" rx="7"/>
+<text x="287" y="358" text-anchor="middle">Android · iOS · Web</text>
+<text x="287" y="376" text-anchor="middle">Windows · macOS · Linux</text>
+</svg></div><figcaption>Flutter's layers. The app talks only to the Framework; the Engine draws every pixel; the Embedder connects the Engine to each operating system.</figcaption></figure>
+
+<h4>1. Framework layer (Dart)</h4>
+<p>This is the part developers use every day. It has sub-layers:</p>
+<ul>
+<li><strong>Material and Cupertino</strong> – ready-made widgets in Android (Material) and iOS (Cupertino) style.</li>
+<li><strong>Widgets</strong> – the building blocks of the UI. We build screens by combining small widgets.</li>
+<li><strong>Rendering</strong> – works out the size and position (layout) of each widget and paints it.</li>
+<li><strong>Animation, Painting, Gestures</strong> – support for motion, drawing and touch input.</li>
+<li><strong>Foundation</strong> – basic classes and services used by all the layers above.</li>
+</ul>
+<h4>2. Engine layer (C/C++)</h4>
+<p>The engine is the core that makes Flutter run. It uses <strong>Skia / Impeller</strong> to draw graphics, does text layout, runs Dart code (the Dart runtime), and passes messages to native code through <strong>platform channels</strong>.</p>
+<h4>3. Embedder layer (platform-specific)</h4>
+<p>The embedder is written in the platform's own language (Kotlin/Java for Android, Swift/Objective-C for iOS, C++ for desktop). It gives the engine a surface to draw on, sends touch and keyboard input, and handles the app's life cycle.</p>
+<h4>Key points</h4>
+<ul>
+<li><strong>Everything is a widget.</strong> The widget tree is turned into an element tree and then a render tree that is painted.</li>
+<li>Flutter <strong>draws every pixel itself</strong> instead of using native controls, so the app looks the same on every device.</li>
+<li>In release mode Dart is compiled <strong>ahead of time (AOT)</strong> to native code, which makes apps fast. In debug mode it uses <strong>JIT</strong>, which makes hot reload possible.</li>
+</ul>
+<p>So, one Dart codebase runs on mobile, web and desktop because only the small embedder changes from platform to platform.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (D) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q1d2" data-marks="5"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">What are the Basic Flutter Widgets? Explain any two.</p><div class="ans"><p>In Flutter, <strong>everything on the screen is a widget</strong>: text, buttons, images, even padding and layout. Widgets are the basic building blocks of the UI.</p>
+<div class="table-wrap cols-3"><table>
+<thead>
+<tr>
+<th>Widget</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Text</code></td>
+<td>Shows a line of text</td>
+</tr>
+<tr>
+<td><code>Container</code></td>
+<td>A box for size, colour, padding, margin and borders</td>
+</tr>
+<tr>
+<td><code>Row</code> / <code>Column</code></td>
+<td>Place children horizontally / vertically</td>
+</tr>
+<tr>
+<td><code>Image</code></td>
+<td>Shows a picture from assets or the internet</td>
+</tr>
+<tr>
+<td><code>Icon</code></td>
+<td>Shows a material icon</td>
+</tr>
+<tr>
+<td><code>ElevatedButton</code></td>
+<td>A clickable button</td>
+</tr>
+<tr>
+<td><code>Scaffold</code> / <code>AppBar</code></td>
+<td>Basic page structure and the top bar</td>
+</tr>
+<tr>
+<td><code>Stack</code></td>
+<td>Places widgets on top of each other</td>
+</tr>
+</tbody>
+</table></div>
+<h4>1. Text widget</h4>
+<p><code>Text</code> displays a string. Its look is set with <strong><code>TextStyle</code></strong> (font size, colour, weight). Other properties are <code>textAlign</code>, <code>maxLines</code> and <code>overflow</code>.</p>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">Text(
+  'Welcome to Flutter',
+  textAlign: TextAlign.center,
+  style: TextStyle(fontSize: 22, color: Colors.blue, fontWeight: FontWeight.bold),
+)
+</code></pre></div>
+<h4>2. Container widget</h4>
+<p><code>Container</code> is a <strong>box</strong> that can hold one child. It is used to give size, colour, spacing and decoration. Main properties: <code>width</code>, <code>height</code>, <code>color</code>, <code>padding</code>, <code>margin</code>, <code>alignment</code>, <code>decoration</code> and <code>child</code>.</p>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">Container(
+  width: 200,
+  height: 100,
+  margin: EdgeInsets.all(16),
+  padding: EdgeInsets.all(12),
+  alignment: Alignment.center,
+  decoration: BoxDecoration(
+    color: Colors.amber,
+    borderRadius: BorderRadius.circular(12),
+  ),
+  child: Text('I am inside a Container'),
+)
+</code></pre></div>
+<p>Note: when using <code>decoration</code>, put the colour inside <code>BoxDecoration</code>, not in <code>color</code>, or Flutter shows an error.</p>
+<p>By combining such basic widgets, we can build any screen in Flutter.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q1 (D) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section></section>
+<section class="q" id="q2" aria-labelledby="q2-title"><header class="q-head"><p class="q-no">Q.2</p><h2 id="q2-title">Layouts, widgets and navigation</h2><p class="q-total">14 marks</p></header><section class="sec" id="q2a" data-marks="1"><header class="sec-head"><span class="sec-letter">(A)</span><h3 class="sec-title">Answer the following</h3><span class="sec-rule">Attempt all · 1 mark each</span><span class="sec-marks" aria-label="4 marks">4</span></header><div class="items"><article class="item" id="q2a1" data-marks="1"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask"><span class="blank"><span class="fill">Responsive</span></span> app is one that is written in such a way that it fits the available screen size of the device it is viewed on.</p><div class="ans"><p>The same app looks good on a small phone, a tablet and a desktop window.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (A) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q2a2" data-marks="1"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask"><span class="blank"><span class="fill">AnimatedContainer</span></span> widget is the animated version of Container widget that gradually changes its values over a period of time.</p><div class="ans"><p>When its width, colour or other values change, it animates smoothly over the given <code>duration</code>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (A) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q2a3" data-marks="1"><div class="item-no" aria-hidden="true">3</div><div class="item-main"><p class="ask"><span class="blank"><span class="fill">Navigator.push()</span></span> method is used to navigate from one route to another route.</p><div class="ans"><p><code>Navigator.pop()</code> goes back to the previous route.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (A) 3 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q2a4" data-marks="1"><div class="item-no" aria-hidden="true">4</div><div class="item-main"><p class="ask">GridView is a widget in Flutter that displays the items in two-dimensional rows and columns. (True/False).</p><div class="ans"><p class="verdict"><span class="pill pill-true">True</span></p><p>For example, <code>GridView.count(crossAxisCount: 2, children: [...])</code> shows items two per row.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (A) 4 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q2b" data-marks="2"><header class="sec-head"><span class="sec-letter">(B)</span><h3 class="sec-title">Answer in brief</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="2 marks">2</span></header><div class="items"><article class="item" id="q2b1" data-marks="2"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">What is MediaQuery?</p><div class="ans"><p><code>MediaQuery</code> gives <strong>information about the device screen and settings</strong>: screen width and height, orientation, pixel ratio, text scale and safe-area padding (notch, status bar). We use it to build <strong>responsive</strong> layouts.</p>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">final size = MediaQuery.of(context).size;
+bool isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+
+Container(width: size.width * 0.8);   // 80% of the screen width
+</code></pre></div></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (B) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q2b2" data-marks="2"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">How to debug UI issues in Flutter?</p><div class="ans"><ul>
+<li><strong>Widget Inspector (DevTools):</strong> tap any widget on screen to see its place in the widget tree, its size, padding and constraints.</li>
+<li><strong>Layout Explorer:</strong> shows how a <code>Row</code> or <code>Column</code> divides space and helps fix overflow.</li>
+<li><strong>Debug paint:</strong> set <code>debugPaintSizeEnabled = true;</code> to draw borders and padding lines on every widget.</li>
+<li><strong>Read the overflow error:</strong> the yellow-and-black striped bar means a widget is too big. The console tells by how many pixels. Fix it with <code>Expanded</code>, <code>Flexible</code> or <code>SingleChildScrollView</code>.</li>
+<li>Use <strong>hot reload</strong> to try fixes quickly and <code>debugPrint()</code> to print values.</li>
+</ul></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (B) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q2c" data-marks="3"><header class="sec-head"><span class="sec-letter">(C)</span><h3 class="sec-title">Answer in detail</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="3 marks">3</span></header><div class="items"><article class="item" id="q2c1" data-marks="3"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Give difference between Stateless and Stateful widgets.</p><div class="ans"><div class="table-wrap cols-4"><table>
+<thead>
+<tr>
+<th>Point</th>
+<th>StatelessWidget</th>
+<th>StatefulWidget</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data</td>
+<td>Cannot change after it is built</td>
+<td>Has <strong>state</strong> that can change</td>
+</tr>
+<tr>
+<td>Rebuild</td>
+<td>Only when its parent sends new data</td>
+<td>Calls <strong><code>setState()</code></strong> to rebuild itself</td>
+</tr>
+<tr>
+<td>Classes</td>
+<td>One class</td>
+<td>Two classes: the widget and its <code>State</code> class</td>
+</tr>
+<tr>
+<td>Main methods</td>
+<td><code>build()</code></td>
+<td><code>createState()</code>, <code>initState()</code>, <code>build()</code>, <code>dispose()</code></td>
+</tr>
+<tr>
+<td>Examples</td>
+<td><code>Text</code>, <code>Icon</code>, a fixed About screen</td>
+<td><code>Checkbox</code>, <code>TextField</code>, counter, forms</td>
+</tr>
+</tbody>
+</table></div>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">class Greeting extends StatelessWidget {          // stateless
+  final String name;
+  const Greeting({super.key, required this.name});
+
+  @override
+  Widget build(BuildContext context) =&gt; Text('Hello $name');
+}
+
+class Counter extends StatefulWidget {            // stateful
+  const Counter({super.key});
+  @override
+  State&lt;Counter&gt; createState() =&gt; _CounterState();
+}
+
+class _CounterState extends State&lt;Counter&gt; {
+  int count = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () =&gt; setState(() =&gt; count++),   // changes state, rebuilds
+      child: Text('Clicked $count times'),
+    );
+  }
+}
+</code></pre></div></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (C) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q2c2" data-marks="3"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Explain SliverAppBar widget.</p><div class="ans"><p><code>SliverAppBar</code> is an <strong>app bar that changes while the user scrolls</strong>. It can start large (for example with a cover photo), shrink as the list scrolls up, stay pinned at the top, or float back into view. It must be used inside a <strong><code>CustomScrollView</code></strong> together with other slivers such as <code>SliverList</code>.</p>
+<div class="table-wrap cols-3"><table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>expandedHeight</code></td>
+<td>Height when fully open</td>
+</tr>
+<tr>
+<td><code>flexibleSpace</code></td>
+<td>Content that shrinks, usually a <code>FlexibleSpaceBar</code> with title and background</td>
+</tr>
+<tr>
+<td><code>pinned</code></td>
+<td>Keeps a small bar visible at the top after collapsing</td>
+</tr>
+<tr>
+<td><code>floating</code></td>
+<td>Bar comes back as soon as the user scrolls up a little</td>
+</tr>
+<tr>
+<td><code>snap</code></td>
+<td>With <code>floating</code>, the bar opens or closes fully in one go</td>
+</tr>
+</tbody>
+</table></div>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">CustomScrollView(
+  slivers: [
+    SliverAppBar(
+      expandedHeight: 200,
+      pinned: true,
+      flexibleSpace: FlexibleSpaceBar(
+        title: Text('My Profile'),
+        background: Image.asset('assets/cover.jpg', fit: BoxFit.cover),
+      ),
+    ),
+    SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (context, i) =&gt; ListTile(title: Text('Item $i')),
+        childCount: 30,
+      ),
+    ),
+  ],
+)
+</code></pre></div></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (C) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q2d" data-marks="5"><header class="sec-head"><span class="sec-letter">(D)</span><h3 class="sec-title">Write a note on</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="5 marks">5</span></header><div class="items"><article class="item" id="q2d1" data-marks="5"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Explain the layout and widgets hierarchy with example.</p><div class="ans"><p>In Flutter, the whole screen is a <strong>tree of widgets</strong>, called the <strong>widget hierarchy</strong> or widget tree. A parent widget holds child widgets, and those children can hold their own children. <strong>Layout widgets</strong> decide where and how big their children are.</p>
+<h4>Types of layout widgets</h4>
+<ul>
+<li><strong>Single-child layout widgets</strong> – hold one child: <code>Container</code>, <code>Center</code>, <code>Padding</code>, <code>Align</code>, <code>SizedBox</code>, <code>Expanded</code>.</li>
+<li><strong>Multi-child layout widgets</strong> – hold a list of children: <code>Row</code>, <code>Column</code>, <code>Stack</code>, <code>ListView</code>, <code>GridView</code>, <code>Wrap</code>.</li>
+</ul>
+<h4>How layout works (the main rule)</h4>
+<p><strong>Constraints go down, sizes go up, and the parent sets the position.</strong> A parent tells each child the minimum and maximum size it may take. The child picks its size within those limits and reports it back. Then the parent places the child.</p>
+<h4>Example: a profile screen</h4>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">MaterialApp(
+  home: Scaffold(
+    appBar: AppBar(title: Text('Profile')),
+    body: Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.person, size: 80),
+          Text('Ravi Patel', style: TextStyle(fontSize: 24)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [Icon(Icons.email), Text(' ravi@mail.com')],
+          ),
+        ],
+      ),
+    ),
+  ),
+)
+</code></pre></div>
+<figure class="diagram"><div class="scroll"><svg class="dg" style="--dw: 513px; --dmin: 330px" viewBox="0 0 446 292" role="img" aria-label="Widget tree of the profile screen: MaterialApp, Scaffold, AppBar with Text, and Center with Column holding Icon, Text and Row">
+<line class="e" x1="220" y1="42" x2="220" y2="66"/>
+<line class="e" x1="220" y1="100" x2="90" y2="124"/>
+<line class="e" x1="220" y1="100" x2="300" y2="124"/>
+<line class="e" x1="90" y1="158" x2="90" y2="182"/>
+<line class="e" x1="300" y1="158" x2="300" y2="182"/>
+<line class="e" x1="300" y1="216" x2="196" y2="240"/>
+<line class="e" x1="300" y1="216" x2="300" y2="240"/>
+<line class="e" x1="300" y1="216" x2="396" y2="240"/>
+<rect class="b" x="165" y="8" width="110" height="34" rx="8"/>
+<text class="t-b" x="220" y="30" text-anchor="middle">MaterialApp</text>
+<rect class="b" x="172" y="66" width="96" height="34" rx="8"/>
+<text class="t-b" x="220" y="88" text-anchor="middle">Scaffold</text>
+<rect class="b" x="42" y="124" width="96" height="34" rx="8"/>
+<text x="90" y="146" text-anchor="middle">AppBar</text>
+<rect class="b-acc" x="252" y="124" width="96" height="34" rx="8"/>
+<text x="300" y="146" text-anchor="middle">Center</text>
+<rect class="b" x="42" y="182" width="96" height="34" rx="8"/>
+<text x="90" y="204" text-anchor="middle">Text</text>
+<rect class="b-acc" x="252" y="182" width="96" height="34" rx="8"/>
+<text x="300" y="204" text-anchor="middle">Column</text>
+<rect class="b" x="152" y="240" width="88" height="34" rx="8"/>
+<text x="196" y="262" text-anchor="middle">Icon</text>
+<rect class="b" x="256" y="240" width="88" height="34" rx="8"/>
+<text x="300" y="262" text-anchor="middle">Text</text>
+<rect class="b-acc" x="352" y="240" width="88" height="44" rx="8"/>
+<text x="396" y="258" text-anchor="middle">Row</text>
+<text class="t-sub" x="396" y="275" text-anchor="middle">Icon + Text</text>
+<text class="t-sub halo" x="228" y="58">home</text>
+<text class="t-sub halo" x="146" y="106" text-anchor="end">appBar</text>
+<text class="t-sub halo" x="270" y="106">body</text>
+<text class="t-sub halo" x="98" y="174">title</text>
+<text class="t-sub halo" x="308" y="174">child</text>
+</svg></div><figcaption>The widget tree of the profile screen. Tinted boxes are layout widgets; the small labels are the property that holds each child.</figcaption></figure>
+
+<h4>Explanation</h4>
+<ul>
+<li><code>MaterialApp</code> is the root and gives the app theme and navigation.</li>
+<li><code>Scaffold</code> gives the page structure with an <code>appBar</code> and a <code>body</code>.</li>
+<li><code>Center</code> places its child in the middle; <code>Column</code> stacks the icon, name and email row <strong>vertically</strong>.</li>
+<li>The inner <code>Row</code> places the email icon and text <strong>horizontally</strong>.</li>
+</ul>
+<p>Building screens by nesting small widgets like this keeps the code easy to read and lets us reuse parts.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (D) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q2d2" data-marks="5"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Explain custom widget creation in Flutter.</p><div class="ans"><p>A <strong>custom widget</strong> is our own widget, made by <strong>combining existing widgets</strong> into one reusable piece. If the same card or button appears many times, we create it once as a custom widget and reuse it.</p>
+<h4>Why create custom widgets?</h4>
+<ul>
+<li><strong>Reuse</strong> – write once, use on many screens.</li>
+<li><strong>Clean code</strong> – the <code>build()</code> method of each screen stays short.</li>
+<li><strong>Consistent look</strong> – all copies look the same, and one change updates them all.</li>
+</ul>
+<h4>Steps</h4>
+<ol>
+<li>Create a class that extends <strong><code>StatelessWidget</code></strong> (or <strong><code>StatefulWidget</code></strong> if it has changing data).</li>
+<li>Add <strong><code>final</code> fields</strong> for the values it needs, and a constructor with named parameters.</li>
+<li>Override <strong><code>build()</code></strong> and return the UI made from other widgets.</li>
+<li>Use it like any built-in widget and pass the values.</li>
+</ol>
+<h4>Example: a reusable info card</h4>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">class InfoCard extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String subtitle;
+
+  const InfoCard({super.key, required this.icon, required this.title, required this.subtitle});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.all(8),
+      child: ListTile(
+        leading: Icon(icon, color: Colors.indigo),
+        title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+        subtitle: Text(subtitle),
+      ),
+    );
+  }
+}
+</code></pre></div>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">// Using it on a screen
+Column(
+  children: const [
+    InfoCard(icon: Icons.phone, title: 'Phone', subtitle: '98765 43210'),
+    InfoCard(icon: Icons.email, title: 'Email', subtitle: 'ravi@mail.com'),
+    InfoCard(icon: Icons.home, title: 'City', subtitle: 'Rajkot'),
+  ],
+)
+</code></pre></div>
+<h4>A stateful custom widget</h4>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">class LikeButton extends StatefulWidget {
+  const LikeButton({super.key});
+  @override
+  State&lt;LikeButton&gt; createState() =&gt; _LikeButtonState();
+}
+
+class _LikeButtonState extends State&lt;LikeButton&gt; {
+  bool liked = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(liked ? Icons.favorite : Icons.favorite_border, color: Colors.red),
+      onPressed: () =&gt; setState(() =&gt; liked = !liked),
+    );
+  }
+}
+</code></pre></div>
+<p><strong>Tips:</strong> keep each custom widget in its own file (for example <code>widgets/info_card.dart</code>) and use <code>const</code> constructors where possible, which helps performance.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q2 (D) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section></section>
+<section class="q" id="q3" aria-labelledby="q3-title"><header class="q-head"><p class="q-no">Q.3</p><h2 id="q3-title">State management</h2><p class="q-total">14 marks</p></header><section class="sec" id="q3a" data-marks="1"><header class="sec-head"><span class="sec-letter">(A)</span><h3 class="sec-title">Answer the following</h3><span class="sec-rule">Attempt all · 1 mark each</span><span class="sec-marks" aria-label="4 marks">4</span></header><div class="items"><article class="item" id="q3a1" data-marks="1"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">BloC stands for <span class="blank"><span class="fill">Business Logic Component</span></span>.</p><div class="ans"><p>It is a pattern that keeps the business logic separate from the UI by using streams of events and states.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (A) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q3a2" data-marks="1"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Flutter is not declarative (True/False).</p><div class="ans"><p class="verdict"><span class="pill pill-false">False</span></p><p>Flutter <strong>is</strong> declarative. We describe how the UI should look for the current state, and Flutter rebuilds it when the state changes (UI = f(state)).</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (A) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q3a3" data-marks="1"><div class="item-no" aria-hidden="true">3</div><div class="item-main"><p class="ask"><span class="blank"><span class="fill">App state</span></span> type of state can be used globally.</p><div class="ans"><p>App state (also called shared state) is used across many screens, like login details or a shopping cart. The other type, <strong>ephemeral (local) state</strong>, stays inside one widget.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (A) 3 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q3a4" data-marks="1"><div class="item-no" aria-hidden="true">4</div><div class="item-main"><p class="ask">BaaS stands for <span class="blank"><span class="fill">Backend as a Service</span></span>.</p><div class="ans"><p>A BaaS such as Firebase gives a ready-made backend (database, login, storage, notifications), so we do not need to build our own server.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (A) 4 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q3b" data-marks="2"><header class="sec-head"><span class="sec-letter">(B)</span><h3 class="sec-title">Answer in brief</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="2 marks">2</span></header><div class="items"><article class="item" id="q3b1" data-marks="2"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">What are DevTools?</p><div class="ans"><p><strong>Flutter DevTools</strong> is a set of <strong>debugging and performance tools</strong> for Flutter and Dart apps. It opens in the browser or inside VS Code / Android Studio while the app runs in debug mode.</p>
+<ul>
+<li><strong>Flutter Inspector</strong> – see and explore the widget tree</li>
+<li><strong>Performance view</strong> – find slow (janky) frames</li>
+<li><strong>CPU Profiler</strong> and <strong>Memory view</strong> – find heavy code and memory leaks</li>
+<li><strong>Network view</strong> – check HTTP requests</li>
+<li><strong>Debugger</strong> and <strong>Logging</strong> view</li>
+</ul></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (B) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q3b2" data-marks="2"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">What is InheritedWidget?</p><div class="ans"><p><code>InheritedWidget</code> is a special widget that <strong>passes data down the widget tree</strong>. Any widget below it can read that data directly through <code>context</code>, without passing it through every constructor. When the data changes, only the widgets that use it are rebuilt.</p>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">class UserInfo extends InheritedWidget {
+  final String name;
+  const UserInfo({super.key, required this.name, required super.child});
+
+  static UserInfo of(BuildContext context) =&gt;
+      context.dependOnInheritedWidgetOfExactType&lt;UserInfo&gt;()!;
+
+  @override
+  bool updateShouldNotify(UserInfo old) =&gt; name != old.name;
+}
+// Any child can now use: Text(UserInfo.of(context).name)
+</code></pre></div>
+<p><code>Theme.of(context)</code> and <code>MediaQuery.of(context)</code> work this way, and the Provider package is built on it.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (B) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q3c" data-marks="3"><header class="sec-head"><span class="sec-letter">(C)</span><h3 class="sec-title">Answer in detail</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="3 marks">3</span></header><div class="items"><article class="item" id="q3c1" data-marks="3"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Explain Stream-based state management with RxDart.</p><div class="ans"><p>A <strong>Stream</strong> is a flow of values over time, like water through a pipe. The UI listens to a stream with <strong><code>StreamBuilder</code></strong> and rebuilds whenever a new value arrives. <strong>RxDart</strong> is a package that adds extra power to Dart streams:</p>
+<ul>
+<li><strong>Subjects</strong> – a stream we can push values into. <code>BehaviorSubject</code> remembers the <strong>latest value</strong> and gives it to every new listener; <code>PublishSubject</code> sends only new values; <code>ReplaySubject</code> replays all old values.</li>
+<li><strong>Operators</strong> – tools such as <code>map</code>, <code>where</code>, <code>distinct</code>, <code>debounceTime</code> (wait until the user stops typing) and <code>combineLatest</code>.</li>
+</ul>
+<p><strong>Flow:</strong> the UI calls a method → the logic class adds a value to the subject → <code>StreamBuilder</code> receives it → the UI rebuilds.</p>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">import 'package:rxdart/rxdart.dart';
+
+class CounterBloc {
+  final _count = BehaviorSubject&lt;int&gt;.seeded(0);   // starts at 0
+  Stream&lt;int&gt; get count =&gt; _count.stream;
+
+  void increment() =&gt; _count.add(_count.value + 1);
+  void dispose() =&gt; _count.close();
+}
+</code></pre></div>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">StreamBuilder&lt;int&gt;(
+  stream: bloc.count,
+  builder: (context, snapshot) =&gt; Text('Count: ${snapshot.data ?? 0}'),
+)
+// Button: ElevatedButton(onPressed: bloc.increment, child: Text('+'))
+</code></pre></div>
+<p>The logic stays outside the widgets, so it is easy to test and reuse.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (C) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q3c2" data-marks="3"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Write a note on ScopedModel.</p><div class="ans"><p><strong>ScopedModel</strong> (<code>scoped_model</code> package) is a simple way to <strong>share data with many widgets</strong> and rebuild them when the data changes. It has three main parts:</p>
+<ul>
+<li><strong><code>Model</code></strong> – our data class extends <code>Model</code> and calls <strong><code>notifyListeners()</code></strong> whenever the data changes.</li>
+<li><strong><code>ScopedModel&lt;T&gt;</code></strong> – wraps a part of the widget tree and <strong>provides</strong> the model to it.</li>
+<li><strong><code>ScopedModelDescendant&lt;T&gt;</code></strong> – any widget below that <strong>uses</strong> the model. Its builder runs again when <code>notifyListeners()</code> is called.</li>
+</ul>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">class CounterModel extends Model {
+  int count = 0;
+  void increment() {
+    count++;
+    notifyListeners();            // tell listening widgets to rebuild
+  }
+}
+
+ScopedModel&lt;CounterModel&gt;(
+  model: CounterModel(),
+  child: ScopedModelDescendant&lt;CounterModel&gt;(
+    builder: (context, child, model) =&gt; TextButton(
+      onPressed: model.increment,
+      child: Text('Count: ${model.count}'),
+    ),
+  ),
+)
+</code></pre></div>
+<p>ScopedModel is easy to learn, but it is an older package. Today <strong>Provider</strong>, which works in a very similar way, is the recommended choice.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (C) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q3d" data-marks="5"><header class="sec-head"><span class="sec-letter">(D)</span><h3 class="sec-title">Write a note on</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="5 marks">5</span></header><div class="items"><article class="item" id="q3d1" data-marks="5"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Explain BLoC pattern for state management.</p><div class="ans"><p><strong>BLoC</strong> stands for <strong>Business Logic Component</strong>. It is a pattern that <strong>separates the business logic from the UI</strong> using streams. The UI only does two things: it sends <strong>events</strong> and it shows <strong>states</strong>.</p>
+<figure class="diagram"><div class="scroll"><svg class="dg" style="--dw: 540px; --dmin: 348px" viewBox="0 0 470 190" role="img" aria-label="The UI sends events to the BLoC, the BLoC requests data from the data layer, and sends new states back to the UI">
+<defs>
+<marker id="ah-bloc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ah"/></marker>
+<marker id="ah-bloc-acc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ah-acc"/></marker>
+</defs>
+<rect class="b" x="10" y="45" width="110" height="100" rx="10"/>
+<text class="t-b" x="65" y="91" text-anchor="middle">UI</text>
+<text class="t-sub" x="65" y="109" text-anchor="middle">widgets</text>
+<rect class="b-acc" x="190" y="45" width="130" height="100" rx="10"/>
+<text class="t-b" x="255" y="91" text-anchor="middle">BLoC</text>
+<text class="t-sub" x="255" y="109" text-anchor="middle">business logic</text>
+<rect class="b" x="390" y="45" width="70" height="100" rx="10"/>
+<text class="t-b" x="425" y="91" text-anchor="middle">Data</text>
+<text class="t-sub" x="425" y="109" text-anchor="middle">API · DB</text>
+<line class="e-acc" x1="122" y1="75" x2="186" y2="75" marker-end="url(#ah-bloc-acc)"/>
+<text class="t-acc halo" x="155" y="65" text-anchor="middle">events</text>
+<line class="e-acc" x1="188" y1="117" x2="124" y2="117" marker-end="url(#ah-bloc-acc)"/>
+<text class="t-acc halo" x="155" y="137" text-anchor="middle">states</text>
+<line class="e" x1="322" y1="75" x2="386" y2="75" marker-end="url(#ah-bloc)"/>
+<text class="t-sub halo" x="355" y="65" text-anchor="middle">request</text>
+<line class="e" x1="388" y1="117" x2="324" y2="117" marker-end="url(#ah-bloc)"/>
+<text class="t-sub halo" x="355" y="137" text-anchor="middle">data</text>
+</svg></div><figcaption>The UI sends events into the BLoC. The BLoC does the work (with help from the data layer) and sends a new state back. The UI only draws the latest state.</figcaption></figure>
+
+<h4>How it works</h4>
+<ol>
+<li>The user taps a button, so the UI <strong>adds an event</strong> (for example <code>Increment</code>) to the BLoC.</li>
+<li>The BLoC runs the <strong>logic</strong> (calculation, API call, database work).</li>
+<li>The BLoC <strong>emits a new state</strong> (for example <code>count = 5</code>).</li>
+<li>Widgets listening to the BLoC <strong>rebuild</strong> with the new state.</li>
+</ol>
+<h4>Main classes of the <code>flutter_bloc</code> package</h4>
+<ul>
+<li><strong><code>Bloc</code> / <code>Cubit</code></strong> – hold the logic (<code>Cubit</code> is a simpler BLoC that uses methods instead of events).</li>
+<li><strong><code>BlocProvider</code></strong> – gives the BLoC to the widget tree.</li>
+<li><strong><code>BlocBuilder</code></strong> – rebuilds the UI when the state changes.</li>
+<li><strong><code>BlocListener</code></strong> – does one-time actions such as showing a SnackBar or navigating.</li>
+</ul>
+<h4>Example: counter</h4>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">abstract class CounterEvent {}
+class Increment extends CounterEvent {}
+class Decrement extends CounterEvent {}
+
+class CounterBloc extends Bloc&lt;CounterEvent, int&gt; {
+  CounterBloc() : super(0) {                       // starting state = 0
+    on&lt;Increment&gt;((event, emit) =&gt; emit(state + 1));
+    on&lt;Decrement&gt;((event, emit) =&gt; emit(state - 1));
+  }
+}
+</code></pre></div>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">BlocProvider(
+  create: (_) =&gt; CounterBloc(),
+  child: Builder(
+    builder: (context) =&gt; Scaffold(
+      body: Center(
+        child: BlocBuilder&lt;CounterBloc, int&gt;(
+          builder: (context, count) =&gt; Text('$count', style: const TextStyle(fontSize: 40)),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () =&gt; context.read&lt;CounterBloc&gt;().add(Increment()),
+        child: const Icon(Icons.add),
+      ),
+    ),
+  ),
+)
+</code></pre></div>
+<h4>Advantages</h4>
+<ul>
+<li>UI and logic are separate, so the code is clean and easy to test.</li>
+<li>State changes are predictable: one event in, one state out.</li>
+<li>The same BLoC can be reused on different screens.</li>
+</ul>
+<p>The only drawback is some extra code (events and states classes), which is worth it for medium and large apps.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (D) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q3d2" data-marks="5"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Explain Redux architecture for Flutter.</p><div class="ans"><p><strong>Redux</strong> is a state management pattern (first made for JavaScript) that keeps the <strong>whole app state in one place, called the store</strong>, and allows data to flow in <strong>only one direction</strong>. In Flutter we use it with the <code>redux</code> and <code>flutter_redux</code> packages.</p>
+<h4>Main parts</h4>
+<ul>
+<li><strong>Store</strong> – one object that holds the complete app state (single source of truth).</li>
+<li><strong>State</strong> – the data; it is never changed directly.</li>
+<li><strong>Action</strong> – a simple object that says <strong>what happened</strong>, like <code>IncrementAction</code>.</li>
+<li><strong>Reducer</strong> – a <strong>pure function</strong> <code>(oldState, action) =&gt; newState</code> that creates the new state.</li>
+<li><strong>Middleware</strong> (optional) – runs between the action and the reducer, for API calls or logging.</li>
+</ul>
+<figure class="diagram"><div class="scroll"><svg class="dg" style="--dw: 529px; --dmin: 340px" viewBox="0 0 460 240" role="img" aria-label="Redux loop: the View dispatches an Action, it passes Middleware, the Reducer makes a new state, the Store saves it, and the View rebuilds">
+<defs>
+<marker id="ah-rdx" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ah"/></marker>
+</defs>
+<rect class="b" x="10" y="20" width="150" height="56" rx="10"/>
+<text class="t-b" x="85" y="44" text-anchor="middle">View</text>
+<text class="t-sub" x="85" y="62" text-anchor="middle">StoreConnector</text>
+<rect class="b" x="300" y="20" width="150" height="56" rx="10"/>
+<text class="t-b" x="375" y="44" text-anchor="middle">Action</text>
+<text class="t-sub t-mono" x="375" y="62" text-anchor="middle">IncrementAction</text>
+<rect class="b dash" x="315" y="100" width="120" height="44" rx="10"/>
+<text class="t-b" x="375" y="119" text-anchor="middle">Middleware</text>
+<text class="t-sub" x="375" y="135" text-anchor="middle">API calls, logs</text>
+<rect class="b" x="300" y="170" width="150" height="56" rx="10"/>
+<text class="t-b" x="375" y="194" text-anchor="middle">Reducer</text>
+<text class="t-sub" x="375" y="212" text-anchor="middle">pure function</text>
+<rect class="b-acc" x="10" y="170" width="150" height="56" rx="10"/>
+<text class="t-b" x="85" y="194" text-anchor="middle">Store</text>
+<text class="t-sub" x="85" y="212" text-anchor="middle">single app state</text>
+<line class="e" x1="162" y1="48" x2="296" y2="48" marker-end="url(#ah-rdx)"/>
+<text class="t-sub halo" x="230" y="38" text-anchor="middle">dispatch</text>
+<line class="e" x1="375" y1="78" x2="375" y2="96" marker-end="url(#ah-rdx)"/>
+<line class="e" x1="375" y1="146" x2="375" y2="166" marker-end="url(#ah-rdx)"/>
+<line class="e" x1="298" y1="198" x2="164" y2="198" marker-end="url(#ah-rdx)"/>
+<text class="t-sub halo" x="230" y="216" text-anchor="middle">new state</text>
+<line class="e" x1="85" y1="168" x2="85" y2="80" marker-end="url(#ah-rdx)"/>
+<text class="t-sub halo" x="95" y="128">rebuilds UI</text>
+</svg></div><figcaption>Redux data flows one way around this loop. The View never changes the state itself; it only dispatches actions.</figcaption></figure>
+
+<h4>Example: counter with flutter_redux</h4>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">enum CounterAction { increment }
+
+int counterReducer(int state, dynamic action) {   // pure function
+  if (action == CounterAction.increment) return state + 1;
+  return state;
+}
+
+void main() {
+  final store = Store&lt;int&gt;(counterReducer, initialState: 0);
+
+  runApp(StoreProvider&lt;int&gt;(
+    store: store,
+    child: MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: StoreConnector&lt;int, String&gt;(
+            converter: (store) =&gt; store.state.toString(),
+            builder: (context, count) =&gt; Text(count, style: const TextStyle(fontSize: 40)),
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () =&gt; store.dispatch(CounterAction.increment),
+          child: const Icon(Icons.add),
+        ),
+      ),
+    ),
+  ));
+}
+</code></pre></div>
+<h4>Three principles of Redux</h4>
+<ol>
+<li><strong>Single source of truth</strong> – the whole state is in one store.</li>
+<li><strong>State is read-only</strong> – the only way to change it is to dispatch an action.</li>
+<li><strong>Changes are made by pure functions</strong> – reducers return a new state without side effects.</li>
+</ol>
+<p><strong>Advantages:</strong> predictable behaviour, easy debugging and testing. <strong>Drawback:</strong> a lot of extra code, so it suits large apps more than small ones.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q3 (D) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section></section>
+<section class="q" id="q4" aria-labelledby="q4-title"><header class="q-head"><p class="q-no">Q.4</p><h2 id="q4-title">Networking, JSON and local storage</h2><p class="q-total">14 marks</p></header><section class="sec" id="q4a" data-marks="1"><header class="sec-head"><span class="sec-letter">(A)</span><h3 class="sec-title">Answer the following</h3><span class="sec-rule">Attempt all · 1 mark each</span><span class="sec-marks" aria-label="4 marks">4</span></header><div class="items"><article class="item" id="q4a1" data-marks="1"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Flutter provides <span class="blank"><span class="fill">http</span></span> package to use http resources.</p><div class="ans"><p>Example: <code>import 'package:http/http.dart' as http;</code> and then <code>http.get(Uri.parse(url))</code>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (A) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q4a2" data-marks="1"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">JSON stands for <span class="blank"><span class="fill">JavaScript Object Notation</span></span>.</p><div class="ans"><p>A simple text format for data, like <code>{"name": "Riya", "age": 21}</code>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (A) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q4a3" data-marks="1"><div class="item-no" aria-hidden="true">3</div><div class="item-main"><p class="ask">Flutter apps can make use of the SQLite databases via <span class="blank"><span class="fill">sqflite</span></span> plugin available on pub.dev.</p><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (A) 3 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q4a4" data-marks="1"><div class="item-no" aria-hidden="true">4</div><div class="item-main"><p class="ask">REST stands for <span class="blank"><span class="fill">Representational State Transfer</span></span>.</p><div class="ans"><p>A style of web API where the app uses HTTP methods (GET, POST, PUT, DELETE) on URLs.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (A) 4 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q4b" data-marks="2"><header class="sec-head"><span class="sec-letter">(B)</span><h3 class="sec-title">Answer in brief</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="2 marks">2</span></header><div class="items"><article class="item" id="q4b1" data-marks="2"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">What is JSON serialization?</p><div class="ans"><p><strong>Serialization</strong> means turning a <strong>Dart object into JSON text</strong> (to send to a server or save it). <strong>Deserialization</strong> is the reverse: turning <strong>JSON text back into a Dart object</strong>. <code>dart:convert</code> gives <code>jsonEncode()</code> and <code>jsonDecode()</code>, and we add <code>toJson()</code> and <code>fromJson()</code> to the model class.</p>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">class Student {
+  final String name;
+  final int age;
+  Student(this.name, this.age);
+
+  factory Student.fromJson(Map&lt;String, dynamic&gt; j) =&gt; Student(j['name'], j['age']);
+  Map&lt;String, dynamic&gt; toJson() =&gt; {'name': name, 'age': age};
+}
+
+String text = jsonEncode(Student('Riya', 21).toJson());   // {&quot;name&quot;:&quot;Riya&quot;,&quot;age&quot;:21}
+Student s = Student.fromJson(jsonDecode(text));
+</code></pre></div>
+<p>For big apps, the <code>json_serializable</code> package can generate this code automatically.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (B) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q4b2" data-marks="2"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">What is Hive in Flutter?</p><div class="ans"><p><strong>Hive</strong> is a <strong>lightweight and very fast NoSQL database</strong> written in pure Dart. It saves data as <strong>key–value pairs inside boxes</strong> (a box is like a table). It works offline on mobile, desktop and web and needs no native setup.</p>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">await Hive.initFlutter();
+var box = await Hive.openBox('settings');
+box.put('name', 'Ravi');
+print(box.get('name'));   // Ravi
+</code></pre></div>
+<p>It is a good choice for app settings, cached data and offline data. Custom objects are stored with <strong>TypeAdapters</strong>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (B) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q4c" data-marks="3"><header class="sec-head"><span class="sec-letter">(C)</span><h3 class="sec-title">Answer in detail</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="3 marks">3</span></header><div class="items"><article class="item" id="q4c1" data-marks="3"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Explain caching data in Flutter.</p><div class="ans"><p><strong>Caching</strong> means <strong>keeping a copy of data on the device</strong>, so the app can show it <strong>quickly</strong>, work <strong>offline</strong>, and make fewer network calls.</p>
+<p><strong>Ways to cache in Flutter:</strong></p>
+<ul>
+<li><strong>In-memory cache</strong> – keep data in a variable or <code>Map</code>. Fastest, but lost when the app closes.</li>
+<li><strong>Disk cache</strong> – <code>shared_preferences</code> for small values, <strong>Hive</strong> or <strong>sqflite</strong> for larger structured data, or files saved with <code>path_provider</code>.</li>
+<li><strong>Image cache</strong> – the <code>cached_network_image</code> package saves downloaded pictures.</li>
+<li><strong>File cache</strong> – <code>flutter_cache_manager</code> keeps downloaded files with an expiry time.</li>
+</ul>
+<p><strong>Common strategy:</strong> try the network; if it works, save a fresh copy; if it fails, show the saved copy.</p>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">Future&lt;String&gt; getQuote() async {
+  final prefs = await SharedPreferences.getInstance();
+  try {
+    final res = await http.get(Uri.parse('https://api.example.com/quote'));
+    await prefs.setString('quote', res.body);          // save a copy
+    return res.body;
+  } catch (e) {
+    return prefs.getString('quote') ?? 'No data yet';  // offline: use the copy
+  }
+}
+</code></pre></div></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (C) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q4c2" data-marks="3"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Explain the use of WebSockets for real-time communication in Flutter.</p><div class="ans"><p>A <strong>WebSocket</strong> is a <strong>connection that stays open</strong> between the app and the server. Both sides can send messages <strong>at any time</strong> (two-way, real time). With normal HTTP, the app must ask again and again for new data. Uses: <strong>chat apps, live scores, stock prices, live location, multiplayer games</strong>.</p>
+<p>In Flutter we use the <strong><code>web_socket_channel</code></strong> package:</p>
+<ul>
+<li><strong>Connect:</strong> <code>WebSocketChannel.connect(Uri.parse('wss://...'))</code></li>
+<li><strong>Send:</strong> <code>channel.sink.add('message')</code></li>
+<li><strong>Receive:</strong> listen to <code>channel.stream</code>, usually with a <code>StreamBuilder</code></li>
+<li><strong>Close:</strong> <code>channel.sink.close()</code> in <code>dispose()</code></li>
+</ul>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">final channel = WebSocketChannel.connect(Uri.parse('wss://echo.websocket.events'));
+
+StreamBuilder(
+  stream: channel.stream,
+  builder: (context, snapshot) =&gt;
+      Text(snapshot.hasData ? 'Server: ${snapshot.data}' : 'Waiting...'),
+);
+
+ElevatedButton(
+  onPressed: () =&gt; channel.sink.add('Hello server'),
+  child: const Text('Send'),
+);
+
+@override
+void dispose() {
+  channel.sink.close();
+  super.dispose();
+}
+</code></pre></div></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (C) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q4d" data-marks="5"><header class="sec-head"><span class="sec-letter">(D)</span><h3 class="sec-title">Write a note on</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="5 marks">5</span></header><div class="items"><article class="item" id="q4d1" data-marks="5"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Explain Shared preferences and secure storage in Flutter.</p><div class="ans"><p>Both are used to <strong>save data permanently on the device</strong>, so it is still there after the app is closed. The difference is <strong>security</strong>.</p>
+<h4>1. SharedPreferences</h4>
+<p>The <code>shared_preferences</code> package stores <strong>small, simple data as key–value pairs</strong>. It uses SharedPreferences on Android and NSUserDefaults on iOS.</p>
+<ul>
+<li>Supports <code>int</code>, <code>double</code>, <code>bool</code>, <code>String</code> and <code>List&lt;String&gt;</code>.</li>
+<li>Used for settings such as dark mode, language, "first launch" flag, or a username.</li>
+<li>Data is <strong>not encrypted</strong>, so never store passwords or tokens here.</li>
+</ul>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">final prefs = await SharedPreferences.getInstance();
+
+await prefs.setBool('darkMode', true);          // save
+await prefs.setString('username', 'ravi');
+
+bool dark = prefs.getBool('darkMode') ?? false; // read (with default)
+await prefs.remove('username');                 // delete one key
+</code></pre></div>
+<h4>2. Secure storage</h4>
+<p>The <code>flutter_secure_storage</code> package stores <strong>sensitive data in encrypted form</strong>. It uses the <strong>Keychain</strong> on iOS and <strong>Keystore-based encryption</strong> on Android.</p>
+<ul>
+<li>Used for login tokens, passwords, API keys and PINs.</li>
+<li>Main methods: <code>write()</code>, <code>read()</code>, <code>delete()</code>, <code>deleteAll()</code>.</li>
+</ul>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">const storage = FlutterSecureStorage();
+
+await storage.write(key: 'token', value: 'eyJhbGciOi...');   // save
+String? token = await storage.read(key: 'token');            // read
+await storage.delete(key: 'token');                          // delete (logout)
+</code></pre></div>
+<h4>Comparison</h4>
+<div class="table-wrap cols-4"><table>
+<thead>
+<tr>
+<th>Point</th>
+<th>SharedPreferences</th>
+<th>Secure storage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Package</td>
+<td><code>shared_preferences</code></td>
+<td><code>flutter_secure_storage</code></td>
+</tr>
+<tr>
+<td>Encrypted?</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Best for</td>
+<td>Settings and flags</td>
+<td>Tokens, passwords, keys</td>
+</tr>
+<tr>
+<td>Speed</td>
+<td>Very fast</td>
+<td>A little slower (encryption)</td>
+</tr>
+</tbody>
+</table></div>
+<p>So, use <strong>SharedPreferences for normal settings</strong> and <strong>secure storage for anything secret</strong>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (D) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q4d2" data-marks="5"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">How to perform CRUD operations on a SQLite database in Flutter? Explain with example.</p><div class="ans"><p><strong>SQLite</strong> is a small database stored as a file on the device. Flutter uses it through the <strong><code>sqflite</code></strong> plugin. <strong>CRUD</strong> means <strong>Create, Read, Update, Delete</strong>.</p>
+<h4>Step 1: Add packages</h4>
+<div class="code"><div class="code-bar"><span>YAML</span><button type="button" class="copy">Copy</button></div><pre><code class="language-yaml">dependencies:
+  sqflite: ^2.3.0
+  path: ^1.9.0
+</code></pre></div>
+<h4>Step 2: Model class</h4>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">class Student {
+  final int? id;
+  final String name;
+  final int age;
+  Student({this.id, required this.name, required this.age});
+
+  Map&lt;String, dynamic&gt; toMap() =&gt; {'id': id, 'name': name, 'age': age};
+  factory Student.fromMap(Map&lt;String, dynamic&gt; m) =&gt;
+      Student(id: m['id'], name: m['name'], age: m['age']);
+}
+</code></pre></div>
+<h4>Step 3: Open the database and write CRUD methods</h4>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
+
+class DBHelper {
+  static Database? _db;
+
+  static Future&lt;Database&gt; get db async {
+    _db ??= await openDatabase(
+      join(await getDatabasesPath(), 'school.db'),
+      version: 1,
+      onCreate: (db, version) =&gt; db.execute(
+        'CREATE TABLE students(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER)',
+      ),
+    );
+    return _db!;
+  }
+
+  static Future&lt;int&gt; insert(Student s) async =&gt;                       // Create
+      (await db).insert('students', s.toMap());
+
+  static Future&lt;List&lt;Student&gt;&gt; getAll() async {                       // Read
+    final rows = await (await db).query('students');
+    return rows.map((r) =&gt; Student.fromMap(r)).toList();
+  }
+
+  static Future&lt;int&gt; update(Student s) async =&gt;                       // Update
+      (await db).update('students', s.toMap(), where: 'id = ?', whereArgs: [s.id]);
+
+  static Future&lt;int&gt; delete(int id) async =&gt;                          // Delete
+      (await db).delete('students', where: 'id = ?', whereArgs: [id]);
+}
+</code></pre></div>
+<h4>Step 4: Use it</h4>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">await DBHelper.insert(Student(name: 'Riya', age: 21));
+List&lt;Student&gt; all = await DBHelper.getAll();
+await DBHelper.update(Student(id: 1, name: 'Riya Shah', age: 22));
+await DBHelper.delete(1);
+</code></pre></div>
+<div class="table-wrap cols-4"><table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>sqflite method</th>
+<th>SQL behind it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Create</td>
+<td><code>insert()</code></td>
+<td><code>INSERT INTO students ...</code></td>
+</tr>
+<tr>
+<td>Read</td>
+<td><code>query()</code></td>
+<td><code>SELECT * FROM students</code></td>
+</tr>
+<tr>
+<td>Update</td>
+<td><code>update()</code></td>
+<td><code>UPDATE students SET ... WHERE id = ?</code></td>
+</tr>
+<tr>
+<td>Delete</td>
+<td><code>delete()</code></td>
+<td><code>DELETE FROM students WHERE id = ?</code></td>
+</tr>
+</tbody>
+</table></div>
+<h4>Points to remember</h4>
+<ul>
+<li>All methods are <strong>asynchronous</strong> (they return a <code>Future</code>), so we use <code>await</code>.</li>
+<li><code>where: 'id = ?'</code> with <code>whereArgs</code> keeps the query safe from SQL injection.</li>
+<li>Show the records on screen with a <code>FutureBuilder</code> or by calling <code>setState()</code> after loading.</li>
+</ul></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q4 (D) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section></section>
+<section class="q" id="q5" aria-labelledby="q5-title"><header class="q-head"><p class="q-no">Q.5</p><h2 id="q5-title">Animations, device features, testing and localization</h2><p class="q-total">14 marks</p></header><section class="sec" id="q5a" data-marks="1"><header class="sec-head"><span class="sec-letter">(A)</span><h3 class="sec-title">Answer the following</h3><span class="sec-rule">Attempt all · 1 mark each</span><span class="sec-marks" aria-label="4 marks">4</span></header><div class="items"><article class="item" id="q5a1" data-marks="1"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">What is tween animation in flutter?</p><div class="ans"><p>A <strong>tween</strong> (short for "in-between") animation is given a <strong>start value and an end value</strong>, and Flutter calculates all the values in between over a set time, for example <code>Tween&lt;double&gt;(begin: 0, end: 300).animate(controller)</code>.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (A) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q5a2" data-marks="1"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask"><span class="blank"><span class="fill">geolocator</span></span> plugin in Flutter is used to access the device's location services.</p><div class="ans"><p>The <code>location</code> package can also be used.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (A) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q5a3" data-marks="1"><div class="item-no" aria-hidden="true">3</div><div class="item-main"><p class="ask">FCM stands for <span class="blank"><span class="fill">Firebase Cloud Messaging</span></span>.</p><div class="ans"><p>Google's free service for sending push notifications.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (A) 3 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><article class="item" id="q5a4" data-marks="1"><div class="item-no" aria-hidden="true">4</div><div class="item-main"><p class="ask"><span class="blank"><span class="fill">mockito</span></span> package in Flutter helps you create Mock Dependencies of classes while testing.</p><div class="ans"><p>(<code>mocktail</code> is a similar package.)</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="1" aria-label="1 mark"><b>1</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (A) 4 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q5b" data-marks="2"><header class="sec-head"><span class="sec-letter">(B)</span><h3 class="sec-title">Answer in brief</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="2 marks">2</span></header><div class="items"><article class="item" id="q5b1" data-marks="2"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Explain Accessibility in Flutter apps.</p><div class="ans"><p><strong>Accessibility</strong> means making the app <strong>usable by everyone</strong>, including people with low vision, blindness, or difficulty using their hands.</p>
+<ul>
+<li><strong>Screen readers</strong> (TalkBack, VoiceOver): give labels using the <code>Semantics</code> widget, <code>semanticLabel</code> on images and icons, and <code>tooltip</code> on icon buttons.</li>
+<li><strong>Large text:</strong> respect the phone's font size setting and avoid fixed heights that cut text.</li>
+<li><strong>Colour contrast:</strong> text should clearly stand out from its background.</li>
+<li><strong>Tap targets:</strong> buttons should be at least 48 × 48 pixels.</li>
+</ul>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">Semantics(label: 'Profile picture', child: Image.asset('assets/me.png'));
+IconButton(icon: const Icon(Icons.delete), tooltip: 'Delete item', onPressed: remove);
+</code></pre></div></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (B) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q5b2" data-marks="2"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Give steps to integrate camera in Flutter app.</p><div class="ans"><ol>
+<li>Add the <strong><code>camera</code></strong> package to <code>pubspec.yaml</code> and run <code>flutter pub get</code>.</li>
+<li>Add permissions: <code>NSCameraUsageDescription</code> in iOS <code>Info.plist</code>; on Android the plugin adds the camera permission (minSdk 21).</li>
+<li>Get the list of cameras with <code>availableCameras()</code>.</li>
+<li>Create a <code>CameraController</code> and call <code>initialize()</code>.</li>
+<li>Show the live view with <code>CameraPreview(controller)</code>.</li>
+<li>Take a photo with <code>controller.takePicture()</code>, and call <code>controller.dispose()</code> when leaving the screen.</li>
+</ol>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">final cameras = await availableCameras();
+final controller = CameraController(cameras.first, ResolutionPreset.medium);
+await controller.initialize();
+// UI: CameraPreview(controller)
+XFile photo = await controller.takePicture();
+</code></pre></div>
+<p>(For just picking one photo, <code>image_picker</code> is simpler: <code>ImagePicker().pickImage(source: ImageSource.camera)</code>.)</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="2" aria-label="2 marks"><b>2</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (B) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q5c" data-marks="3"><header class="sec-head"><span class="sec-letter">(C)</span><h3 class="sec-title">Answer in detail</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="3 marks">3</span></header><div class="items"><article class="item" id="q5c1" data-marks="3"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Explain Push notifications in Flutter using Firebase.</p><div class="ans"><p>A <strong>push notification</strong> is a message sent from a server to the user's phone, which appears <strong>even when the app is closed</strong>. Flutter apps receive them with <strong>Firebase Cloud Messaging (FCM)</strong>.</p>
+<ol>
+<li>Create a project in the <strong>Firebase console</strong> and connect the app with <code>flutterfire configure</code>.</li>
+<li>Add the packages <strong><code>firebase_core</code></strong> and <strong><code>firebase_messaging</code></strong>.</li>
+<li>Start Firebase in <code>main()</code> with <code>Firebase.initializeApp()</code>.</li>
+<li><strong>Ask permission</strong> to show notifications (needed on iOS and Android 13+).</li>
+<li>Get the <strong>device token</strong> with <code>getToken()</code>; the server uses it to send to this phone.</li>
+<li><strong>Handle messages:</strong> <code>onMessage</code> (app open), <code>onBackgroundMessage</code> (app in background or closed), <code>onMessageOpenedApp</code> (user tapped the notification).</li>
+<li>Send a test message from <strong>Firebase console → Messaging</strong>.</li>
+</ol>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  final fcm = FirebaseMessaging.instance;
+  await fcm.requestPermission();
+  print('Token: ${await fcm.getToken()}');
+
+  FirebaseMessaging.onMessage.listen((msg) {
+    print('New message: ${msg.notification?.title}');
+  });
+  runApp(const MyApp());
+}
+</code></pre></div></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (C) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q5c2" data-marks="3"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Explain Testing and debugging in Flutter.</p><div class="ans"><p><strong>Testing</strong> checks that the app works correctly. Flutter supports three kinds of tests, all run with <code>flutter test</code>:</p>
+<div class="table-wrap cols-5"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>What it tests</th>
+<th>Package</th>
+<th>Speed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unit test</td>
+<td>One function or class</td>
+<td><code>test</code> / <code>flutter_test</code></td>
+<td>Fastest</td>
+</tr>
+<tr>
+<td>Widget test</td>
+<td>One widget or screen</td>
+<td><code>flutter_test</code></td>
+<td>Fast</td>
+</tr>
+<tr>
+<td>Integration test</td>
+<td>The whole app on a device</td>
+<td><code>integration_test</code></td>
+<td>Slow</td>
+</tr>
+</tbody>
+</table></div>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">int add(int a, int b) =&gt; a + b;
+
+void main() {
+  test('adds two numbers', () {                       // unit test
+    expect(add(2, 3), 5);
+  });
+
+  testWidgets('shows the title', (tester) async {      // widget test
+    await tester.pumpWidget(const MaterialApp(home: Text('Hello')));
+    expect(find.text('Hello'), findsOneWidget);
+  });
+}
+</code></pre></div>
+<p><strong>Debugging</strong> means finding and fixing bugs. Tools: <strong>breakpoints</strong> in VS Code / Android Studio, <strong><code>debugPrint()</code></strong> messages, <strong>Flutter DevTools</strong> (Inspector, Performance, Memory), <strong><code>assert()</code></strong> checks, and <strong>hot reload</strong> to test fixes quickly.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="3" aria-label="3 marks"><b>3</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (C) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section><section class="sec" id="q5d" data-marks="5"><header class="sec-head"><span class="sec-letter">(D)</span><h3 class="sec-title">Write a note on</h3><span class="sec-rule">Any one out of two</span><span class="sec-marks" aria-label="5 marks">5</span></header><div class="items"><article class="item" id="q5d1" data-marks="5"><div class="item-no" aria-hidden="true">1</div><div class="item-main"><p class="ask">Explain animation techniques – Flare and Lottie.</p><div class="ans"><p>Flutter can animate widgets with code (<code>AnimationController</code>, <code>Tween</code>), but complex animations such as characters or illustrated loaders are easier to make in a design tool and then <strong>play inside the app</strong>. <strong>Flare (now Rive)</strong> and <strong>Lottie</strong> are the two popular ways.</p>
+<h4>1. Flare (now called Rive)</h4>
+<ul>
+<li>Flare was a 2D design and animation tool; it is now called <strong>Rive</strong>. Designers draw and animate in the Rive editor and export a file (<code>.flr</code> in old Flare, <code>.riv</code> in Rive).</li>
+<li>Animations are <strong>vector based</strong>, so they stay sharp at any size and the files are small.</li>
+<li>Rive <strong>state machines</strong> make animations <strong>interactive</strong>: they can react to taps, hover or values from the app (for example a login character that covers its eyes while you type a password).</li>
+<li>Package: <strong><code>rive</code></strong> (the old package was <code>flare_flutter</code>).</li>
+</ul>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">// Rive
+RiveAnimation.asset('assets/truck.riv');
+
+// Old Flare package
+FlareActor('assets/robot.flr', animation: 'idle', fit: BoxFit.contain);
+</code></pre></div>
+<h4>2. Lottie</h4>
+<ul>
+<li>Lottie animations are made in <strong>Adobe After Effects</strong> and exported as a <strong>JSON</strong> file with the <strong>Bodymovin</strong> plugin. Thousands of free ones are on <strong>LottieFiles</strong>.</li>
+<li>Used for loading spinners, success ticks, onboarding and empty-screen pictures.</li>
+<li>Package: <strong><code>lottie</code></strong>.</li>
+</ul>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">Lottie.asset('assets/loading.json', width: 150, repeat: true);
+Lottie.network('https://example.com/success.json');
+</code></pre></div>
+<h4>Steps to use either one</h4>
+<ol>
+<li>Add the package (<code>rive</code> or <code>lottie</code>) to <code>pubspec.yaml</code>.</li>
+<li>Put the animation file in <code>assets/</code> and list it under <code>flutter: assets:</code>.</li>
+<li>Show it with the widget (<code>RiveAnimation.asset</code> or <code>Lottie.asset</code>).</li>
+<li>Control it if needed (play, pause, repeat) with a controller.</li>
+</ol>
+<h4>Comparison</h4>
+<div class="table-wrap cols-4"><table>
+<thead>
+<tr>
+<th>Point</th>
+<th>Flare / Rive</th>
+<th>Lottie</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Made in</td>
+<td>Rive (Flare) editor</td>
+<td>Adobe After Effects</td>
+</tr>
+<tr>
+<td>File type</td>
+<td><code>.riv</code> (<code>.flr</code> in old Flare)</td>
+<td><code>.json</code></td>
+</tr>
+<tr>
+<td>Interactive</td>
+<td>Yes, with state machines</td>
+<td>Mostly plays as recorded</td>
+</tr>
+<tr>
+<td>Package</td>
+<td><code>rive</code></td>
+<td><code>lottie</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Both give rich, smooth animations with very little code, which makes apps feel more polished.</p></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (D) 1 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article><div class="or" aria-hidden="true">or</div><article class="item" id="q5d2" data-marks="5"><div class="item-no" aria-hidden="true">2</div><div class="item-main"><p class="ask">Explain Internationalisation and localization in Flutter.</p><div class="ans"><ul>
+<li><strong>Internationalization (i18n)</strong> means <strong>preparing the app to support many languages and regions</strong>: no hard-coded text, and dates, numbers and currency formatted by locale.</li>
+<li><strong>Localization (l10n)</strong> means <strong>adding the actual translations and formats</strong> for each language, for example English, Hindi and Gujarati.</li>
+</ul>
+<h4>Steps (official Flutter method)</h4>
+<p><strong>1. Add packages</strong> in <code>pubspec.yaml</code> and turn on code generation:</p>
+<div class="code"><div class="code-bar"><span>YAML</span><button type="button" class="copy">Copy</button></div><pre><code class="language-yaml">dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+flutter:
+  generate: true
+</code></pre></div>
+<p><strong>2. Create <code>l10n.yaml</code></strong> in the project root:</p>
+<div class="code"><div class="code-bar"><span>YAML</span><button type="button" class="copy">Copy</button></div><pre><code class="language-yaml">arb-dir: lib/l10n
+template-arb-file: app_en.arb
+output-localization-file: app_localizations.dart
+</code></pre></div>
+<p><strong>3. Add one ARB file per language</strong> in <code>lib/l10n/</code>:</p>
+<div class="code"><div class="code-bar"><span>JSON</span><button type="button" class="copy">Copy</button></div><pre><code class="language-json">// app_en.arb
+{ &quot;hello&quot;: &quot;Hello&quot;, &quot;welcome&quot;: &quot;Welcome, {name}!&quot; }
+
+// app_hi.arb
+{ &quot;hello&quot;: &quot;नमस्ते&quot;, &quot;welcome&quot;: &quot;स्वागत है, {name}!&quot; }
+</code></pre></div>
+<p><strong>4. Run <code>flutter gen-l10n</code></strong> (it also runs on every build). Flutter creates the <code>AppLocalizations</code> class.</p>
+<p><strong>5. Connect it in <code>MaterialApp</code></strong> and use the text:</p>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">import 'l10n/app_localizations.dart';   // older Flutter: package:flutter_gen/gen_l10n/app_localizations.dart
+
+MaterialApp(
+  localizationsDelegates: AppLocalizations.localizationsDelegates,
+  supportedLocales: AppLocalizations.supportedLocales,
+  home: Builder(
+    builder: (context) =&gt; Text(AppLocalizations.of(context)!.hello),
+  ),
+);
+</code></pre></div>
+<h4>Formatting dates and money with <code>intl</code></h4>
+<div class="code"><div class="code-bar"><span>Dart</span><button type="button" class="copy">Copy</button></div><pre><code class="language-dart">DateFormat.yMMMd('hi').format(DateTime.now());                        // date in Hindi format
+NumberFormat.currency(locale: 'en_IN', symbol: '₹').format(150000);   // ₹1,50,000.00
+</code></pre></div>
+<h4>Points to remember</h4>
+<ul>
+<li>The app picks the language of the phone automatically; we can force one with <code>locale: Locale('hi')</code>.</li>
+<li>Right-to-left languages such as Arabic are handled automatically by Flutter's widgets.</li>
+<li>Keeping all text in ARB files makes adding a new language easy: just add one more file.</li>
+</ul></div><button type="button" class="reveal">Show answer</button></div><div class="item-side"><span class="wt" data-m="5" aria-label="5 marks"><b>5</b><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><button type="button" class="done" aria-pressed="false" aria-label="Mark Q5 (D) 2 as revised" title="Mark as revised"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></article></div></section></section>
+  </main>
+
+  <footer class="foot wrap">
+    <p>Model answers sized to the marks of each question. Teachers sometimes expect the exact wording from class notes, so read these alongside your notes.</p>
+    <p>Tick the circle next to a question once you have revised it. Your ticks are saved in this browser only.</p>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/dart.min.js"></script>
+<script>
+(function () {
+  var app = document.querySelector(".app");
+  var paper = document.getElementById("paper");
+  var key = "msc-sem3-solved:" + app.dataset.slug;
+  var items = Array.prototype.slice.call(document.querySelectorAll(".item"));
+  var done = new Set();
+  try { (JSON.parse(localStorage.getItem(key)) || []).forEach(function (id) { done.add(id); }); } catch (e) {}
+
+  function save() {
+    try { localStorage.setItem(key, JSON.stringify(Array.from(done))); } catch (e) {}
+  }
+  function paint() {
+    var n = 0;
+    items.forEach(function (it) {
+      var on = done.has(it.id);
+      if (on) n++;
+      it.classList.toggle("is-done", on);
+      it.querySelector(".done").setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    document.getElementById("done-count").textContent = n;
+    document.getElementById("done-bar").style.width = (items.length ? n / items.length * 100 : 0) + "%";
+  }
+  paint();
+
+  document.addEventListener("click", function (ev) {
+    var t = ev.target.closest("button, .blank");
+    if (!t) return;
+    if (t.classList.contains("done")) {
+      var id = t.closest(".item").id;
+      if (done.has(id)) done.delete(id); else done.add(id);
+      save(); paint();
+    } else if (t.classList.contains("reveal") || t.classList.contains("blank")) {
+      var it = t.closest(".item");
+      if (it) it.classList.add("shown");
+    } else if (t.dataset.filter) {
+      paper.dataset.filter = t.dataset.filter;
+      document.querySelectorAll("[data-filter]").forEach(function (b) {
+        if (b.tagName === "BUTTON") b.setAttribute("aria-pressed", b === t ? "true" : "false");
+      });
+    } else if (t.id === "selftest") {
+      var on = !app.classList.contains("selftest");
+      app.classList.toggle("selftest", on);
+      t.setAttribute("aria-pressed", on ? "true" : "false");
+      if (!on) items.forEach(function (it) { it.classList.remove("shown"); });
+    } else if (t.classList.contains("copy")) {
+      var code = t.closest(".code").querySelector("code");
+      var flash = function (label) { t.textContent = label; setTimeout(function () { t.textContent = "Copy"; }, 1600); };
+      var select = function () {
+        var r = document.createRange(); r.selectNodeContents(code);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        flash("Press Ctrl+C");
+      };
+      try {
+        navigator.clipboard.writeText(code.innerText).then(function () { flash("Copied"); }, select);
+      } catch (e) { select(); }
+    }
+  });
+
+  if ("IntersectionObserver" in window) {
+    var links = {};
+    document.querySelectorAll(".qnav a").forEach(function (a) { links[a.getAttribute("href").slice(1)] = a; });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        Object.keys(links).forEach(function (k) { links[k].removeAttribute("aria-current"); });
+        if (links[e.target.id]) links[e.target.id].setAttribute("aria-current", "true");
+      });
+    }, { rootMargin: "-25% 0px -65% 0px" });
+    document.querySelectorAll(".q").forEach(function (s) { io.observe(s); });
+  }
+
+  if (window.hljs) {
+    hljs.configure({ ignoreUnescapedHTML: true });
+    document.querySelectorAll("pre code[class*='language-']:not(.language-plaintext)").forEach(function (el) {
+      try { hljs.highlightElement(el); } catch (e) {}
+    });
+  }
+})();
+</script>
+</body>
+</html>
